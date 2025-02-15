@@ -1,0 +1,147 @@
+/* eslint-disable react/prop-types */
+import { useState } from "react";
+import { createUser } from "../../services/user.service";
+import { useNavigate } from "react-router-dom";
+
+const Register = ({ user }) => {
+  const [userData, setUserData] = useState({
+    name: user?.name || "",
+    email: user?.email || "",
+  });
+  const [userRole, setUserRole] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const uploadData = new FormData();
+
+    uploadData.append("name", userData.name);
+    uploadData.append("imageUrl", userData.imageUrl);
+    uploadData.append("email", userData.email);
+    uploadData.append("password", userData.password);
+    uploadData.append("role", userData.role);
+    if (userData.role === "promoter") {
+      uploadData.append("promoterRole", userData.promoterRole);
+      uploadData.append("promoterCapacity", userData.promoterCapacity);
+    }
+    uploadData.append("cif", userData.cif);
+
+    try {
+      await createUser(uploadData);
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    setUserData((prevState) => ({
+      ...prevState,
+      [name]: files ? files[0] : value,
+    }));
+  };
+
+  const handleOptionChange = (e) => {
+    const value = e.target.value;
+    setUserRole(value);
+    setUserData((prevState) => ({
+      ...prevState,
+      role: value,
+    }));
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">
+          <input
+            type="text"
+            placeholder="name"
+            name="name"
+            id="name"
+            onChange={handleChange}
+            value={userData.name}
+          />
+        </label>
+        <label htmlFor="email">
+          <input
+            type="email"
+            placeholder="email"
+            name="email"
+            id="email"
+            onChange={handleChange}
+            value={userData.email}
+          />
+        </label>
+        <label htmlFor="password">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="password"
+            onChange={handleChange}
+            value={userData.password}
+          />
+        </label>
+        <select
+          name="role"
+          id="role"
+          onChange={handleOptionChange}
+          value={userData.role}
+        >
+          <option selected disabled>--Select an Option--</option>
+          <option value="agency">Agency</option>
+          <option value="promoter">Promoter</option>
+        </select>
+        {userRole === "promoter" && (
+          <div>
+            <select name="promoterRole" id="promoterRole" onChange={handleChange}
+          value={userData.promoterRole}>
+              <option value="club">Club</option>
+              <option value="festival">Festival</option>
+              <option value="specialEvent">Special Event</option>
+            </select>
+            <label htmlFor="promoterCapacity">
+              <input
+                type="number"
+                name="promoterCapacity"
+                id="promoterCapacity"
+                onChange={handleChange}
+                value={userData.promoterCapacity}
+              />
+            </label>
+          </div>
+        )}
+        {userRole && (
+          <div>
+            <label htmlFor="cif">
+              <input
+                type="text"
+                name="cif"
+                placeholder="CIF"
+                id="cif"
+                onChange={handleChange}
+                value={userData.cif}
+              />
+            </label>
+            <label htmlFor="imageUrl" className="form-label">
+              Image URL
+            </label>
+            <input
+              type="file"
+              id="imageUrl"
+              name="imageUrl"
+              onChange={handleChange}
+              required
+            />
+            <button type="submit">Register</button>
+          </div>
+        )}
+      </form>
+    </div>
+  );
+};
+
+export default Register;
