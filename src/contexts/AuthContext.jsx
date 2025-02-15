@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from 'react';
-import { getAccessToken, setAccessToken } from '../store/AccessTokenStore';
+import { getAccessToken, setAccessToken } from '../../store/AccessTokenStore';
 import { getCurrentUserService } from '../services/auth.service';
 import { useNavigate } from 'react-router-dom';
 

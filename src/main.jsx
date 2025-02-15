@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import AuthContextProvider from '../contexts/AuthContext.jsx'
+import AuthContextProvider from './contexts/AuthContext.jsx'
 import { BrowserRouter } from 'react-router-dom'
 
 import AppRouter from './AppRouter.jsx'
