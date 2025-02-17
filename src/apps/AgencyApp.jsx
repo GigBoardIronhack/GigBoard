@@ -10,7 +10,7 @@ const AgencyApp = () => {
       <Route path="/dashboard" element={<AgencyDashboard />} />
       <Route path="/artists" element={<AgencyArtists />} />
       <Route path="/artists/:id" element={<ArtistDetail />} />
-      <Route path="/edit/:id" element={<Edit /> } />
+      <Route path="/edit" element={<Edit /> } />
     </Routes>
   );
 };
