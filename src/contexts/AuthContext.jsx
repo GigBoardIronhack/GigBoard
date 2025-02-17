@@ -25,7 +25,6 @@ export const AuthContext = createContext();
       });
   }
   const login = (token) => {
-    
     const navigateToProfile = () => {
       navigate('/dashboard');
     }

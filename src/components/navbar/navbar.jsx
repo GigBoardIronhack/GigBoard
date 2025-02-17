@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { AuthContext } from "../../contexts/AuthContext"
 
 
+
 const Navbar = () =>{
     const {logout } = useContext(AuthContext)
 
@@ -12,6 +13,7 @@ const Navbar = () =>{
 
                 }}>Logout</button>
 
+                
         </>
     )
 }

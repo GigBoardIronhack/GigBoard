@@ -1,6 +1,8 @@
 import { createHttp } from "./base.service";
 
-const http = createHttp();
+const http = createHttp(true);
 
-export const createUser = (user) => http.post("/register", user)
+
+
+export const updateUser = (id, user) => http.patch(`/users/${id}`,user)
 
