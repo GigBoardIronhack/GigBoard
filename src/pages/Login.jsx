@@ -24,7 +24,8 @@ const Login = () => {
     e.preventDefault();
     try{
       const loginUser = await loginService(formData)
-     login(loginUser.accessToken)
+      login(loginUser.accessToken)
+
      
     }catch(error){
       setError(error.message)

@@ -1,6 +1,7 @@
 import { createHttp } from "./base.service";
 
-const http = createHttp();
+const http = createHttp(true);
+
 
 export const createArtist = (artist) => http.post("/artists",artist)
 

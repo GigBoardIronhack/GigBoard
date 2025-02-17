@@ -20,8 +20,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        
-      
+
         {currentUser ? (
           currentUser.role === "agency" ? (
             <Route path="/*" element={<AgencyApp />} />
