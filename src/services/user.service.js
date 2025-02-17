@@ -4,5 +4,5 @@ const http = createHttp(true);
 
 
 
-export const updateUser = (id, user) => http.patch(`/users/${id}`,user)
+export const updateUser = (user) => http.patch("/users/me", user)
 

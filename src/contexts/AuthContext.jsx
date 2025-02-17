@@ -17,7 +17,7 @@ export const AuthContext = createContext();
   const getCurrentUser = (callback) => {
     getCurrentUserService()
       .then((res) => {
-        console.log(res)
+        
         setCurrentUser(res);
         setIsAuthLoaded(true);
 
@@ -47,7 +47,7 @@ export const AuthContext = createContext();
   };
 
   return (
-    <AuthContext.Provider value={{ currentUser, isAuthLoaded, login, logout }}>
+    <AuthContext.Provider value={{ currentUser, setCurrentUser, isAuthLoaded, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

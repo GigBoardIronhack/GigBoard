@@ -3,16 +3,20 @@ import { useContext, useState } from "react";
 import {  updateUser } from "../services/user.service";
 import { createUser } from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthContext";
+import { AuthContext } from "../contexts/AuthContext"; 
 
-const Register = ({ user, isEditing }) => {
+
+
+const Register = ({ isEditing }) => {
+  const { isAuthLoaded, currentUser, setCurrentUser } = useContext(AuthContext);
+  console.log(currentUser)
   const [userData, setUserData] = useState({
-    name: user?.name || "",
-    email: user?.email || "",
-    cif: user?.cif || "",
-    imageUrl: user?.imageUrl || ""
+    name: currentUser?.name || "",
+    email: currentUser?.email || "",
+    cif: currentUser?.cif || "",
+    imageUrl: currentUser?.imageUrl || "",
+    role: currentUser?.role
   });
-   const { isAuthLoaded, currentUser } = useContext(AuthContext);
   const [userRole, setUserRole] = useState("");
 
   const navigate = useNavigate();
@@ -24,7 +28,9 @@ const Register = ({ user, isEditing }) => {
     uploadData.append("name", userData.name);
     uploadData.append("imageUrl", userData.imageUrl);
     uploadData.append("email", userData.email);
-    uploadData.append("password", userData.password);
+    if(!isEditing){
+      uploadData.append("password", userData.password);
+    }
     uploadData.append("role", userData.role);
     if (userData.role === "promoter") {
       uploadData.append("promoterRole", userData.promoterRole);
@@ -34,8 +40,11 @@ const Register = ({ user, isEditing }) => {
 
     try {
       if(isEditing){
-        await updateUser(user._id, uploadData)
-        navigate("/dashboard");
+        console.log(uploadData.get("email"))
+        const updatedUser = await updateUser(uploadData)
+        console.log(updateUser)
+        setCurrentUser(updatedUser)
+        navigate("/dashboard")
        return
       }
       await createUser(uploadData);
@@ -47,6 +56,10 @@ const Register = ({ user, isEditing }) => {
 
   if (!isAuthLoaded) {
     return 'loading'
+  }
+
+  if (currentUser && !isEditing) {
+    return 'Fuera de mi puta vista'
   }
 
   const handleChange = (e) => {
@@ -134,8 +147,8 @@ const Register = ({ user, isEditing }) => {
             </label>
           </div>
         )}
-        {userRole || isEditing && (
           <div>
+        {userRole && (
             <label htmlFor="cif">
               <input
                 type="text"
@@ -146,6 +159,7 @@ const Register = ({ user, isEditing }) => {
                 value={userData.cif}
               />
             </label>
+          )}
             <label htmlFor="imageUrl" className="form-label">
               Image URL
             </label>
@@ -158,7 +172,7 @@ const Register = ({ user, isEditing }) => {
             />
             <button type="submit">{isEditing ? "Edit" : "Register"}</button>
           </div>
-        )}
+        
       </form>
     </div>
   );

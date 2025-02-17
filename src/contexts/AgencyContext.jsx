@@ -8,7 +8,7 @@ const AgencyContext = (currentUser, children) =>{
 
     return(
         <>
-            <AgencyContext.Provider value={{ currentUser, isAgency }}>
+            <AgencyContext.Provider value={{ isAgency }}>
                 {children}
             </AgencyContext.Provider>
 
