@@ -12,6 +12,5 @@ export const getAccessToken = () => {
 
 export const logout = () => {
   localStorage.removeItem(JWT_TOKEN_KEY);
-
   window.location.assign("/login");
 };
