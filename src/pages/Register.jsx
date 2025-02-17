@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { createUser } from "../../services/user.service";
+import { createUser } from "../services/user.service";
 import { useNavigate } from "react-router-dom";
 
 const Register = ({ user }) => {
