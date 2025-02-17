@@ -1,13 +1,18 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
-import { createUser } from "../services/user.service";
+import { useContext, useState } from "react";
+import {  updateUser } from "../services/user.service";
+import { createUser } from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
-const Register = ({ user }) => {
+const Register = ({ user, isEditing }) => {
   const [userData, setUserData] = useState({
     name: user?.name || "",
     email: user?.email || "",
+    cif: user?.cif || "",
+    imageUrl: user?.imageUrl || ""
   });
+   const { isAuthLoaded, currentUser } = useContext(AuthContext);
   const [userRole, setUserRole] = useState("");
 
   const navigate = useNavigate();
@@ -28,12 +33,21 @@ const Register = ({ user }) => {
     uploadData.append("cif", userData.cif);
 
     try {
+      if(isEditing){
+        await updateUser(user._id, uploadData)
+        navigate("/dashboard");
+       return
+      }
       await createUser(uploadData);
       navigate("/login");
     } catch (error) {
       console.log(error);
     }
   };
+
+  if (!isAuthLoaded) {
+    return 'loading'
+  }
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -75,7 +89,8 @@ const Register = ({ user }) => {
             value={userData.email}
           />
         </label>
-        <label htmlFor="password">
+        {!isEditing &&(
+          <label htmlFor="password">
           <input
             type="password"
             name="password"
@@ -85,7 +100,10 @@ const Register = ({ user }) => {
             value={userData.password}
           />
         </label>
-        <select
+        )}
+       
+        {!isEditing && (
+          <select
           name="role"
           id="role"
           onChange={handleOptionChange}
@@ -95,6 +113,8 @@ const Register = ({ user }) => {
           <option value="agency">Agency</option>
           <option value="promoter">Promoter</option>
         </select>
+          )} 
+        
         {userRole === "promoter" && (
           <div>
             <select name="promoterRole" id="promoterRole" onChange={handleChange}
@@ -114,7 +134,7 @@ const Register = ({ user }) => {
             </label>
           </div>
         )}
-        {userRole && (
+        {userRole || isEditing && (
           <div>
             <label htmlFor="cif">
               <input
@@ -136,7 +156,7 @@ const Register = ({ user }) => {
               onChange={handleChange}
               required
             />
-            <button type="submit">Register</button>
+            <button type="submit">{isEditing ? "Edit" : "Register"}</button>
           </div>
         )}
       </form>
