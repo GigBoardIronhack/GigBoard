@@ -1,21 +1,21 @@
 /* eslint-disable react/prop-types */
 import { useContext, useState } from "react";
-import {  updateUser } from "../services/user.service";
+import { updateUser } from "../services/user.service";
 import { createUser } from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthContext"; 
-
-
+import { AuthContext } from "../contexts/AuthContext";
 
 const Register = ({ isEditing }) => {
   const { isAuthLoaded, currentUser, setCurrentUser } = useContext(AuthContext);
-  console.log(currentUser)
+  console.log(currentUser);
   const [userData, setUserData] = useState({
     name: currentUser?.name || "",
     email: currentUser?.email || "",
     cif: currentUser?.cif || "",
-    imageUrl: currentUser?.imageUrl || "",
-    role: currentUser?.role
+    imageUrl: currentUser?.imageUrl || null,
+    role: currentUser?.role,
+    promoterRole: currentUser?.promoterRole,
+    promoterCapacity: currentUser?.promoterCapacity
   });
   const [userRole, setUserRole] = useState("");
 
@@ -26,9 +26,11 @@ const Register = ({ isEditing }) => {
     const uploadData = new FormData();
 
     uploadData.append("name", userData.name);
-    uploadData.append("imageUrl", userData.imageUrl);
+    if (userData.imageUrl instanceof File) {
+      uploadData.append("imageUrl", userData.imageUrl); // Si es un archivo, lo enviamos
+    }
     uploadData.append("email", userData.email);
-    if(!isEditing){
+    if (!isEditing) {
       uploadData.append("password", userData.password);
     }
     uploadData.append("role", userData.role);
@@ -39,13 +41,13 @@ const Register = ({ isEditing }) => {
     uploadData.append("cif", userData.cif);
 
     try {
-      if(isEditing){
-        console.log(uploadData.get("email"))
-        const updatedUser = await updateUser(uploadData)
-        console.log(updateUser)
-        setCurrentUser(updatedUser)
-        navigate("/dashboard")
-       return
+      if (isEditing) {
+        console.log(uploadData.get("email"));
+        const updatedUser = await updateUser(uploadData);
+        console.log(updateUser);
+        setCurrentUser(updatedUser);
+        navigate("/dashboard");
+        return;
       }
       await createUser(uploadData);
       navigate("/login");
@@ -55,11 +57,11 @@ const Register = ({ isEditing }) => {
   };
 
   if (!isAuthLoaded) {
-    return 'loading'
+    return "loading";
   }
 
   if (currentUser && !isEditing) {
-    return 'Fuera de mi puta vista'
+    return "Fuera de mi puta vista";
   }
 
   const handleChange = (e) => {
@@ -102,36 +104,42 @@ const Register = ({ isEditing }) => {
             value={userData.email}
           />
         </label>
-        {!isEditing &&(
+        {!isEditing && (
           <label htmlFor="password">
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="password"
-            onChange={handleChange}
-            value={userData.password}
-          />
-        </label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="password"
+              onChange={handleChange}
+              value={userData.password}
+            />
+          </label>
         )}
-       
+
         {!isEditing && (
           <select
-          name="role"
-          id="role"
-          onChange={handleOptionChange}
-          value={userData.role}
-        >
-          <option selected disabled>--Select an Option--</option>
-          <option value="agency">Agency</option>
-          <option value="promoter">Promoter</option>
-        </select>
-          )} 
-        
-        {userRole === "promoter" && (
+            name="role"
+            id="role"
+            onChange={handleOptionChange}
+            value={userData.role}
+          >
+            <option selected disabled>
+              --Select an Option--
+            </option>
+            <option value="agency">Agency</option>
+            <option value="promoter">Promoter</option>
+          </select>
+        )}
+
+        {userRole === "promoter" || currentUser?.role === "promoter" && isEditing && (
           <div>
-            <select name="promoterRole" id="promoterRole" onChange={handleChange}
-          value={userData.promoterRole}>
+            <select
+              name="promoterRole"
+              id="promoterRole"
+              onChange={handleChange}
+              value={userData.promoterRole}
+            >
               <option value="club">Club</option>
               <option value="festival">Festival</option>
               <option value="specialEvent">Special Event</option>
@@ -147,8 +155,8 @@ const Register = ({ isEditing }) => {
             </label>
           </div>
         )}
-          <div>
-        {userRole && (
+        <div>
+          {userRole && (
             <label htmlFor="cif">
               <input
                 type="text"
@@ -160,19 +168,32 @@ const Register = ({ isEditing }) => {
               />
             </label>
           )}
-            <label htmlFor="imageUrl" className="form-label">
-              Image URL
-            </label>
+          <label htmlFor="imageUrl">
+            {userData.imageUrl && (
+              <div>
+                <p>Imagen actual:</p>
+                <img
+                  src={
+                    typeof userData.imageUrl === "string"
+                      ? userData.imageUrl
+                      : URL.createObjectURL(userData.imageUrl)
+                  }
+                  alt="Imagen actual"
+                  width="100"
+                />
+              </div>
+            )}
             <input
               type="file"
               id="imageUrl"
               name="imageUrl"
               onChange={handleChange}
-              required
+              style={{ width: "132px", marginRight: "30px"}}
             />
-            <button type="submit">{isEditing ? "Edit" : "Register"}</button>
-          </div>
-        
+          </label>
+
+          <button type="submit">{isEditing ? "Edit" : "Register"}</button>
+        </div>
       </form>
     </div>
   );
