@@ -15,4 +15,6 @@ export const listArtists = () => http.get("/artists/agency")
 
 export const listAgencyPurposals = () => http.get("/purposals")
 
+export const editAgencyPurposals = (id, purposal) => http.patch(`/purposals/${id}`, purposal) 
+
 
