@@ -1,8 +1,6 @@
 import { createHttp } from "./base.service";
 
-const http = createHttp(true);
+const authenticatedHttp = createHttp(true);
 
-
-
-export const updateUser = (user) => http.patch("/users/me", user)
+export const updateUser = (user) => authenticatedHttp.patch("/users/me", user)
 

@@ -27,7 +27,7 @@ const Register = ({ isEditing }) => {
 
     uploadData.append("name", userData.name);
     if (userData.imageUrl instanceof File) {
-      uploadData.append("imageUrl", userData.imageUrl); // Si es un archivo, lo enviamos
+      uploadData.append("imageUrl", userData.imageUrl);
     }
     uploadData.append("email", userData.email);
     if (!isEditing) {

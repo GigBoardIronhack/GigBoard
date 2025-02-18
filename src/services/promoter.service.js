@@ -1,11 +1,15 @@
 import { createHttp } from "./base.service";
 
-const http = createHttp();
+const authenticatedHttp = createHttp(true);
 
-export const createPurposal = (purposal) => http.post("/purposals",purposal)
+export const createPurposal = (purposal) => authenticatedHttp.post("/purposals",purposal)
 
-export const listPromoterPurposals = () => http.get("/purposals/promoter")
+export const listPromoterPurposals = () => authenticatedHttp.get("/purposals/promoter")
 
 /* ARTISTS */
 
-export const listArtists = () => http.get(`/artists`)
+export const listArtists = () => authenticatedHttp.get(`/artists`)
+
+/* FAVORITES */
+
+export const ListFavorites = () => authenticatedHttp.get("/favorites")
