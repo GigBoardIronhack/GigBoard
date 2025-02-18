@@ -34,11 +34,12 @@ const ArtistForm = ({ artist, isEditing }) => {
     const uploadData = new FormData();
 
     uploadData.append("name", artistData.name);
+    uploadData.append("description", artistData.description);
+
     if (artistData.imageUrl instanceof File) {
       uploadData.append("imageUrl", artistData.imageUrl);
     }
-    uploadData.append("description", artistData.description);
-    uploadData.append("style", selectedStyles);
+    artistData.style.forEach(style => uploadData.append("style[]", style));
     uploadData.append("basePrice", artistData.basePrice);
     uploadData.append("club", artistData.club);
     uploadData.append("festival", artistData.festival);
@@ -48,6 +49,8 @@ const ArtistForm = ({ artist, isEditing }) => {
     uploadData.append("weekendBoost", artistData.weekendBoost);
     uploadData.append("monthBoost", artistData.monthBoost);
     uploadData.append("agency", currentUser.id);
+
+
     
     try {
       if (isEditing) {
@@ -56,12 +59,20 @@ const ArtistForm = ({ artist, isEditing }) => {
         return;
       }
       console.log(uploadData)
-      await createArtist(uploadData);
-      navigate(`/artists/${artist.id}`);
+      const newArtist = await createArtist(uploadData);
+      navigate(`/artists/${newArtist.id}`);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const handleStyleChange = (e) => {
+    setSelectedStyles(e.value);  
+    setArtistData(prevState => ({
+        ...prevState,
+        style: e.value.map(style => style.style) 
+    }));
+};
 
   
 
@@ -132,8 +143,9 @@ const ArtistForm = ({ artist, isEditing }) => {
           </label>
            
         <div >
-            <MultiSelect value={selectedStyles} onChange={(e) => setSelectedStyles(e.value)} options={GENRES_LIST} optionLabel="style" 
+            <MultiSelect value={selectedStyles} onChange={handleStyleChange} options={GENRES_LIST} optionLabel="style" 
                 filter placeholder="Select styles" maxSelectedLabels={3} />
+                
         </div>
 
             <label htmlFor="basePrice">
