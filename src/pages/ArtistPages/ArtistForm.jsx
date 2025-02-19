@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { editArtist, createArtist } from "../../services/agency.service.js"
@@ -18,13 +18,13 @@ const ArtistForm = ({ artist, isEditing }) => {
     description: artist?.description || "",
     style: artist?.style || [],
     basePrice: artist?.basePrice || 0,
-    club: artist?.pricingModifiers.type.club || 0,
-    festival: artist?.pricingModifiers?.type?.festival || 0,
-    specialEvent: artist?.pricingModifiers?.type?.specialEvent || 0,
-    small: artist?.pricingModifiers?.type?.capacity?.small || 0,
-    large: artist?.pricingModifiers?.type?.capacity?.large || 0,
-    weekendBoost: artist?.pricingModifiers?.type?.weekendBoost || 0,
-    monthBoost: artist?.pricingModifiers?.type?.monthBoost || 0,
+    club: artist?.pricingModifiers?.club || 0,
+    festival: artist?.pricingModifiers?.festival || 0,
+    specialEvent: artist?.pricingModifiers?.specialEvent || 0,
+    small: artist?.pricingModifiers?.capacity?.small || 0,
+    large: artist?.pricingModifiers?.capacity?.large || 0,
+    weekendBoost: artist?.pricingModifiers?.weekendBoost || 0,
+    monthBoost: artist?.pricingModifiers?.monthBoost || 0,
 
   });
   const navigate = useNavigate();
@@ -50,30 +50,40 @@ const ArtistForm = ({ artist, isEditing }) => {
     uploadData.append("monthBoost", artistData.monthBoost);
     uploadData.append("agency", currentUser.id);
 
+   
 
-    
     try {
       if (isEditing) {
-        const updatedArtist = await editArtist(uploadData);
+        const updatedArtist = await editArtist(artist.id,uploadData);
         navigate(`/artists/${updatedArtist.id}`);
         return;
       }
-      console.log(uploadData)
+      console.log("Datos enviados a la API:", artistData);
       const newArtist = await createArtist(uploadData);
       navigate(`/artists/${newArtist.id}`);
     } catch (error) {
       console.log(error);
     }
   };
-
+  
+  useEffect(() => {
+    console.log("Datos del artista:", artist);
+    if (artist?.style) {
+      setSelectedStyles(artist.style); 
+    }
+  }, [artist]);
+  
+  console.log("Selected Styles:", selectedStyles.join(", "));
+  
+  
   const handleStyleChange = (e) => {
     setSelectedStyles(e.value);  
     setArtistData(prevState => ({
         ...prevState,
-        style: e.value.map(style => style.style) 
-    }));
-};
-
+        style: e.value
+      }));
+    };
+ 
   
 
   const handleChange = (e) => {
@@ -143,6 +153,10 @@ const ArtistForm = ({ artist, isEditing }) => {
           </label>
            
         <div >
+        <div>
+  <h3>Selected Styles:</h3>
+  <p>{selectedStyles ? selectedStyles.join(", ") : "No styles selected"}</p>
+</div>
             <MultiSelect value={selectedStyles} onChange={handleStyleChange} options={GENRES_LIST} optionLabel="style" 
                 filter placeholder="Select styles" maxSelectedLabels={3} />
                 
