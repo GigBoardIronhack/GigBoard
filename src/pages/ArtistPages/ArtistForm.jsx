@@ -2,8 +2,9 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
-import { editArtist, createArtist } from "../../services/agency.service.js"
+import { editArtist, createArtist } from "../../services/agency.service.js";
 import { GENRES_LIST } from "../../data/styles.js";
+
 import { MultiSelect } from 'primereact/multiselect';
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { InputText } from 'primereact/inputtext';
@@ -17,11 +18,13 @@ const ArtistForm = ({ artist, isEditing }) => {
   const [selectedStyles, setSelectedStyles] = useState([]);
 
 
+
   const [artistData, setArtistData] = useState({
     name: artist?.name || "",
     imageUrl: artist?.imageUrl || null,
     description: artist?.description || "",
     style: artist?.style || [],
+
     basePrice: artist?.basePrice || null,
     club: artist?.pricingModifiers?.club || null,
     festival: artist?.pricingModifiers?.festival || null,
@@ -30,8 +33,8 @@ const ArtistForm = ({ artist, isEditing }) => {
     large: artist?.pricingModifiers?.capacity?.large || null,
     weekendBoost: artist?.pricingModifiers?.weekendBoost || null,
     monthBoost: artist?.pricingModifiers?.monthBoost || null,
-
   });
+  
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -44,7 +47,9 @@ const ArtistForm = ({ artist, isEditing }) => {
     if (artistData.imageUrl instanceof File) {
       uploadData.append("imageUrl", artistData.imageUrl);
     }
+
     artistData.style.forEach(style => uploadData.append("style[]", style));
+
     uploadData.append("basePrice", artistData.basePrice);
     uploadData.append("club", artistData.club);
     uploadData.append("festival", artistData.festival);
@@ -55,7 +60,6 @@ const ArtistForm = ({ artist, isEditing }) => {
     uploadData.append("monthBoost", artistData.monthBoost);
     uploadData.append("agency", currentUser.id);
 
-   
 
     try {
       if (isEditing) {
@@ -64,13 +68,16 @@ const ArtistForm = ({ artist, isEditing }) => {
         console.log("Datos actualizados:", updatedArtist);
         return;
       }
+
       console.log("Datos enviados a la API:", artistData);
       const newArtist = await createArtist(uploadData);
       navigate(`/artists/${newArtist.id}`);
+
     } catch (error) {
       console.log(error);
     }
   };
+
   
   useEffect(() => {
     if (artist?.style && Array.isArray(artist.style)) {
@@ -92,6 +99,7 @@ const ArtistForm = ({ artist, isEditing }) => {
  
   
 
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setArtistData((prevState) => ({
@@ -100,16 +108,14 @@ const ArtistForm = ({ artist, isEditing }) => {
     }));
   };
 
-  const handleNumberChange = (e) =>{
-      const name = e.target.name;
-      const value = Number(e.target.value);
-      setArtistData((prevState)=>({
-          ...prevState,
-          [name]: value,
-      }))
-
-  }
-
+  const handleNumberChange = (e) => {
+    const name = e.target.name;
+    const value = Number(e.target.value);
+    setArtistData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   return (
     <div>
@@ -135,6 +141,7 @@ const ArtistForm = ({ artist, isEditing }) => {
             value={artistData.description}
           />
         </label>
+
           <label htmlFor="imageUrl">
             {artistData.imageUrl && (
               <div>
@@ -203,56 +210,112 @@ const ArtistForm = ({ artist, isEditing }) => {
                 id="specialEvent"
                 onChange={handleNumberChange}
                 value={artistData.specialEvent}
+
               />
-            </label>
-            <label htmlFor="capacity" placeholder="tipo de evento">
-              Capacidad de evento
-                <input
-                  type="number"
-                  placeholder="small"
-                  name="small"
-                  id="small"
-                  onChange={handleNumberChange}
-                  value={artistData.small}
-                />
-                 <input
-                  type="number"
-                  placeholder="large"
-                  name="large"
-                  id="large"
-                  onChange={handleNumberChange}
-                  value={artistData.large}
-                />
-                </label>
-                <label htmlFor="weekendBoost" placeholder="tipo de evento">
-                    weekendBoost
-                <input
-                  type="number"
-                  placeholder="weekendBoost"
-                  name="weekendBoost"
-                  id="weekendBoost"
-                  onChange={handleNumberChange}
-                  value={artistData.weekendBoost}
-                />
-                </label>
-                <label htmlFor="monthBoost" placeholder="tipo de evento">
-                monthBoost
-                <input
-                  type="number"
-                  placeholder="monthBoost"
-                  name="monthBoost"
-                  id="monthBoost"
-                  onChange={handleNumberChange}
-                  value={artistData.monthBoost}
-                />
-                </label>
+            </div>
+          )}
+          <input
+            type="file"
+            id="imageUrl"
+            name="imageUrl"
+            onChange={handleChange}
+            style={{ width: "132px", marginRight: "30px" }}
+          />
+        </label>
 
+        <div>
+          <MultiSelect
+            value={selectedStyles}
+            onChange={(e) => setSelectedStyles(e.value)}
+            options={GENRES_LIST}
+            optionLabel="style"
+            filter
+            placeholder="Select styles"
+            maxSelectedLabels={3}
+          />
+        </div>
 
-           
-         
-              
+        <label htmlFor="basePrice">
+          base Price
+          <input
+            type="number"
+            placeholder="basePrice"
+            name="basePrice"
+            id="basePrice"
+            onChange={handleNumberChange}
+            value={artistData.basePrice}
+          />
+        </label>
+        <label htmlFor="pricingModifiers" placeholder="tipo de evento">
+          tipo de evento
+          <input
+            type="number"
+            placeholder="club"
+            name="club"
+            id="club"
+            onChange={handleNumberChange}
+            value={artistData.club}
+          />
+          <input
+            type="number"
+            placeholder="festival"
+            name="festival"
+            id="festival"
+            onChange={handleNumberChange}
+            value={artistData.festival}
+          />
+          <input
+            type="number"
+            placeholder="specialEvent"
+            name="specialEvent"
+            id="specialEvent"
+            onChange={handleNumberChange}
+            value={artistData.specialEvent}
+          />
+        </label>
+        <label htmlFor="capacity" placeholder="tipo de evento">
+          Capacidad de evento
+          <input
+            type="number"
+            placeholder="small"
+            name="small"
+            id="small"
+            onChange={handleNumberChange}
+            value={artistData.small}
+          />
+          <input
+            type="number"
+            placeholder="large"
+            name="large"
+            id="large"
+            onChange={handleNumberChange}
+            value={artistData.large}
+          />
+        </label>
+        <label htmlFor="weekendBoost" placeholder="tipo de evento">
+          weekendBoost
+          <input
+            type="number"
+            placeholder="weekendBoost"
+            name="weekendBoost"
+            id="weekendBoost"
+            onChange={handleNumberChange}
+            value={artistData.weekendBoost}
+          />
+        </label>
+        <label htmlFor="monthBoost" placeholder="tipo de evento">
+          monthBoost
+          <input
+            type="number"
+            placeholder="monthBoost"
+            name="monthBoost"
+            id="monthBoost"
+            onChange={handleNumberChange}
+            value={artistData.monthBoost}
+          />
+        </label>
 
-          <button type="submit">{isEditing ? "Edit" : "Register"}</button>
+        <button type="submit">{isEditing ? "Edit" : "Register"}</button>
       </form>
     </div>
   );
