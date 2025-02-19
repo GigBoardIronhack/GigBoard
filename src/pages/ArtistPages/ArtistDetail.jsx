@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { getArtist } from "../../services/artist.service"
 import { useParams } from "react-router-dom"
+import { Spotify } from "react-spotify-embed"
 const ArtistDetail = () => {
   const [artist, setArtist] = useState(null)
   const {id} = useParams()
@@ -26,6 +27,7 @@ const ArtistDetail = () => {
       <div>
         <p>{artist.name}</p>
         <img src={artist.imageUrl} alt="" />
+        <Spotify link={artist.spotiUrl}/>
     </div>
 
     ) : (
