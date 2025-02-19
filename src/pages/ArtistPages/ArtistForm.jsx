@@ -212,8 +212,8 @@ const ArtistForm = ({ artist, isEditing }) => {
                 value={artistData.specialEvent}
 
               />
-            </div>
-          )}
+            </label>
+          
           <input
             type="file"
             id="imageUrl"
