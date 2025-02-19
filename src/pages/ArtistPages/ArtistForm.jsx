@@ -5,8 +5,12 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { editArtist, createArtist } from "../../services/agency.service.js"
 import { GENRES_LIST } from "../../data/styles.js";
 import { MultiSelect } from 'primereact/multiselect';
+import "primereact/resources/themes/lara-light-cyan/theme.css";
+import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
+import { FloatLabel } from "primereact/floatlabel";
 
-const ArtistForm = ({ artist, isEditing, setArtist }) => {
+const ArtistForm = ({ artist, isEditing }) => {
 
 
   const { currentUser } = useContext(AuthContext);
@@ -18,14 +22,14 @@ const ArtistForm = ({ artist, isEditing, setArtist }) => {
     imageUrl: artist?.imageUrl || null,
     description: artist?.description || "",
     style: artist?.style || [],
-    basePrice: artist?.basePrice || 0,
-    club: artist?.pricingModifiers?.club || 0,
-    festival: artist?.pricingModifiers?.festival || 0,
-    specialEvent: artist?.pricingModifiers?.specialEvent || 0,
-    small: artist?.pricingModifiers?.capacity?.small || 0,
-    large: artist?.pricingModifiers?.capacity?.large || 0,
-    weekendBoost: artist?.pricingModifiers?.weekendBoost || 0,
-    monthBoost: artist?.pricingModifiers?.monthBoost || 0,
+    basePrice: artist?.basePrice || null,
+    club: artist?.pricingModifiers?.club || null,
+    festival: artist?.pricingModifiers?.festival || null,
+    specialEvent: artist?.pricingModifiers?.specialEvent || null,
+    small: artist?.pricingModifiers?.capacity?.small || null,
+    large: artist?.pricingModifiers?.capacity?.large || null,
+    weekendBoost: artist?.pricingModifiers?.weekendBoost || null,
+    monthBoost: artist?.pricingModifiers?.monthBoost || null,
 
   });
   const navigate = useNavigate();
@@ -110,8 +114,8 @@ const ArtistForm = ({ artist, isEditing, setArtist }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">
-          <input
+        <FloatLabel>
+          <InputText
             type="text"
             placeholder="name"
             name="name"
@@ -119,7 +123,8 @@ const ArtistForm = ({ artist, isEditing, setArtist }) => {
             onChange={handleChange}
             value={artistData.name}
           />
-        </label>
+          <label htmlFor="name">Name</label>
+        </FloatLabel>
         <label htmlFor="description">
           <input
             type="text"
@@ -156,7 +161,7 @@ const ArtistForm = ({ artist, isEditing, setArtist }) => {
            
         <div>
             <MultiSelect value={selectedStyles} onChange={handleStyleChange} options={GENRES_LIST} optionLabel="style" 
-                filter placeholder="Select styles" maxSelectedLabels={3} />
+                filter placeholder="Select styles" maxSelectedLabels={3} className="w-full md:w-20rem" />
                 
         </div>
 
@@ -173,9 +178,11 @@ const ArtistForm = ({ artist, isEditing, setArtist }) => {
             </label>
             <label htmlFor="pricingModifiers" placeholder="tipo de evento">
               tipo de evento
-                <input
+                <InputNumber
                   type="number"
                   placeholder="club"
+                  mode="decimal" minFractionDigits={2}
+ 
                   name="club"
                   id="club"
                   onChange={handleNumberChange}
