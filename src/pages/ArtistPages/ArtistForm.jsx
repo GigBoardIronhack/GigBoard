@@ -6,10 +6,11 @@ import { editArtist, createArtist } from "../../services/agency.service.js"
 import { GENRES_LIST } from "../../data/styles.js";
 import { MultiSelect } from 'primereact/multiselect';
 
-const ArtistForm = ({ artist, isEditing }) => {
+const ArtistForm = ({ artist, isEditing, setArtist }) => {
+
 
   const { currentUser } = useContext(AuthContext);
-  const [selectedStyles , setSelectedStyles] = useState([])
+  const [selectedStyles, setSelectedStyles] = useState([]);
 
 
   const [artistData, setArtistData] = useState({
@@ -56,6 +57,7 @@ const ArtistForm = ({ artist, isEditing }) => {
       if (isEditing) {
         const updatedArtist = await editArtist(artist.id,uploadData);
         navigate(`/artists/${updatedArtist.id}`);
+        console.log("Datos actualizados:", updatedArtist);
         return;
       }
       console.log("Datos enviados a la API:", artistData);
@@ -67,12 +69,12 @@ const ArtistForm = ({ artist, isEditing }) => {
   };
   
   useEffect(() => {
-    console.log("Datos del artista:", artist);
-    if (artist?.style) {
-      setSelectedStyles(artist.style); 
+    if (artist?.style && Array.isArray(artist.style)) {
+      setSelectedStyles(
+        artist.style.map(styleName => GENRES_LIST.find(genre => genre.style === styleName) || { style: styleName })
+      );
     }
   }, [artist]);
-  
   console.log("Selected Styles:", selectedStyles.join(", "));
   
   
@@ -80,7 +82,7 @@ const ArtistForm = ({ artist, isEditing }) => {
     setSelectedStyles(e.value);  
     setArtistData(prevState => ({
         ...prevState,
-        style: e.value
+        style: e.value.map(item => item.style) 
       }));
     };
  
@@ -152,11 +154,7 @@ const ArtistForm = ({ artist, isEditing }) => {
             />
           </label>
            
-        <div >
         <div>
-  <h3>Selected Styles:</h3>
-  <p>{selectedStyles ? selectedStyles.join(", ") : "No styles selected"}</p>
-</div>
             <MultiSelect value={selectedStyles} onChange={handleStyleChange} options={GENRES_LIST} optionLabel="style" 
                 filter placeholder="Select styles" maxSelectedLabels={3} />
                 
