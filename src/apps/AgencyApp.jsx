@@ -13,11 +13,11 @@ const AgencyApp = () => {
   return (
     <Routes>
       <Route path="/dashboard" element={<AgencyDashboard />} />
+      <Route path="/edit" element={<Edit /> } />
       <Route path="/artists" element={<AgencyArtists />} />
       <Route path="/artists/:id" element={<ArtistDetail />} />
       <Route path="/create/artist" element={<ArtistForm/>} />
-      <Route path="/edit/artist/:id" element={<EditArtist  /> } />
-      <Route path="/edit" element={<Edit /> } />
+      <Route path="/artists/edit/:id" element={<EditArtist  /> } />
       <Route path="/purposals" element={<PurposalList/>} />
       <Route path="/purposals/:id" element={<PurposalDetail/>} />
       <Route path="/edit/purposals/:id" element={<PurposalEdit/>} />

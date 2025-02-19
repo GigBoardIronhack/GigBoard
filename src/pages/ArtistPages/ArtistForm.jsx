@@ -1,28 +1,38 @@
 /* eslint-disable react/prop-types */
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { editArtist, createArtist } from "../../services/agency.service.js";
 import { GENRES_LIST } from "../../data/styles.js";
-import { MultiSelect } from "primereact/multiselect";
+
+import { MultiSelect } from 'primereact/multiselect';
+import "primereact/resources/themes/lara-light-cyan/theme.css";
+import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
+import { FloatLabel } from "primereact/floatlabel";
 
 const ArtistForm = ({ artist, isEditing }) => {
+
+
   const { currentUser } = useContext(AuthContext);
   const [selectedStyles, setSelectedStyles] = useState([]);
+
+
 
   const [artistData, setArtistData] = useState({
     name: artist?.name || "",
     imageUrl: artist?.imageUrl || null,
     description: artist?.description || "",
     style: artist?.style || [],
-    basePrice: artist?.basePrice || 0,
-    club: artist?.pricingModifiers?.club || 0,
-    festival: artist?.pricingModifiers?.festival || 0,
-    specialEvent: artist?.pricingModifiers?.specialEvent || 0,
-    small: artist?.pricingModifiers?.capacity?.small || 0,
-    large: artist?.pricingModifiers?.capacity?.large || 0,
-    weekendBoost: artist?.pricingModifiers?.weekendBoost || 0,
-    monthBoost: artist?.pricingModifiers?.monthBoost || 0,
+
+    basePrice: artist?.basePrice || null,
+    club: artist?.pricingModifiers?.club || null,
+    festival: artist?.pricingModifiers?.festival || null,
+    specialEvent: artist?.pricingModifiers?.specialEvent || null,
+    small: artist?.pricingModifiers?.capacity?.small || null,
+    large: artist?.pricingModifiers?.capacity?.large || null,
+    weekendBoost: artist?.pricingModifiers?.weekendBoost || null,
+    monthBoost: artist?.pricingModifiers?.monthBoost || null,
   });
   
   const navigate = useNavigate();
@@ -32,13 +42,14 @@ const ArtistForm = ({ artist, isEditing }) => {
     const uploadData = new FormData();
 
     uploadData.append("name", artistData.name);
+    uploadData.append("description", artistData.description);
+
     if (artistData.imageUrl instanceof File) {
       uploadData.append("imageUrl", artistData.imageUrl);
     }
-    uploadData.append("description", artistData.description);
-    selectedStyles.forEach(style => {
-      uploadData.append("style", style);
-    });
+
+    artistData.style.forEach(style => uploadData.append("style[]", style));
+
     uploadData.append("basePrice", artistData.basePrice);
     uploadData.append("club", artistData.club);
     uploadData.append("festival", artistData.festival);
@@ -49,19 +60,45 @@ const ArtistForm = ({ artist, isEditing }) => {
     uploadData.append("monthBoost", artistData.monthBoost);
     uploadData.append("agency", currentUser.id);
 
+
     try {
       if (isEditing) {
-        const updatedArtist = await editArtist(uploadData);
+        const updatedArtist = await editArtist(artist.id,uploadData);
         navigate(`/artists/${updatedArtist.id}`);
+        console.log("Datos actualizados:", updatedArtist);
         return;
       }
-      console.log(uploadData);
-      await createArtist(uploadData);
-      navigate(`/artists/${artist.id}`);
+
+      console.log("Datos enviados a la API:", artistData);
+      const newArtist = await createArtist(uploadData);
+      navigate(`/artists/${newArtist.id}`);
+
     } catch (error) {
       console.log(error);
     }
   };
+
+  
+  useEffect(() => {
+    if (artist?.style && Array.isArray(artist.style)) {
+      setSelectedStyles(
+        artist.style.map(styleName => GENRES_LIST.find(genre => genre.style === styleName) || { style: styleName })
+      );
+    }
+  }, [artist]);
+  console.log("Selected Styles:", selectedStyles.join(", "));
+  
+  
+  const handleStyleChange = (e) => {
+    setSelectedStyles(e.value);  
+    setArtistData(prevState => ({
+        ...prevState,
+        style: e.value.map(item => item.style) 
+      }));
+    };
+ 
+  
+
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -83,8 +120,8 @@ const ArtistForm = ({ artist, isEditing }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">
-          <input
+        <FloatLabel>
+          <InputText
             type="text"
             placeholder="name"
             name="name"
@@ -92,7 +129,8 @@ const ArtistForm = ({ artist, isEditing }) => {
             onChange={handleChange}
             value={artistData.name}
           />
-        </label>
+          <label htmlFor="name">Name</label>
+        </FloatLabel>
         <label htmlFor="description">
           <input
             type="text"
@@ -103,18 +141,76 @@ const ArtistForm = ({ artist, isEditing }) => {
             value={artistData.description}
           />
         </label>
-        <label htmlFor="imageUrl">
-          {artistData.imageUrl && (
-            <div>
-              <p>Imagen actual:</p>
-              <img
-                src={
-                  typeof artistData.imageUrl === "string"
-                    ? artistData.imageUrl
-                    : URL.createObjectURL(artistData.imageUrl)
-                }
-                alt="Imagen actual"
-                width="100"
+
+          <label htmlFor="imageUrl">
+            {artistData.imageUrl && (
+              <div>
+                <p>Imagen actual:</p>
+                <img
+                  src={
+                    typeof artistData.imageUrl === "string"
+                      ? artistData.imageUrl
+                      : URL.createObjectURL(artistData.imageUrl)
+                  }
+                  alt="Imagen actual"
+                  width="100"
+                />
+              </div>
+            )}
+            <input
+              type="file"
+              id="imageUrl"
+              name="imageUrl"
+              onChange={handleChange}
+              style={{ width: "132px", marginRight: "30px"}}
+            />
+          </label>
+           
+        <div>
+            <MultiSelect value={selectedStyles} onChange={handleStyleChange} options={GENRES_LIST} optionLabel="style" 
+                filter placeholder="Select styles" maxSelectedLabels={3} className="w-full md:w-20rem" />
+                
+        </div>
+
+            <label htmlFor="basePrice">
+            base Price
+              <input
+                type="number"
+                placeholder="basePrice"
+                name="basePrice"
+                id="basePrice"
+                onChange={handleNumberChange}
+                value={artistData.basePrice}
+              />
+            </label>
+            <label htmlFor="pricingModifiers" placeholder="tipo de evento">
+              tipo de evento
+                <InputNumber
+                  type="number"
+                  placeholder="club"
+                  mode="decimal" minFractionDigits={2}
+ 
+                  name="club"
+                  id="club"
+                  onChange={handleNumberChange}
+                  value={artistData.club}
+                />
+                <input
+                  type="number"
+                  placeholder="festival"
+                  name="festival"
+                  id="festival"
+                  onChange={handleNumberChange}
+                  value={artistData.festival}
+                />
+                <input
+                type="number"
+                placeholder="specialEvent"
+                name="specialEvent"
+                id="specialEvent"
+                onChange={handleNumberChange}
+                value={artistData.specialEvent}
+
               />
             </div>
           )}
