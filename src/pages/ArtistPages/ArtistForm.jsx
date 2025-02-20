@@ -25,13 +25,13 @@ const ArtistForm = ({ artist, isEditing }) => {
     youtubeUrl: artist?.youtubeUrl || "",
     style: artist?.style || [],
     basePrice: artist?.basePrice || 0,
-    club: artist?.pricingModifiers?.club || 0,
-    festival: artist?.pricingModifiers?.festival || 0,
-    specialEvent: artist?.pricingModifiers?.specialEvent || 0,
-    small: artist?.pricingModifiers?.capacity?.small || 0,
-    large: artist?.pricingModifiers?.capacity?.large || 0,
-    weekendBoost: artist?.pricingModifiers?.weekendBoost || 0,
-    monthBoost: artist?.pricingModifiers?.monthBoost || 0,
+    club: artist?.pricingModifiers?.club*100 || 0,
+    festival: artist?.pricingModifiers?.festival*100 || 0,
+    specialEvent: artist?.pricingModifiers?.specialEvent*100 || 0,
+    small: artist?.pricingModifiers?.capacity?.small*100 || 0,
+    large: artist?.pricingModifiers?.capacity?.large*100 || 0,
+    weekendBoost: artist?.pricingModifiers?.weekendBoost*100 || 0,
+    monthBoost: artist?.pricingModifiers?.monthBoost*100 || 0,
   });
   const navigate = useNavigate();
 
@@ -49,13 +49,13 @@ const ArtistForm = ({ artist, isEditing }) => {
     uploadData.append("basePrice", artistData.basePrice);
     uploadData.append("spotiUrl", artistData.spotiUrl);
     uploadData.append("youtubeUrl", artistData.youtubeUrl);
-    uploadData.append("club", artistData.club);
-    uploadData.append("festival", artistData.festival);
-    uploadData.append("specialEvent", artistData.specialEvent);
-    uploadData.append("small", artistData.small);
-    uploadData.append("large", artistData.large);
-    uploadData.append("weekendBoost", artistData.weekendBoost);
-    uploadData.append("monthBoost", artistData.monthBoost);
+    uploadData.append("club", artistData.club/100);
+    uploadData.append("festival", artistData.festival/100);
+    uploadData.append("specialEvent", artistData.specialEvent/100);
+    uploadData.append("small", artistData.small/100);
+    uploadData.append("large", artistData.large/100);
+    uploadData.append("weekendBoost", artistData.weekendBoost/100);
+    uploadData.append("monthBoost", artistData.monthBoost/100);
     uploadData.append("agency", currentUser.id);
 
     try {
@@ -214,6 +214,7 @@ const ArtistForm = ({ artist, isEditing }) => {
           </div>
             {promoterRoleChecked && (
             <div>
+            Porcentaje extra para clubes 
           <input
             type="number"
             placeholder="club"
@@ -221,7 +222,10 @@ const ArtistForm = ({ artist, isEditing }) => {
             id="club"
             onChange={handleNumberChange}
             value={artistData.club}
-          />
+            style={{width:"40px", marginLeft:"10px"}}
+
+          />% <br />
+          Porcentaje extra para festival 
           <input
             type="number"
             placeholder="festival"
@@ -229,7 +233,10 @@ const ArtistForm = ({ artist, isEditing }) => {
             id="festival"
             onChange={handleNumberChange}
             value={artistData.festival}
-          />
+            style={{width:"40px", marginLeft:"10px"}}
+          />% <br />
+          Porcentaje extra para eventos especiales
+         
           <input
             type="number"
             placeholder="specialEvent"
@@ -237,11 +244,15 @@ const ArtistForm = ({ artist, isEditing }) => {
             id="specialEvent"
             onChange={handleNumberChange}
             value={artistData.specialEvent}
-          />
+            style={{width:"40px", marginLeft:"10px"}}
+          />% <br />
             </div>
             )}
         </label>
-        <label htmlFor="capacity" placeholder="tipo de evento">
+        <label 
+        htmlFor="capacity" 
+        placeholder="tipo de evento"
+        style={{marginTop: "10px"}}>
           ¿Quieres añadir bonus en base a la capacidad del Evento contratante?
           <div className="card flex justify-content-center">
             <InputSwitch
