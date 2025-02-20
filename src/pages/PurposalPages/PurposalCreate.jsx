@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext, useEffect, useState } from "react";
@@ -91,25 +92,29 @@ useEffect(() => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div>
-          <Calendar
-            onChange={handleDateChange}
-            value={purposalData.eventDate}
-          />
-          <Calculator artist={artist} key={artist.id} weekendBoost={weekendBoost} summerBoost={summerBoost}
-          />
+      <div>
+          <div>
+            <Calendar
+              onChange={handleDateChange}
+              value={purposalData.eventDate}
+            />
+            <Calculator artist={artist} key={artist.id} weekendBoost={weekendBoost} summerBoost={summerBoost}
+            />
+          </div>
+          <label htmlFor="notes">
+            <textarea
+              placeholder="Añadir notas..."
+              name="notes"
+              id="notes"
+              onChange={handleChange}
+              value={purposalData.notes || ""}
+              rows={4}
+              cols={50}
+            />
+          </label>
         </div>
-        <label htmlFor="notes">
-          <textarea
-            placeholder="Añadir notas..."
-            name="notes"
-            id="notes"
-            onChange={handleChange}
-            value={purposalData.notes || ""}
-            rows={4}
-            cols={50}
-          />
-        </label>
+      
+
         <button type="submit">{isEditing ? "Edit" : "Enviar"}</button>
       </form>
     </div>
