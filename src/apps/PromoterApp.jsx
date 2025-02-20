@@ -16,7 +16,7 @@ const PromoterApp = () => {
       <Route path="/artists/:id" element={<ArtistDetail />} />
       <Route path="/edit" element={<Edit />} />
       <Route path="/purposals" element={<PurposalList />} />
-      <Route path="/create/purposal" element={<PurposalCreate />} />
+      <Route path="/artists/:artistId/purposal" element={<PurposalCreate />} />
       <Route path="/purposals/:id" element={<PurposalDetail />} />
       <Route path="/edit/purposals/:id" element={<PurposalEdit />} />
     </Routes>
