@@ -11,30 +11,23 @@ import { getArtist } from "../../services/artist.service";
 const PurposalCreate = ({ purposal, isEditing }) => {
   const { currentUser } = useContext(AuthContext);
   const { id } = useParams();
-  const [artist, setArtist] = useState({});
-  
+  const [artist, setArtist] = useState(purposal?.artist || {});
 
-  useEffect(() => {
-    const getArtistId = async () => {
-      try {
-        const artist = await getArtist(id);
-        setArtist(artist);
-        console.log(artist);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getArtistId();
-  }, [id]);
-
-  console.log(artist);
+useEffect(() => {
+  if (purposal?.artist) {
+    setArtist(purposal.artist);
+  }
+}, [purposal]);
+  console.log("Prop purposal en PurposalCreate:", purposal);
 
   const [purposalData, setPurposalData] = useState({
-    negotiatedPrice: purposal?.negotiatedPrice || 0,
+    negotiatedPrice: purposal?.negotiatedPrice || null,
     eventDate: purposal?.eventDate || null,
     status: purposal?.status || "pending",
     notes: purposal?.notes || [],
   });
+
+  console.log("Estado inicial purposalData:", purposalData);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -51,29 +44,30 @@ const PurposalCreate = ({ purposal, isEditing }) => {
       notes: purposalData.notes,
     };
 
-    console.log(
-      "📅 Final Event Date being sent:",
-      purposalData.eventDate.toLocaleDateString("sv-SE")
-    );
-
     try {
       if (isEditing) {
-        const updatePurposal = await editPurposal(purposalData.id, uploadData);
+        const updatePurposal = await editPurposal(purposal.id, uploadData);
         navigate(`/purposals/${updatePurposal.id}`);
         return;
       }
       const newPurposal = await createPurposal(id, uploadData);
       navigate(`/purposals/${newPurposal.id}`);
+      setPurposalData((prevState) => ({
+        ...prevState,
+        artist: newPurposal.artist,  
+      }));
     } catch (error) {
       console.log(error);
     }
   };
+ 
   const handleDateChange = (date) => {
     setPurposalData((prevState) => ({
       ...prevState,
       eventDate: date,
     }));
   };
+  console.log("eventDate en estado:", purposalData.eventDate);
 
   const eventDate = purposalData.eventDate ? new Date(purposalData.eventDate) : null;
 

@@ -7,13 +7,18 @@ const PurposalEdit = () => {
 
   const {id} = useParams()
   console.log(id)
+  
   const [purposal, setPurposal] = useState({})
   const [loading, setLoading] = useState(true)
+  
+
 
   useEffect(()=>{
     const getPurposalId = async () =>{
+      
       try{
-           const purposal = await getPurposal(id)
+           const purposal = await getPurposal(id);
+           console.log("Purposal recibida en Edit:", purposal);
            setPurposal(purposal)
       
            }catch(err){
@@ -26,13 +31,14 @@ const PurposalEdit = () => {
           }
           getPurposalId()
   },[id])
+
   {loading && <p>Cargando purposal...</p> }
 
   {!purposal && <p>No hay purposal para mostrar</p> }
   
   return (
     <div>
-    <PurposalCreate purposal={purposal} key={purposal.id}  isEditing />
+    <PurposalCreate purposal={purposal}  isEditing />
       
     </div>
   )
