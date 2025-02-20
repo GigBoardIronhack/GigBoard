@@ -32,6 +32,7 @@ const PurposalCreate = ({ purposal, isEditing }) => {
       negotiatedPrice: purposalData.negotiatedPrice,
       eventDate: purposalData.eventDate.toLocaleDateString("sv-SE"),
       status: purposalData.status,
+      notes: purposalData.notes
     };
    
     console.log("📅 Final Event Date being sent:", purposalData.eventDate.toLocaleDateString("sv-SE"));
@@ -67,16 +68,7 @@ const PurposalCreate = ({ purposal, isEditing }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="negotiatedPrice">
-          <input
-            type="text"
-            placeholder="negotiatedPrice"
-            name="negotiatedPrice"
-            id="negotiatedPrice"
-            onChange={handleChange}
-            value={purposalData.negotiatedPrice}
-          />
-        </label>
+
         <div>
         <Calendar onChange={handleDateChange} value={purposalData.eventDate} />
        
