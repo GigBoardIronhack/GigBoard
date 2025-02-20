@@ -132,7 +132,7 @@ const Register = ({ isEditing }) => {
           </select>
         )}
 
-        {userRole === "promoter" || currentUser?.role === "promoter" && isEditing && (
+        {(userRole === "promoter" || (isEditing && currentUser?.role === "promoter")) && (
           <div>
             <select
               name="promoterRole"

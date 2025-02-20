@@ -7,7 +7,6 @@ import { GENRES_LIST } from "../../data/styles.js";
 import { MultiSelect } from "primereact/multiselect";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { InputText } from "primereact/inputtext";
-import { InputNumber } from "primereact/inputnumber";
 import { FloatLabel } from "primereact/floatlabel";
 import { InputSwitch } from "primereact/inputswitch";
 
