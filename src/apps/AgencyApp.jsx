@@ -7,7 +7,7 @@ import Edit from "../pages/Edit";
 import EditArtist from "../pages/ArtistPages/EditArtist";
 import PurposalList from "../pages/PurposalPages/PurposalList";
 import PurposalDetail from "../pages/PurposalPages/PurposalDetail";
-import PurposalEdit from "../pages/PurposalPages/PurposalEdit";
+import PurposalEditAgency from "../pages/AgencyPages/PurposalEditAgency";
 
 const AgencyApp = () => {
   return (
@@ -20,7 +20,7 @@ const AgencyApp = () => {
       <Route path="/artists/edit/:id" element={<EditArtist  /> } />
       <Route path="/purposals" element={<PurposalList/>} />
       <Route path="/purposals/:id" element={<PurposalDetail/>} />
-      <Route path="/edit/purposals/:id" element={<PurposalEdit/>} />
+      <Route path="/edit/purposals/:id" element={<PurposalEditAgency/>} />
     </Routes>
   );
 };
