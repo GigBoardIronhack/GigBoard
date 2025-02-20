@@ -2,7 +2,7 @@ import { createHttp } from "./base.service";
 
 const authenticatedHttp = createHttp(true);
 
-export const createPurposal = (artistId, purposal) => authenticatedHttp.post(`/artists/${artistId}/purposal`, purposal)
+export const createPurposal = (id, purposal) => authenticatedHttp.post(`/artists/${id}/purposal`, purposal)
 
 export const listPromoterPurposals = () => authenticatedHttp.get("/purposals/promoter")
 
