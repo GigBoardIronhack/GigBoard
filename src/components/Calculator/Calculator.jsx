@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { AuthContext } from "../../contexts/AuthContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
-const Calculator = ({ artist, weekendBoost, summerBoost }) => {
+const Calculator = ({ artist, weekendBoost, summerBoost, onPriceChange }) => {
   const { currentUser } = useContext(AuthContext);
 
   console.log(currentUser);
@@ -22,6 +22,9 @@ const Calculator = ({ artist, weekendBoost, summerBoost }) => {
   const summerBonus = summerBoost ? artist.basePrice * artist?.pricingModifiers?.monthBoost : 0;
 
   const negotiatedPrice = artist.basePrice + clubBonus + festivalBonus + specialEventBonus + smallBonus + largeBonus + weekendBonus + summerBonus;
+  useEffect(() => {
+    onPriceChange(negotiatedPrice); // 🔥 Debe actualizar `PurposalCreate`
+  }, [negotiatedPrice]);
 
   console.log(clubBonus, festivalBonus, specialEventBonus, smallBonus, largeBonus, weekendBonus, summerBonus, negotiatedPrice);
 

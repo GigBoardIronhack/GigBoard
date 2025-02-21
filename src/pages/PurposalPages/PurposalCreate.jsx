@@ -14,12 +14,22 @@ const PurposalCreate = ({ purposal, isEditing }) => {
   const { id } = useParams();
   const [artist, setArtist] = useState(purposal?.artist || {});
 
+
 useEffect(() => {
   if (purposal?.artist) {
     setArtist(purposal.artist);
+  } else {
+    const fetchArtist = async () => {
+      try {
+        const artistData = await getArtist(id);
+        setArtist(artistData);
+      } catch (error) {
+        console.error("Error al obtener el artista:", error);
+      }
+    };
+    fetchArtist();
   }
-}, [purposal]);
-  console.log("Prop purposal en PurposalCreate:", purposal);
+}, [purposal, id]);
 
   const [purposalData, setPurposalData] = useState({
     negotiatedPrice: purposal?.negotiatedPrice || null,
@@ -33,6 +43,7 @@ useEffect(() => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Datos enviados al backend:", purposalData); 
     if (!purposalData.eventDate || !(purposalData.eventDate instanceof Date)) {
       console.error("Invalid or missing eventDate");
       return;
@@ -47,7 +58,7 @@ useEffect(() => {
 
     try {
       if (isEditing) {
-        const updatePurposal = await editPurposal(purposal.id, uploadData);
+        const updatePurposal = await editPurposal(purposal.id, uploadData); 
         navigate(`/purposals/${updatePurposal.id}`);
         return;
       }
@@ -58,8 +69,10 @@ useEffect(() => {
         artist: newPurposal.artist,  
       }));
     } catch (error) {
+
       console.log(error);
-    }
+    } 
+    
   };
  
   const handleDateChange = (date) => {
@@ -83,9 +96,17 @@ useEffect(() => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(`Cambiando ${name}:`, value);
     setPurposalData((prevState) => ({
       ...prevState,
       [name]: value,
+    }));
+  };
+  const handlePriceChange = (newPrice) => {
+    console.log("Nuevo negotiatedPrice recibido en PurposalCreate:", newPrice); 
+    setPurposalData((prevState) => ({
+      ...prevState,
+      negotiatedPrice: newPrice,
     }));
   };
 
@@ -98,9 +119,18 @@ useEffect(() => {
               onChange={handleDateChange}
               value={purposalData.eventDate}
             />
-            <Calculator artist={artist} key={artist.id} weekendBoost={weekendBoost} summerBoost={summerBoost}
-            />
+            {artist && (
+              <Calculator 
+                artist={artist} 
+                key={artist.id} 
+                weekendBoost={weekendBoost} 
+                summerBoost={summerBoost} 
+                onPriceChange={handlePriceChange}
+              />
+            )}
+          
           </div>
+          {!isEditing && 
           <label htmlFor="notes">
             <textarea
               placeholder="Añadir notas..."
@@ -112,6 +142,7 @@ useEffect(() => {
               cols={50}
             />
           </label>
+        }
         </div>
       
 
