@@ -19,7 +19,7 @@ const AgencyApp = () => {
       <Route path="/create/artist" element={<ArtistForm/>} />
       <Route path="/artists/edit/:id" element={<EditArtist  /> } />
       <Route path="/purposals" element={<PurposalList/>} />
-      <Route path="/purposals/:id" element={<PurposalDetail/>} />
+      <Route path="/purposals/:id/:chatId" element={<PurposalDetail/>} />
       <Route path="/edit/purposals/:id" element={<PurposalEditAgency/>} />
     </Routes>
   );
