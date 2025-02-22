@@ -10,8 +10,9 @@ import { InputText } from "primereact/inputtext";
 import { FloatLabel } from "primereact/floatlabel";
 import { InputSwitch } from "primereact/inputswitch";
 
+
 const ArtistForm = ({ artist, isEditing }) => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, getCurrentUser } = useContext(AuthContext);
   const [selectedStyles, setSelectedStyles] = useState([]);
   const [promoterRoleChecked, setPromoterRoleChecked] = useState(false);
   const [promoterCapacityChecked, setPromoterCapacityChecked] = useState(false);
@@ -66,7 +67,9 @@ const ArtistForm = ({ artist, isEditing }) => {
         return;
       }
       console.log("Datos enviados a la API:", artistData);
+        
       const newArtist = await createArtist(uploadData);
+      await getCurrentUser();
       navigate(`/artists/${newArtist.id}`);
     } catch (error) {
       console.log(error);
@@ -205,8 +208,8 @@ const ArtistForm = ({ artist, isEditing }) => {
         </label>
         <h2>BONUS!</h2>
         <label htmlFor="pricingModifiers" placeholder="tipo de evento">
-          ¿Quieres añadir Bonus en base al tipo de Evento contratante?
           <div className="card flex justify-content-center">
+          ¿Quieres añadir Bonus en base al tipo de Evento contratante?
             <InputSwitch
               checked={promoterRoleChecked}
               onChange={(e) => setPromoterRoleChecked(e.value)}

@@ -47,7 +47,7 @@ export const AuthContext = createContext();
   };
 
   return (
-    <AuthContext.Provider value={{ currentUser, setCurrentUser, isAuthLoaded, login, logout }}>
+    <AuthContext.Provider value={{ currentUser, setCurrentUser, getCurrentUser, isAuthLoaded, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

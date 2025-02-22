@@ -18,4 +18,3 @@ export const listAgencyPurposals = () => authenticatedHttp.get("/purposals")
 
 export const editAgencyPurposals = (id, purposal) => authenticatedHttp.patch(`/purposals/${id}`, purposal) 
 
-

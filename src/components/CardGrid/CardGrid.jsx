@@ -1,17 +1,20 @@
+/* eslint-disable react/prop-types */
 import ArtistCard from "../Cards/ArtistCard"
 import PurposalCard from "../Cards/PurposalCard"
 import WideArtistCard from "../Cards/WideArtistCard"
 import WidePurposalCard from "../Cards/WidePurposalCard"
 
-const CardGrid = ( {cards, type} ) => {
+
+const CardGrid = ( { cards, type } ) => {
 
 
+    {console.log(cards)}
   return (
     <div>
     {type === "artists" && 
         cards.map((card, index)=>(
+            
             <div key={index}>
-            {console.log("carddddddddddddddd",card)}
                 <ArtistCard  card={card}/>
             </div>
         ))
@@ -33,7 +36,7 @@ const CardGrid = ( {cards, type} ) => {
     }{type === "widePurposals" && 
         cards.map((card, index)=>(
             <div key={index}>
-            
+                
                 <WidePurposalCard card={card}/>
             </div>
         ))
