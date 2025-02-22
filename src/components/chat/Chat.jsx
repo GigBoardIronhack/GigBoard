@@ -68,7 +68,7 @@ const Chat = ({chatId}) => {
             {chat?.messages.map((message, index) => (
               <li key={index} className="list-group-item">
              { console.log("mensajeeeeeeeeeeeeeeee",message)}
-                <strong>Sender:</strong> {message.sender === chat?.participants[0].id ? chat?.participants[0].name :  chat?.participants[1].name } <br />
+                <strong>Sender:</strong> {message.sender === chat?.participants[0].id ? chat?.participants[0].name :  chat?.participants[1].name} <br />
                 <strong>Text:</strong> {message.text} <br />
                 <strong>Created At:</strong> {message.createdAt}
               </li>

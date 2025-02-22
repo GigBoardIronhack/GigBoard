@@ -192,7 +192,7 @@ const Register = ({ isEditing }) => {
             />
           </label>
 
-          <button type="submit">{isEditing ? "Edit" : "Register"}</button>
+          <button  type="submit">{isEditing ? "Edit" : "Register" }</button>
         </div>
       </form>
     </div>
