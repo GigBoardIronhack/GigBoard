@@ -17,7 +17,7 @@ const PromoterApp = () => {
       <Route path="/edit" element={<Edit />} />
       <Route path="/purposals" element={<PurposalList />} />
       <Route path="/artists/:id/purposal" element={<PurposalCreate />} />
-      <Route path="/purposals/:id" element={<PurposalDetail />} />
+      <Route path="/purposals/:id/:chatId" element={<PurposalDetail />} />
       <Route path="/edit/purposals/:id" element={<PurposalEdit />} />
     </Routes>
   );

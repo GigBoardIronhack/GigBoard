@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getPurposal } from "../../services/purposal.service";
 import { Link } from "react-router-dom";
+import Chat from "../../components/chat/Chat";
 
 const PurposalDetail = () => {
   const [purposal, setPurposal] = useState({});
   const { id } = useParams();
+  const { chatId } =useParams();
   useEffect(() => {
     const getPurposalId = async () => {
       try {
@@ -33,9 +35,12 @@ const PurposalDetail = () => {
       }
       
       {purposal?.id && (
+      <div>
         <Link to={`/edit/purposals/${purposal.id}`}>
           <button>Editar</button>
         </Link>
+        <Chat chatId={chatId} />
+      </div>
       )}
     </div>
   );

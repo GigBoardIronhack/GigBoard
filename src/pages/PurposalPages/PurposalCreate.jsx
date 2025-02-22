@@ -8,6 +8,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Calculator from "../../components/Calculator/Calculator";
 import { getArtist } from "../../services/artist.service";
+import { createChatService } from "../../services/chat.service";
 
 const PurposalCreate = ({ purposal, isEditing }) => {
   const { currentUser } = useContext(AuthContext);
@@ -63,7 +64,8 @@ useEffect(() => {
         return;
       }
       const newPurposal = await createPurposal(id, uploadData);
-      navigate(`/purposals/${newPurposal.id}`);
+      const chat = await createChatService(artist.agency.id)
+      navigate(`/purposals/${newPurposal.id}/${chat.id}`);
       setPurposalData((prevState) => ({
         ...prevState,
         artist: newPurposal.artist,  
