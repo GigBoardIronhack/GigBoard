@@ -26,8 +26,6 @@ const ArtistDetail = () => {
           const favorites = await getFavorites();
           const isFavorite = favorites.some((fav) => fav.artist.id === id);
           setLiked(isFavorite);
-
-       
         console.log(artist);
         const purposals = await getPurposals();
         const alreadyProposed = purposals.some((purposal) => purposal.artist.id === id);

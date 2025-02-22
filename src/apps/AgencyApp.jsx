@@ -8,6 +8,7 @@ import EditArtist from "../pages/ArtistPages/EditArtist";
 import PurposalList from "../pages/PurposalPages/PurposalList";
 import PurposalDetail from "../pages/PurposalPages/PurposalDetail";
 import PurposalEditAgency from "../pages/AgencyPages/PurposalEditAgency";
+import DeleteArtist from "../pages/ArtistPages/DeleteArtist";
 
 const AgencyApp = () => {
   return (
@@ -18,6 +19,7 @@ const AgencyApp = () => {
       <Route path="/artists/:id" element={<ArtistDetail />} />
       <Route path="/create/artist" element={<ArtistForm/>} />
       <Route path="/artists/edit/:id" element={<EditArtist  /> } />
+      <Route path="/artists/delete/:id" element={<DeleteArtist/>} />
       <Route path="/purposals" element={<PurposalList/>} />
       <Route path="/purposals/:id/:chatId" element={<PurposalDetail/>} />
       <Route path="/edit/purposals/:id" element={<PurposalEditAgency/>} />

@@ -1,11 +1,12 @@
 
 import { AuthContext } from "../../contexts/AuthContext"
-import { useContext } from "react"
+import { useContext} from "react"
 import  LinkCreateArtist   from "../../components/LinkCreateArtist/LinkCreateArtist"
 import CardGrid from "../../components/CardGrid/CardGrid"
 
 const AgencyDashboard = () => {
   const { currentUser } = useContext(AuthContext)
+  
 
   return(
     <>
@@ -14,7 +15,7 @@ const AgencyDashboard = () => {
       <h3>eres {currentUser.role}</h3>
       <h4>tienes : {currentUser.artists.length} artistas</h4>
       <LinkCreateArtist />
-      <CardGrid type="artists" cards={currentUser.artists} />
+      <CardGrid type="wideArtists" cards={currentUser.artists} />
       
      
 

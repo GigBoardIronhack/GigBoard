@@ -1,8 +1,12 @@
+import { useContext } from "react"
+import CardGrid from "../../components/CardGrid/CardGrid"
+import { AuthContext } from "../../contexts/AuthContext"
 
 const AgencyArtists = () => {
+  const { currentUser } = useContext(AuthContext)
   return (
     <>
-    <h1>Agency artists</h1>
+    <CardGrid type="wideArtists" cards={currentUser.artists} />
       
     </>
   )
