@@ -22,13 +22,17 @@ const ArtistDetail = () => {
         const artist = await getArtist(id);
 
         setArtist(artist);
-        const favorites = await getFavorites();
-        const isFavorite = favorites.some((fav) => fav.artist.id === id);
-        setLiked(isFavorite);
+        if(currentUser.role === "promoter"){
+          const favorites = await getFavorites();
+          const isFavorite = favorites.some((fav) => fav.artist.id === id);
+          setLiked(isFavorite);
+
+       
         console.log(artist);
         const purposals = await getPurposals();
         const alreadyProposed = purposals.some((purposal) => purposal.artist.id === id);
         setHasPurposal(alreadyProposed);
+      }
       } catch (err) {
         console.log(err);
       }
