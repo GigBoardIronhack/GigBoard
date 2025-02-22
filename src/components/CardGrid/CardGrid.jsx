@@ -6,9 +6,9 @@ import WidePurposalCard from "../Cards/WidePurposalCard"
 
 
 const CardGrid = ( { cards, type } ) => {
+    console.log("Cards recibidos en CardGrid:", cards); 
 
-
-    {console.log(cards)}
+   
   return (
     <div>
     {type === "artists" && 

@@ -4,22 +4,33 @@ import CardGrid from "../../components/CardGrid/CardGrid";
 
 const PromoterArtists = () => {
   const [artists, setArtists] = useState([]);
-  useEffect(()=>{
-    const fetchArtist = async () => {
+  useEffect(() => {
+    const fetchArtists = async () => {
       try {
-        const artists = await listArtists();
-        setArtists(artists)
-        
+        const response = await listArtists();
+        console.log("🔹 Datos recibidos de API:", response);
+  
+        // Asegurar que se obtiene solo el array
+        const artistsArray = Array.isArray(response.artists) ? response.artists : [];
+  
+        console.log("✅ Array extraído:", artistsArray);
+        setArtists(artistsArray);
       } catch (error) {
-        console.log(error)
+        console.error("❌ Error al obtener artistas:", error);
+        setArtists([]);
       }
-    }
-    fetchArtist()
-  }, [])
+    };
+  
+    fetchArtists();
+  }, []);
+  
   return (
     <div>
+    {artists && 
       <CardGrid type="artists" cards={artists} />
+      }
     </div>
+  
   )
 }
 
