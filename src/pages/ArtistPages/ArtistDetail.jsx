@@ -6,7 +6,7 @@ import { Spotify } from "react-spotify-embed";
 import { AuthContext } from "../../contexts/AuthContext";
 import { getFavorites, toggleFavorite } from "../../services/favorite.service";
 import { useNotification } from "../../contexts/NotificationContext";
-useNotification;
+import DeleteArtist from "../../pages/ArtistPages/DeleteArtist";
 
 const ArtistDetail = () => {
   const [artist, setArtist] = useState(null);
@@ -20,23 +20,23 @@ const ArtistDetail = () => {
     const getArtistId = async () => {
       try {
         const artist = await getArtist(id);
-
         setArtist(artist);
-        if(currentUser.role === "promoter"){
+
+        if (currentUser.role === "promoter") {
           const favorites = await getFavorites();
           const isFavorite = favorites.some((fav) => fav.artist.id === id);
           setLiked(isFavorite);
-        console.log(artist);
-        const purposals = await getPurposals();
-        const alreadyProposed = purposals.some((purposal) => purposal.artist.id === id);
-        setHasPurposal(alreadyProposed);
-      }
+  
+          const purposals = await getPurposals();
+          const alreadyProposed = purposals.some((purposal) => purposal.artist.id === id);
+          setHasPurposal(alreadyProposed);
+        }
       } catch (err) {
         console.log(err);
       }
     };
     getArtistId();
-  }, [id]);
+  }, [id, currentUser.role]);
 
   const submitLike = () => {
     toggleFavorite(artist.id)
@@ -54,12 +54,16 @@ const ArtistDetail = () => {
       });
   };
 
+  const isOwner = artist && currentUser && (artist.agency && artist.agency.id === currentUser.id)
+ 
+
+
   return (
     <>
       {artist ? (
         <div>
           <p>{artist.name}</p>
-          <img src={artist.imageUrl} alt="" />
+          <img src={artist.imageUrl} alt={artist.name} />
           <Spotify link={artist.spotiUrl} />
           {currentUser.role === "promoter" && (
             <div>
@@ -73,9 +77,17 @@ const ArtistDetail = () => {
               )}
             </div>
           )}
+          {isOwner && (
+            <>
+              <Link to={`/artists/edit/${artist.id}`}>
+                <button>Editar</button>
+              </Link>
+              <DeleteArtist id={artist.id} />
+            </>
+          )}
         </div>
       ) : (
-        <p>artist not found</p>
+        <p>Artist not found</p>
       )}
     </>
   );

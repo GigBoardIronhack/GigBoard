@@ -9,20 +9,22 @@ import PurposalList from "../pages/PurposalPages/PurposalList";
 import PurposalDetail from "../pages/PurposalPages/PurposalDetail";
 import PurposalEditAgency from "../pages/AgencyPages/PurposalEditAgency";
 import DeleteArtist from "../pages/ArtistPages/DeleteArtist";
+import FilterArtists from "../pages/FilterArtists/FilterArtists";
 
 const AgencyApp = () => {
   return (
     <Routes>
       <Route path="/dashboard" element={<AgencyDashboard />} />
-      <Route path="/edit" element={<Edit /> } />
+      <Route path="/edit" element={<Edit />} />
       <Route path="/artists" element={<AgencyArtists />} />
       <Route path="/artists/:id" element={<ArtistDetail />} />
-      <Route path="/create/artist" element={<ArtistForm/>} />
-      <Route path="/artists/edit/:id" element={<EditArtist  /> } />
-      <Route path="/artists/delete/:id" element={<DeleteArtist/>} />
-      <Route path="/purposals" element={<PurposalList/>} />
-      <Route path="/purposals/:id/:chatId" element={<PurposalDetail/>} />
-      <Route path="/edit/purposals/:id" element={<PurposalEditAgency/>} />
+      <Route path="/create/artist" element={<ArtistForm />} />
+      <Route path="/artists/edit/:id" element={<EditArtist />} />
+      <Route path="/artists/delete/:id" element={<DeleteArtist />} />
+      <Route path="/purposals" element={<PurposalList />} />
+      <Route path="/purposals/:id/:chatId" element={<PurposalDetail />} />
+      <Route path="/edit/purposals/:id" element={<PurposalEditAgency />} />
+      <Route path="/artists/all" element={<FilterArtists />} />
     </Routes>
   );
 };
