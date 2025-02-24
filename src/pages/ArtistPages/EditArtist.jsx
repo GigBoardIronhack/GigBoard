@@ -33,7 +33,7 @@ const EditArtist = () => {
   return (
     <div>
 
-      <ArtistForm artist={artist} key={artist.id}  isEditing/>
+      <ArtistForm  artist={artist} key={artist.id}  isEditing/>
 
     </div>
   )

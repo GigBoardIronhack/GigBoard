@@ -4,6 +4,9 @@ import { updateUser } from "../services/user.service";
 import { createUser } from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+import { InputNumber } from 'primereact/inputnumber';
+import { FloatLabel } from 'primereact/floatlabel';
+
 
 const Register = ({ isEditing }) => {
   const { isAuthLoaded, currentUser, setCurrentUser } = useContext(AuthContext);
@@ -14,10 +17,13 @@ const Register = ({ isEditing }) => {
     cif: currentUser?.cif || "",
     imageUrl: currentUser?.imageUrl || null,
     role: currentUser?.role,
-    promoterRole: currentUser?.promoterRole,
-    promoterCapacity: currentUser?.promoterCapacity
+    promoterRole: currentUser?.promoterRole || "club",
+    promoterCapacity: currentUser?.promoterCapacity || null,
   });
   const [userRole, setUserRole] = useState("");
+
+
+
 
   const navigate = useNavigate();
 
@@ -34,9 +40,14 @@ const Register = ({ isEditing }) => {
       uploadData.append("password", userData.password);
     }
     uploadData.append("role", userData.role);
+    let promoterCapacity = userData.promoterCapacity ;
+    if(promoterCapacity === null){
+      promoterCapacity = 0;
+    }
+
     if (userData.role === "promoter") {
       uploadData.append("promoterRole", userData.promoterRole);
-      uploadData.append("promoterCapacity", userData.promoterCapacity);
+      uploadData.append("promoterCapacity", promoterCapacity);
     }
     uploadData.append("cif", userData.cif);
 
@@ -80,6 +91,14 @@ const Register = ({ isEditing }) => {
       role: value,
     }));
   };
+  const handlePromoterChange = (e) => {
+    const value = e.target.value;
+    setUserData((prevState) => ({
+      ...prevState,
+      promoterRole: value,
+    }));
+  };
+  
 
   return (
     <div>
@@ -137,22 +156,29 @@ const Register = ({ isEditing }) => {
             <select
               name="promoterRole"
               id="promoterRole"
-              onChange={handleChange}
+              onChange={handlePromoterChange}
               value={userData.promoterRole}
             >
               <option value="club">Club</option>
               <option value="festival">Festival</option>
               <option value="specialEvent">Special Event</option>
             </select>
+            
             <label htmlFor="promoterCapacity">
+            
               <input
                 type="number"
                 name="promoterCapacity"
                 id="promoterCapacity"
+                placeholder="Capacidad"
                 onChange={handleChange}
+                required
+                min={0}
+                pattern="[1-9][0-9]*"
                 value={userData.promoterCapacity}
               />
             </label>
+         
           </div>
         )}
         <div>
