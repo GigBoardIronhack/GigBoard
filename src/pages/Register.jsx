@@ -210,6 +210,7 @@ const Register = ({ isEditing }) => {
               </div>
             )}
             <input
+              multiple
               type="file"
               id="imageUrl"
               name="imageUrl"
