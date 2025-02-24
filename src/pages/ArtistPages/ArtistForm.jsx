@@ -17,6 +17,8 @@ const ArtistForm = ({ artist, isEditing }) => {
   const [promoterRoleChecked, setPromoterRoleChecked] = useState(false);
   const [promoterCapacityChecked, setPromoterCapacityChecked] = useState(false);
   const [promoterBoostChecked, setPromoterBoostChecked] = useState(false);
+  const [error, setError] = useState("");
+
 
   const [artistData, setArtistData] = useState({
     name: artist?.name || "",
@@ -25,7 +27,7 @@ const ArtistForm = ({ artist, isEditing }) => {
     spotiUrl: artist?.spotiUrl || "",
     youtubeUrl: artist?.youtubeUrl || "",
     style: artist?.style || [],
-    basePrice: artist?.basePrice || 0,
+    basePrice: artist?.basePrice || null,
     club: artist?.pricingModifiers?.club*100 || 0,
     festival: artist?.pricingModifiers?.festival*100 || 0,
     specialEvent: artist?.pricingModifiers?.specialEvent*100 || 0,
@@ -38,6 +40,10 @@ const ArtistForm = ({ artist, isEditing }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (selectedStyles.length === 0) {
+      setError("Este campo es obligatorio. Debes seleccionar al menos una opción.");
+      return;
+    }
     const uploadData = new FormData();
 
     uploadData.append("name", artistData.name);
@@ -47,7 +53,12 @@ const ArtistForm = ({ artist, isEditing }) => {
       uploadData.append("imageUrl", artistData.imageUrl);
     }
     artistData.style.forEach((style) => uploadData.append("style[]", style));
-    uploadData.append("basePrice", artistData.basePrice);
+    let basePrice = artistData.basePrice;
+
+    if(artistData.basePrice === null){
+      basePrice = 0;
+    }
+    uploadData.append("basePrice", basePrice);
     uploadData.append("spotiUrl", artistData.spotiUrl);
     uploadData.append("youtubeUrl", artistData.youtubeUrl);
     uploadData.append("club", artistData.club/100);
@@ -62,6 +73,7 @@ const ArtistForm = ({ artist, isEditing }) => {
     try {
       if (isEditing) {
         const updatedArtist = await editArtist(artist.id, uploadData);
+        await getCurrentUser();
         navigate(`/artists/${updatedArtist.id}`);
         console.log("Datos actualizados:", updatedArtist);
         return;
@@ -70,6 +82,7 @@ const ArtistForm = ({ artist, isEditing }) => {
         
       const newArtist = await createArtist(uploadData);
       await getCurrentUser();
+
       navigate(`/artists/${newArtist.id}`);
     } catch (error) {
       console.log(error);
@@ -92,6 +105,7 @@ const ArtistForm = ({ artist, isEditing }) => {
 
   const handleStyleChange = (e) => {
     setSelectedStyles(e.value);
+    
     setArtistData((prevState) => ({
       ...prevState,
       style: e.value.map((item) => item.style),
@@ -186,13 +200,14 @@ const ArtistForm = ({ artist, isEditing }) => {
           <MultiSelect
             value={selectedStyles}
             onChange={handleStyleChange}
-            options={GENRES_LIST}
+            options={GENRES_LIST} 
             optionLabel="style"
             filter
             placeholder="Select styles"
             maxSelectedLabels={3}
             className="w-full md:w-20rem"
           />
+          {error && <p style={{ color: "red" }}>{error}</p>}
         </div>
 
         <label htmlFor="basePrice">
@@ -202,6 +217,8 @@ const ArtistForm = ({ artist, isEditing }) => {
             placeholder="basePrice"
             name="basePrice"
             id="basePrice"
+            min={0}
+            required
             onChange={handleNumberChange}
             value={artistData.basePrice}
           />
@@ -223,6 +240,7 @@ const ArtistForm = ({ artist, isEditing }) => {
             placeholder="club"
             name="club"
             id="club"
+            min={0}
             onChange={handleNumberChange}
             value={artistData.club}
             style={{width:"40px", marginLeft:"10px"}}
@@ -234,6 +252,7 @@ const ArtistForm = ({ artist, isEditing }) => {
             placeholder="festival"
             name="festival"
             id="festival"
+            min={0}
             onChange={handleNumberChange}
             value={artistData.festival}
             style={{width:"40px", marginLeft:"10px"}}
@@ -245,6 +264,7 @@ const ArtistForm = ({ artist, isEditing }) => {
             placeholder="specialEvent"
             name="specialEvent"
             id="specialEvent"
+            min={0}
             onChange={handleNumberChange}
             value={artistData.specialEvent}
             style={{width:"40px", marginLeft:"10px"}}
@@ -271,6 +291,7 @@ const ArtistForm = ({ artist, isEditing }) => {
             placeholder="small"
             name="small"
             id="small"
+            min={0}
             onChange={handleNumberChange}
             value={artistData.small}
           />
@@ -279,6 +300,7 @@ const ArtistForm = ({ artist, isEditing }) => {
             placeholder="large"
             name="large"
             id="large"
+            min={0}
             onChange={handleNumberChange}
             value={artistData.large}
           />
@@ -303,6 +325,8 @@ const ArtistForm = ({ artist, isEditing }) => {
               placeholder="weekendBoost"
               name="weekendBoost"
               id="weekendBoost"
+              min={0}
+
               onChange={handleNumberChange}
               value={artistData.weekendBoost}
             />
@@ -314,12 +338,14 @@ const ArtistForm = ({ artist, isEditing }) => {
               placeholder="monthBoost"
               name="monthBoost"
               id="monthBoost"
+              min={0}
+
               onChange={handleNumberChange}
               value={artistData.monthBoost}
             />
             </label>
             </div>)}
-
+          
         <button type="submit">{isEditing ? "Edit" : "Register"}</button>
       </form>
     </div>
