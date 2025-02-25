@@ -23,6 +23,10 @@ const ArtistForm = ({ artist, isEditing }) => {
   const [artistData, setArtistData] = useState({
     name: artist?.name || "",
     imageUrl: artist?.imageUrl || null,
+    instagram: artist?.rrss?.instagram || "",
+    tiktok: artist?.rrss?.tiktok || "",
+    facebook: artist?.rrss?.facebook || "",
+    twitter: artist?.rrss?.twitter || "",
     description: artist?.description || "",
     spotiUrl: artist?.spotiUrl || "",
     youtubeUrl: artist?.youtubeUrl || "",
@@ -36,6 +40,7 @@ const ArtistForm = ({ artist, isEditing }) => {
     weekendBoost: artist?.pricingModifiers?.weekendBoost*100 || 0,
     monthBoost: artist?.pricingModifiers?.monthBoost*100 || 0,
   });
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -45,7 +50,7 @@ const ArtistForm = ({ artist, isEditing }) => {
       return;
     }
     const uploadData = new FormData();
-
+    
     uploadData.append("name", artistData.name);
     uploadData.append("description", artistData.description);
 
@@ -60,6 +65,10 @@ const ArtistForm = ({ artist, isEditing }) => {
     }
     uploadData.append("basePrice", basePrice);
     uploadData.append("spotiUrl", artistData.spotiUrl);
+    uploadData.append("instagram",artistData.instagram)
+    uploadData.append("tiktok",artistData.tiktok)
+    uploadData.append("facebook",artistData.facebook)
+    uploadData.append("twitter",artistData.twitter)
     uploadData.append("youtubeUrl", artistData.youtubeUrl);
     uploadData.append("club", artistData.club/100);
     uploadData.append("festival", artistData.festival/100);
@@ -69,6 +78,7 @@ const ArtistForm = ({ artist, isEditing }) => {
     uploadData.append("weekendBoost", artistData.weekendBoost/100);
     uploadData.append("monthBoost", artistData.monthBoost/100);
     uploadData.append("agency", currentUser.id);
+    console.log("datos enviados a la api", Object.fromEntries(uploadData))
 
     try {
       if (isEditing) {
@@ -187,6 +197,24 @@ const ArtistForm = ({ artist, isEditing }) => {
               />
             </div>
           )}
+          <div>
+          <FloatLabel>
+              <InputText type="text" name="instagram" id="instagram" onChange={handleChange} value={artistData.instagram}/>
+            <label htmlFor="instagram">Instagram</label>
+            </FloatLabel>
+            <FloatLabel>
+              <InputText type="text" name="tiktok" id="tiktok" onChange={handleChange} value={artistData.tiktok}/>
+            <label htmlFor="tiktok">Tiktok</label>
+            </FloatLabel>
+            <FloatLabel>
+              <InputText type="text" name="facebook" id="facebook" onChange={handleChange} value={artistData.facebook}/>
+            <label htmlFor="facebook">Facebook</label>
+            </FloatLabel>
+            <FloatLabel>
+              <InputText type="text" name="twitter" id="twitter" onChange={handleChange} value={artistData.twitter}/>
+            <label htmlFor="twitter">Twitter</label>
+            </FloatLabel>
+          </div>
           <input
             type="file"
             id="imageUrl"
