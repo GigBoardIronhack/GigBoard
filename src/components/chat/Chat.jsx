@@ -1,24 +1,24 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getChatService, sendMessageService } from "../../services/chat.service";
-import { getCurrentUserService, getUserService } from "../../services/auth.service";
+
 
 const Chat = ({chatId}) => {
   const [chat, setChat] = useState(null);
   const [message, setMessage] = useState("");
   const intervalRef = useRef(null)
 
-
-
   const handleChange = (e) => {
     setMessage(e.target.value);
   }
 
-
   const getChat = useCallback(() => {
+    if(!chatId){
+      return
+    }
     getChatService(chatId)
       .then((response) => {
-        console.log(response)
-        console.log("ChAAAAATTTT",response)
+        if(!chatId)
+          return console.log("no hay chat")
         setChat(response);
       })
       .catch((error) => {
@@ -35,17 +35,19 @@ const Chat = ({chatId}) => {
         getChat();
       })
       .catch((error) => {
-        console.error(error);
+        return
       });
   }
 
-  useEffect(() => {
-    getChat();
+  
 
-    intervalRef.current = setInterval(() => {
+    useEffect(() => {
       getChat();
-    }, 2000);
-  }, [getChat]);
+      intervalRef.current = setInterval(() => {
+        getChat();
+      }, 2000);
+    }, [getChat]);
+ 
 
   return (
     <div className="container mt-4">
