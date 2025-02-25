@@ -7,7 +7,7 @@ import DeletePurposal from "../../pages/PurposalPages/DeletePurposal";
 const WidePurposalCard = ({ card }) => {
     const { currentUser } = useContext(AuthContext);
     const isOwner = currentUser && card.promoter === currentUser.id;
-  console.log(card);
+  console.log("CAAAAARRDDD",card);
   return (
     <div>
       <h1>Purposals</h1>
@@ -19,6 +19,10 @@ const WidePurposalCard = ({ card }) => {
         <Link to={`/edit/purposals/${card.id}/${card.purposalChat}`}>
           <button>Editar</button>
         </Link>
+        <Link to={`/purposals/${card.id}/${card.purposalChat}`}>
+          <button>Detalle</button>
+        </Link>
+
         <DeletePurposal id={card.id} />
       </>
     )}

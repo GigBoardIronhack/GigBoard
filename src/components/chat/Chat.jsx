@@ -46,6 +46,9 @@ const Chat = ({chatId}) => {
       intervalRef.current = setInterval(() => {
         getChat();
       }, 2000);
+      return () => {
+        clearInterval(intervalRef.current); 
+      };
     }, [getChat]);
  
 
