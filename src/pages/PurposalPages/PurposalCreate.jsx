@@ -36,6 +36,7 @@ useEffect(() => {
     negotiatedPrice: purposal?.negotiatedPrice || null,
     eventDate: purposal?.eventDate || null,
     status: purposal?.status || "pending",
+    purposalChat: purposal?.purposalChat || null,
     notes: purposal?.notes || [],
   });
 
@@ -44,38 +45,52 @@ useEffect(() => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Datos enviados al backend:", purposalData); 
+    console.log("Datos enviados al backend:", purposalData);
+  
     if (!purposalData.eventDate || !(purposalData.eventDate instanceof Date)) {
       console.error("Invalid or missing eventDate");
       return;
     }
-
-    const uploadData = {
-      negotiatedPrice: purposalData.negotiatedPrice,
-      eventDate: purposalData.eventDate.toLocaleDateString("sv-SE"),
-      status: purposalData.status,
-      notes: purposalData.notes,
-    };
-
+  
     try {
-      if (isEditing) {
-        const updatePurposal = await editPurposal(purposal.id, uploadData); 
-        navigate(`/purposals/${updatePurposal.id}`);
-        return;
+      let purposalChat;
+      if (!isEditing) {
+        purposalChat = await createChatService(artist.agency.id);
+        console.log("Chat creado con ID:", purposalChat.id);
+      } else {
+        purposalChat = { id: purposalData.purposalChat };
       }
-      const newPurposal = await createPurposal(id, uploadData);
-      const chat = await createChatService(artist.agency.id)
-      navigate(`/purposals/${newPurposal.id}/${chat.id}`);
-      setPurposalData((prevState) => ({
-        ...prevState,
-        artist: newPurposal.artist,  
-      }));
+  
+      const uploadData = {
+        promoter: currentUser.id,
+        negotiatedPrice: purposalData.negotiatedPrice,
+        eventDate: purposalData.eventDate.toLocaleDateString("sv-SE"),
+        purposalChat: purposalChat.id,
+        status: purposalData.status,
+        notes: purposalData.notes,
+      };
+  
+      console.log("Enviando datos a createPurposal:", uploadData);
+  
+      if (isEditing) {
+        const updatePurposal = await editPurposal(purposal.id, uploadData);
+        console.log("Purposal editada:", updatePurposal);
+        navigate(`/purposals/${updatePurposal.id}/${updatePurposal.purposalChat}`);
+      } else {
+        const newPurposal = await createPurposal(id, uploadData);
+        console.log("Purposal creada con éxito:", newPurposal);
+        navigate(`/purposals/${newPurposal.id}/${purposalChat.id}`);
+        setPurposalData((prevState) => ({
+          ...prevState,
+          artist: newPurposal.artist,
+          purposalChat: purposalChat.id,
+        }));
+      }
     } catch (error) {
-
-      console.log(error);
-    } 
-    
+      console.error("Error al crear la purposal:", error.response?.data || error.message);
+    }
   };
+  
  
   const handleDateChange = (date) => {
     setPurposalData((prevState) => ({

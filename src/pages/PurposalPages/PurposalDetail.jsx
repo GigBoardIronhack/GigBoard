@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getPurposal } from "../../services/purposal.service";
 import { Link } from "react-router-dom";
-import Chat from "../../components/chat/Chat";
+import Chat from "../../components/Chat/Chat";
+import DeletePurposal from "./DeletePurposal";
 
 const PurposalDetail = () => {
   const [purposal, setPurposal] = useState({});
@@ -36,10 +37,11 @@ const PurposalDetail = () => {
       
       {purposal?.id && (
       <div>
-        <Link to={`/edit/purposals/${purposal.id}`}>
+        <Link to={`/edit/purposals/${purposal.id}`} isEditing>
           <button>Editar</button>
         </Link>
         <Chat chatId={chatId} />
+        <DeletePurposal id={id} chatId={chatId}/>
       </div>
       )}
     </div>
