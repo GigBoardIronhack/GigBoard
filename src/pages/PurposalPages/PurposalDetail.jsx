@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getPurposal } from "../../services/purposal.service";
 import { Link } from "react-router-dom";
 import Chat from "../../components/Chat/Chat";
 import DeletePurposal from "./DeletePurposal";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const PurposalDetail = () => {
   const [purposal, setPurposal] = useState({});
   const { id } = useParams();
   const { chatId } =useParams();
+  const {currentUser} = useContext(AuthContext)
   useEffect(() => {
     const getPurposalId = async () => {
       try {
@@ -37,9 +39,10 @@ const PurposalDetail = () => {
       
       {purposal?.id && (
       <div>
+        {currentUser.role === "promoter" &&
         <Link to={`/edit/purposals/${purposal.id}`} isEditing>
           <button>Editar</button>
-        </Link>
+        </Link>}
         <Chat chatId={chatId} />
         <DeletePurposal id={id} chatId={chatId}/>
       </div>

@@ -1,11 +1,26 @@
 
 import { AuthContext } from "../../contexts/AuthContext"
-import { useContext} from "react"
+import { useContext, useEffect, useState} from "react"
 import  LinkCreateArtist   from "../../components/LinkCreateArtist/LinkCreateArtist"
 import CardGrid from "../../components/CardGrid/CardGrid"
+import { listAgencyPurposals } from "../../services/agency.service"
 
 const AgencyDashboard = () => {
   const { currentUser } = useContext(AuthContext)
+  const [agencyPurposals, setAgencyPurposals]= useState([])
+  
+  useEffect(() => {
+    const fetchPurposal = async () => {
+      try {
+        const agencyPurposals = await listAgencyPurposals();
+        setAgencyPurposals(Array.isArray(agencyPurposals) ? agencyPurposals : []);
+        console.log("PURPOSALSS AGENCY", agencyPurposals);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchPurposal();
+  }, []);
   
 
   return(
@@ -16,11 +31,12 @@ const AgencyDashboard = () => {
       <h4>tienes : {currentUser.artists.length} artistas</h4>
       <LinkCreateArtist />
       <CardGrid type="wideArtists" cards={currentUser.artists} />
+      <CardGrid type="widePurposals" cards={agencyPurposals}/>
       
      
 
     </>
-  )
-}
+  )}
+
 
 export default AgencyDashboard
