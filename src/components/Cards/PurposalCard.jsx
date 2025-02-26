@@ -1,78 +1,32 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
-import { listPromoterPurposals } from "../../services/promoter.service";
-import { Link } from "react-router-dom";
-import { listAgencyPurposals } from "../../services/agency.service";
-
-const PurposalCard = () => {
-    const {currentUser} = useContext(AuthContext)
-    console.log("CURRENTUSER",currentUser)
-  const [promoterPurposals, setPromoterPurposals] = useState([]);
-  const [agencyPurposals, setAgencyPurposals]= useState([])
-
-  useEffect(() => {
-    const fetchPurposal = async () => {
-      try {
-        const agencyPurposals = await listAgencyPurposals();
-        setAgencyPurposals(Array.isArray(agencyPurposals) ? agencyPurposals : []);
-        console.log("PURPOSALSS AGENCY", agencyPurposals);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchPurposal();
-  }, []);
+/* eslint-disable react/prop-types */
+import { Link } from "react-router-dom"
+import PurposalEditAgency from "../../pages/AgencyPages/PurposalEditAgency"
+import { useContext } from "react"
+import { AuthContext } from "../../contexts/AuthContext"
 
 
-  useEffect(() => {
-    const fetchPurposal = async () => {
-      try {
-        const promoterPurposals = await listPromoterPurposals();
-        setPromoterPurposals(Array.isArray(promoterPurposals) ? promoterPurposals : []);
-        console.log("PURPOSALSS", promoterPurposals);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchPurposal();
-  }, []);
-
+const PurposalCard = ({card}) => {
+  const {currentUser} = useContext(AuthContext)
+  console.log("LA TARHETITTTTTAAA", card)
+  
   return (
-    <div>
-      <h2>Purposals</h2>
-    {currentUser.role === "promoter" ? ( 
-      promoterPurposals &&
-        promoterPurposals.map((purposal) => (
-          <div key={purposal.id}>
-            <h2>{purposal.artist?.name}</h2>
-            <img src={purposal.artist.imageUrl} alt={purposal.artist.name} />
-            <Link to={`/edit/purposals/${purposal.id}`}>
-              <button>Editar</button>
-            </Link>
-            <Link to={`/purposals/${purposal.id}/${purposal.purposalChat}`}>
-              <button>Detalle</button>
-            </Link>
-          </div>
-        ))
-    ) : (
-        agencyPurposals && (
-            agencyPurposals.map((purposal)=>(
-                <div key={agencyPurposals.id}>
-                <h2>{purposal.artist?.name}</h2>
-                <img src={purposal.artist.imageUrl} alt={purposal.artist.name} />
-                <Link to={`/edit/purposals/${purposal.id}`}>
-                <button>Editar</button>
-                </Link>
-                <Link to={`/purposals/${purposal.id}/${purposal.purposalChat}`}>
-                <button>Detalle</button>
-                </Link>
-                </div>
-            ))
-        )
-    )
-    } 
-    </div>
-  );
-};
+  <div>
+      <h2>{card?.artist?.name}</h2>
+      <img src={card.artist.imageUrl} alt={card.artist.name} />
+      
+      <Link to={`/purposals/${card.id}/${card.purposalChat}`}>
+        <button>Chat</button>
+      </Link>
+       {currentUser.role === "agency" ?
+      <PurposalEditAgency id={card.id}/>
+      :
+      <Link to={`/edit/purposals/${card.id}`}>
+        <button>Editar</button>
+      </Link>
+       }
+  </div>
 
-export default PurposalCard;
+  )
+}
+
+export default PurposalCard

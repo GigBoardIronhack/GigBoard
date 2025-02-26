@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { getPurposal, editPurposal } from "../../services/purposal.service";
 
-const PurposalEditAgency = () => {
-  const { id } = useParams(); // ID de la purposal desde la URL
+const PurposalEditAgency = ({id}) => {
+ 
   const navigate = useNavigate();
   const [purposalData, setPurposalData] = useState(null);
 
