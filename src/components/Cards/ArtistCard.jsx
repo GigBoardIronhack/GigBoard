@@ -10,6 +10,7 @@ const WideArtistCard = ({ card }) => {
 
   return (
     <div>
+    
       <Link to={`/artists/${card.id}`}>
         <h1>{card.name}</h1>
         <img src={card.imageUrl} alt={card.name} />
@@ -25,6 +26,7 @@ const WideArtistCard = ({ card }) => {
           <DeleteArtist id={card.id} />
         </>
       )}
+      
     </div>
   );
 };

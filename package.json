@@ -10,9 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroui/system": "^2.4.10",
+    "@heroui/theme": "^2.4.9",
     "axios": "^1.7.9",
     "framer-motion": "^12.4.7",
     "lucide-react": "^0.475.0",
+    "motion": "^12.4.7",
     "primeflex": "^4.0.0",
     "primeicons": "^7.0.0",
     "primereact": "^10.9.2",

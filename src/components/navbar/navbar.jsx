@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { Link, NavLink } from "react-router-dom";
 
+
 const Navbar = () => {
   const { logout, currentUser } = useContext(AuthContext);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -75,9 +76,7 @@ const Navbar = () => {
           <NavLink to="/purposals">
             <button>Purposals</button>
           </NavLink>
-          <NavLink to="/chats">
-            <button>Chats</button>
-          </NavLink>
+         
 
           <button className="btn btn-danger" onClick={logout}>
             Logout
