@@ -5,12 +5,13 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 
 
+
 import AppRouter from "./AppRouter.jsx";
 import { NotificationProvider } from "./contexts/NotificationContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter>   
       <NotificationProvider>
         <AuthContextProvider>
           <AppRouter />

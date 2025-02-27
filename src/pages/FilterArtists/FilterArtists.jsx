@@ -3,6 +3,7 @@ import { listArtists } from "../../services/promoter.service";
 import CardGrid from "../../components/CardGrid/CardGrid";
 import Select from "react-select";
 
+
 const PromoterArtists = () => {
   const [artists, setArtists] = useState([]);
   const [selectedStyles, setSelectedStyles] = useState([]);
@@ -92,8 +93,12 @@ const PromoterArtists = () => {
 
      
       <section className="artist-list">
-        <CardGrid type="artists" cards={filteredArtists} />
+   
+          <CardGrid type="artists" cards={filteredArtists} />
+       
+        
       </section>
+     
     </div>
   );
 };

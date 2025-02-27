@@ -12,6 +12,9 @@ const PurposalList = () => {
   const [agencyPurposals, setAgencyPurposals]= useState([])
 
   useEffect(() => {
+    if(currentUser.role === "agency"){
+
+    
     const fetchPurposal = async () => {
       try {
         const agencyPurposals = await listAgencyPurposals();
@@ -22,11 +25,14 @@ const PurposalList = () => {
       }
     };
     fetchPurposal();
-  }, []);
+  }
+  }, [currentUser]);
 
 
   useEffect(() => {
+    if(currentUser.role === "promoter"){
     const fetchPurposal = async () => {
+
       try {
         const promoterPurposals = await listPromoterPurposals();
         setPromoterPurposals(Array.isArray(promoterPurposals) ? promoterPurposals : []);
@@ -36,7 +42,8 @@ const PurposalList = () => {
       }
     };
     fetchPurposal();
-  }, []);
+  }
+  }, [currentUser]);
 
   return (
     <div>
