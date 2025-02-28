@@ -26,7 +26,7 @@ const PurposalList = () => {
     };
     fetchPurposal();
   }
-  }, [currentUser]);
+  }, [currentUser, agencyPurposals]);
 
 
   useEffect(() => {

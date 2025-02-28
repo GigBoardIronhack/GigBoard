@@ -171,7 +171,7 @@ const PurposalCreate = ({ purposal, isEditing }) => {
               tileDisabled={isTileDisabled}
               tileClassName={({ date, view }) =>
                 isTileDisabled({ date, view })
-                  ? "bg-red-500 text-white opacity-50 cursor-not-allowed rounded-md"
+                  ? "bg-red-500 text-white opacity-50 rounded-md"
                   : ""
               }
             />
