@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import {  useNavigate } from "react-router-dom";
-import { getPurposal, editPurposal } from "../../services/purposal.service";
+import { getPurposal, editPurposal, deletePurposal } from "../../services/purposal.service";
+import { deleteChat } from "../../services/chat.service";
 
 const PurposalEditAgency = ({id}) => {
  
@@ -32,7 +33,12 @@ const PurposalEditAgency = ({id}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await editPurposal(id, { status: purposalData.status });
+      const editedPurposal = await editPurposal(id, { status: purposalData.status });
+      {editedPurposal.status === "rejected" &&
+        console.log("ENTRO AQUI",editPurposal.purposalChat)
+        await deletePurposal(editedPurposal.id)
+        await deleteChat(editedPurposal.purposalChat)
+      }
       navigate("/purposals");
     } catch (error) {
       console.error("Error al actualizar el estado:", error);

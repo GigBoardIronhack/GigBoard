@@ -26,18 +26,18 @@ const Chat = ({chatId}) => {
       });
   }, [chatId]);
 
-  const createMessage = (e) => {
+  const createMessage = async (e) => {
     e.preventDefault();
-
-    sendMessageService(chatId, message)
-      .then((response) => {
-        setMessage("");
-        getChat();
-      })
-      .catch((error) => {
-        return
-      });
-  }
+    if (!message.trim()) return;
+    setMessage("");
+  
+    try {
+      await sendMessageService(chatId, message);
+      getChat();
+    } catch (error) {
+      console.error("Error al enviar el mensaje:", error);
+    }
+  };
 
   
 
