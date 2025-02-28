@@ -13,6 +13,7 @@ import facebookImg from "../../assets/facebook.png"
 import twitterImg from "../../assets/logotipos.png"
 
 
+
 const ArtistDetail = () => {
   const [artist, setArtist] = useState(null);
   const { id } = useParams();

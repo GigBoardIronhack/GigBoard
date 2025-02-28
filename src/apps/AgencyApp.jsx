@@ -10,9 +10,20 @@ import PurposalDetail from "../pages/PurposalPages/PurposalDetail";
 import PurposalEditAgency from "../pages/AgencyPages/PurposalEditAgency";
 import DeleteArtist from "../pages/ArtistPages/DeleteArtist";
 import FilterArtists from "../pages/FilterArtists/FilterArtists";
+import { AnimatePresence, motion } from "framer-motion";
 
 const AgencyApp = () => {
   return (
+    <>
+
+   
+     <AnimatePresence mode="wait">
+        <motion.div
+          key={location.pathname}
+          initial={{ opacity: 0, y: -50 }} // Empieza arriba
+          animate={{ opacity: 1, y: 0, transition: { duration: 0.3 } }} // Se desplaza hacia abajo
+          exit={{ opacity: 0, y: 50, transition: { duration: 0.3 } }}
+        >
     <Routes>
       <Route path="/dashboard" element={<AgencyDashboard />} />
       <Route path="/edit" element={<Edit />} />
@@ -26,6 +37,13 @@ const AgencyApp = () => {
       <Route path="/edit/purposals/:id" element={<PurposalEditAgency />} />
       <Route path="/artists/all" element={<FilterArtists />} />
     </Routes>
+      </motion.div>
+      </AnimatePresence>
+
+
+    </>
+    
+
   );
 };
 

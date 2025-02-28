@@ -233,7 +233,7 @@ const ArtistForm = ({ artist, isEditing }) => {
             filter
             placeholder="Select styles"
             maxSelectedLabels={3}
-            className="w-full md:w-20rem"
+            className=""
           />
           {error && <p style={{ color: "red" }}>{error}</p>}
         </div>
