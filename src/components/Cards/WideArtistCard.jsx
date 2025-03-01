@@ -9,40 +9,42 @@ const WideArtistCard = ({ card }) => {
   const isOwner = currentUser && card.agency === currentUser.id;
 
   return (
-    <div className="max-w-4xl w-full bg-white dark:bg-[#002846] shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row">
-      {/* Imagen */}
-      <Link to={`/artists/${card.id}`} className="w-full md:w-1/3">
+    <div className="max-w-4xl w-full bg-[#004E64] shadow-lg rounded-2xl overflow-hidden grid gap-2
+      grid-cols-1 grid-rows-4 
+      md:grid-cols-2 md:grid-rows-2 
+      lg:grid-cols-3 lg:grid-rows-2">
+      
+      <Link to={`/artists/${card.id}`} className="row-span-2 md:row-span-2 lg:row-span-2">
         <img 
           src={card.imageUrl} 
           alt={card.name} 
-          className="w-full h-48 md:h-auto object-cover"
+          className="w-full h-48 md:h-auto md:aspect-square object-cover rounded-lg"
         />
       </Link>
 
-      {/* Contenido */}
-      <div className="p-6 flex flex-col justify-between flex-1">
-        {/* Nombre del artista */}
-        <Link to={`/artists/${card.id}`} className="text-2xl font-semibold text-[#8E44AD] dark:text-[#F1C40F] hover:underline">
+      <div className="p-6 text-white row-start-3 md:row-auto lg:row-span-2 justify-center text-center lg:text-left lg:col-span-2">
+
+        <Link to={`/artists/${card.id}`} className="text-2xl font-semibold text-[#E3B505] hover:underline">
           {card.name}
         </Link>
 
-        {/* Estilos */}
-        <p className="text-gray-600 dark:text-[#1ABC9C] mt-2">
+        <p className="mt-2">
           {card.style.toString().split(",").join(" | ")}
         </p>
+      </div>
 
-        {/* Botones para dueños */}
-        {isOwner && (
-          <div className="mt-4 flex gap-4">
+      {isOwner && (
+        <div className="flex flex-col md:flex-row gap-4 row-start-4 md:col-start-2 lg:row-span-2">
+          <div className="w-full flex justify-around md:justify-start lg:justify-end">
             <Link to={`/artists/edit/${card.id}`}>
-              <button className="bg-[#1ABC9C] text-white dark:bg-[#F1C40F] dark:text-black px-4 py-2 rounded-lg font-medium shadow-md hover:bg-[#8E44AD] dark:hover:bg-[#8E44AD] transition">
+              <button className="bg-[#D76A03] text-white px-4 py-2 rounded-lg font-medium shadow-md hover:bg-[#E3B505] hover:text-black transition">
                 Editar
               </button>
             </Link>
             <DeleteArtist id={card.id} />
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

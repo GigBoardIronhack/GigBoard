@@ -20,7 +20,8 @@ function App() {
 
   return (
     <>
-      <Navbar />
+    <div className="col-span-6 col-start-1 row-start-1"><Navbar /></div>
+      
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/register" element={<Register />} />
