@@ -5,7 +5,7 @@ import { useContext } from "react"
 import { AuthContext } from "../../contexts/AuthContext"
 
 
-const PurposalCard = ({card}) => {
+const PurposalCard = ({card, setNeedRefresh}) => {
   const {currentUser} = useContext(AuthContext)
   console.log("LA TARHETITTTTTAAA", card)
   
@@ -18,7 +18,7 @@ const PurposalCard = ({card}) => {
         <button>Chat</button>
       </Link>
        {currentUser.role === "agency" ?
-      <PurposalEditAgency id={card.id}/>
+      <PurposalEditAgency id={card.id} setNeedRefresh={setNeedRefresh}/>
       :
       <Link to={`/edit/purposals/${card.id}`}>
         <button>Editar</button>

@@ -8,19 +8,10 @@ const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   return (
-    <>
-      {!currentUser && (
-        <>
-          <NavLink to="/register">
-            <button>Register</button>
-          </NavLink>
-          <NavLink to="/login">
-            <button>Login</button>
-          </NavLink>
-        </>
-      )}
+    <div className="flex justify-between">
       {currentUser && (
         <>
+        <div className="flex justify-around w-1/3">
           <NavLink to="/dashboard">
             <button>Dashboard</button>
           </NavLink>
@@ -76,14 +67,26 @@ const Navbar = () => {
           <NavLink to="/purposals">
             <button>Purposals</button>
           </NavLink>
-         
+          </div>
+          <div>
 
-          <button className="btn btn-danger" onClick={logout}>
+          <button className="btn btn-danger justify-end" onClick={logout}>
             Logout
           </button>
+          </div>
         </>
       )}
-    </>
+      {!currentUser && (
+        <>
+          <NavLink to="/register">
+            <button>Register</button>
+          </NavLink>
+          <NavLink to="/login">
+            <button>Login</button>
+          </NavLink>
+        </>
+      )}
+    </div>
   );
 };
 

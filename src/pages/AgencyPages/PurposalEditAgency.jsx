@@ -4,7 +4,7 @@ import {  useNavigate } from "react-router-dom";
 import { getPurposal, editPurposal, deletePurposal } from "../../services/purposal.service";
 import { deleteChat } from "../../services/chat.service";
 
-const PurposalEditAgency = ({id}) => {
+const PurposalEditAgency = ({id, setNeedRefresh}) => {
  
   const navigate = useNavigate();
   const [purposalData, setPurposalData] = useState(null);
@@ -38,6 +38,7 @@ const PurposalEditAgency = ({id}) => {
         console.log("ENTRO AQUI",editPurposal.purposalChat)
         await deletePurposal(editedPurposal.id)
         await deleteChat(editedPurposal.purposalChat)
+        await setNeedRefresh(true)
       }
       navigate("/purposals");
     } catch (error) {

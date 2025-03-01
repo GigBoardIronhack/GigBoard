@@ -5,9 +5,8 @@ import WideArtistCard from "../Cards/WideArtistCard"
 import WidePurposalCard from "../Cards/WidePurposalCard"
 
 
-const CardGrid = ( { cards, type } ) => {
+const CardGrid = ( { cards, type, setNeedRefresh } ) => {
     console.log("Cards recibidos en CardGrid:", cards); 
-
    
   return (
     <div>
@@ -22,12 +21,12 @@ const CardGrid = ( { cards, type } ) => {
         cards.map((card, index)=>(
             <div key={index}>
             
-                <PurposalCard card={card}/>
+                <PurposalCard card={card} setNeedRefresh={setNeedRefresh}/>
             </div>
         ))
     }
     {type === "wideArtists" && 
-        cards.map((card, index)=>(
+        cards.slice(0,5).map((card, index)=>(
             <div key={index}>
             
                 <WideArtistCard card={card}/>
