@@ -20,8 +20,8 @@ const AgencyApp = () => {
      <AnimatePresence mode="wait">
         <motion.div
           key={location.pathname}
-          initial={{ opacity: 0, y: -50 }} // Empieza arriba
-          animate={{ opacity: 1, y: 0, transition: { duration: 0.3 } }} // Se desplaza hacia abajo
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0, transition: { duration: 0.3 } }}
           exit={{ opacity: 0, y: 50, transition: { duration: 0.3 } }}
         >
     <Routes>
