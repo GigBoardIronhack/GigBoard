@@ -1,28 +1,53 @@
 /* eslint-disable react/prop-types */
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { updateUser } from "../services/user.service";
 import { createUser } from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+import { InputText } from "primereact/inputtext";
+import { FloatLabel } from "primereact/floatlabel";
 
 const Register = ({ isEditing }) => {
   const { isAuthLoaded, currentUser, setCurrentUser } = useContext(AuthContext);
-  console.log(currentUser);
+  const [isFormValid, setIsFormValid] = useState(false); 
+  const [backendErrors, setBackendErrors] = useState({});
+ 
+
+ 
   const [userData, setUserData] = useState({
     name: currentUser?.name || "",
     email: currentUser?.email || "",
+    password: currentUser?.password || "",
     cif: currentUser?.cif || "",
     imageUrl: currentUser?.imageUrl || null,
-    role: currentUser?.role,
+    role: currentUser?.role || "",
     promoterRole: currentUser?.promoterRole || "club",
     promoterCapacity: currentUser?.promoterCapacity || null,
   });
-  const [userRole, setUserRole] = useState("");
+  const [userRole, setUserRole] = useState(userData.role || "");
+
+
+  useEffect(() => {
+    const isValid =
+      userData.name.trim() !== "" &&
+      userData.email.trim() !== "" &&
+      userData.cif.trim() !== "" &&
+      userData.role !== "" &&
+      userData.imageUrl instanceof File &&
+      (!isEditing ? userData.password.trim() !== "" : true);
+
+    setIsFormValid(isValid);
+  }, [userData, isEditing]);
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+
+    if (!isFormValid) return;
+  
+    
     const uploadData = new FormData();
 
     uploadData.append("name", userData.name);
@@ -57,7 +82,14 @@ const Register = ({ isEditing }) => {
       await createUser(uploadData);
       navigate("/login");
     } catch (error) {
-      console.log(error);
+      console.log(error.message)
+      setBackendErrors(error);
+      if(error.message === "Image error"){
+        
+        setBackendErrors(error)
+       
+      }
+      
     }
   };
 
@@ -66,7 +98,7 @@ const Register = ({ isEditing }) => {
   }
 
   if (currentUser && !isEditing) {
-    return "Fuera de mi puta vista";
+    return "No puedes registrarte otra vez";
   }
 
   const handleChange = (e) => {
@@ -94,42 +126,54 @@ const Register = ({ isEditing }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-[#101C29] min-h-screen flex items-center justify-center">
-      <form onSubmit={handleSubmit} className="bg-[#004e64] p-6 rounded-lg shadow-lg w-full max-w-md">
-        <label htmlFor="name" className="block mb-2">
-          <input
+    <div className=" bg-white dark:bg-[#101C29] min-h-screen flex items-center justify-center">
+    <div className="container mx-auto px-4">
+   
+      <form onSubmit={handleSubmit} className="bg-[#004e64] container mx-auto px-8 p-6 rounded-lg shadow-lg w-full max-w-md">
+      <h1 className="text-2xl font-semibold text-white mb-4 text-center">Registro</h1>
+        <FloatLabel>
+          <InputText
             type="text"
-            placeholder="name"
             name="name"
             id="name"
             onChange={handleChange}
             value={userData.name}
-            className="w-full p-2 border border-[#d76a03] rounded text-gray-400"
+            className={`w-full p-2 mb-5 dark:bg-[#101C29] border rounded ${backendErrors?.errors?.name ? "border-red-500" : "border-[#d76a03]"}`}
           />
-        </label>
-        <label htmlFor="email" className="block mb-2">
-          <input
+          <label htmlFor="name" className="block mb-2">
+          name</label>
+           {backendErrors?.errors?.name && <p className="text-red-500  text-sm mt-1">{backendErrors?.errors?.name}</p>}
+        </FloatLabel>
+        <FloatLabel>
+          <InputText
             type="email"
-            placeholder="email"
+           
             name="email"
             id="email"
             onChange={handleChange}
             value={userData.email}
-            className="w-full p-2 border border-[#d76a03] rounded text-gray-400"
+            className={`w-full p-2 mb-5 dark:bg-[#101C29] border rounded ${backendErrors?.errors?.email ? "border-red-500" : "border-[#d76a03]"}`}
           />
+          <label htmlFor="email" className="block mb-2">Email
         </label>
+          
+  {backendErrors?.errors?.email && <p className="text-red-500 text-sm mt-1">{backendErrors?.errors?.email}</p>}
+          
+        </FloatLabel>
         {!isEditing && (
-          <label htmlFor="password" className="block mb-2">
-            <input
+          <FloatLabel>
+            <InputText
               type="password"
               name="password"
               id="password"
-              placeholder="password"
+              
               onChange={handleChange}
               value={userData.password}
-              className="w-full p-2 border border-[#d76a03] rounded text-gray-400"
+              className={`w-full p-2 mb-5 dark:bg-[#101C29] border rounded ${backendErrors?.errors?.password ? "border-red-500" : "border-[#d76a03]"}`}
             />
-          </label>
+            <label htmlFor="password" className="block mb-2">password</label>
+            {backendErrors?.errors?.password && <p className="text-red-500 text-sm mt-1">{backendErrors?.errors?.password}</p>}
+            </FloatLabel>
         )}
 
         {!isEditing && (
@@ -137,10 +181,10 @@ const Register = ({ isEditing }) => {
             name="role"
             id="role"
             onChange={handleOptionChange}
-            value={userData.role}
+            value={userData.role || ""}
             className="w-full p-2 border border-[#d76a03] rounded mb-2 text-gray-400"
           >
-            <option selected disabled>
+            <option value="" disabled>
               --Select an Option--
             </option>
             <option value="agency">Agency</option>
@@ -172,8 +216,8 @@ const Register = ({ isEditing }) => {
                 required
                 min={0}
                 pattern="[1-9][0-9]*"
-                value={userData.promoterCapacity}
-                className="w-full p-2 border border-[#d76a03] rounded"
+                value={userData.promoterCapacity ?? ""}
+                className={"w-full p-2 mt-2 border rounded "}
               />
             </label>
           </div>
@@ -188,11 +232,12 @@ const Register = ({ isEditing }) => {
                 id="cif"
                 onChange={handleChange}
                 value={userData.cif}
-                className="w-full p-2 border border-[#d76a03] rounded text-gray-400"
+                className={`w-full p-2 border rounded ${backendErrors?.errors?.cif ? "border-red-500" : "border-[#d76a03]"}`}
               />
+                {backendErrors?.errors?.cif && <p className="text-red-500 text-sm mt-1">{backendErrors?.errors?.cif}</p>}
             </label>
           )}
-          <label htmlFor="imageUrl" className="block mb-2">
+          <label htmlFor="imageUrl" className="block mb-2 dark:bg-[#101C29]">
             {userData.imageUrl && (
               <div className="mb-2 flex justify-center">
                 <img
@@ -204,23 +249,31 @@ const Register = ({ isEditing }) => {
                   alt="Imagen actual"
                   width="100"
                 />
+              
               </div>
             )}
             <input
-              multiple
+             
               type="file"
               id="imageUrl"
               name="imageUrl"
               onChange={handleChange}
-              className="w-full p-2 border border-[#d76a03] rounded text-gray-400"
+              
+              className={`w-full p-2 border rounded ${backendErrors?.message ? "border-red-500" : "border-[#d76a03]"}`}
             />
+            {backendErrors?.message && <p className="text-red-500 text-sm mt-1">Formato de imagen no valido. La imagen debe de ser jpg, png, o jpeg.</p>}
           </label>
 
-          <button type="submit" className="w-full p-2 bg-[#d76a03] text-white rounded hover:bg-[#e3b505]">
-            {isEditing ? "Edit" : "Register"}
+          <button
+            type="submit"
+            className={`w-full p-2 rounded text-white ${isFormValid ? "bg-[#d76a03] hover:bg-[#e3b505]" : "bg-gray-400 cursor-not-allowed"}`}
+            disabled={!isFormValid}
+          >
+            {isEditing ? "Editar" : "Registrarse"}
           </button>
         </div>
       </form>
+      </div>
     </div>
   );
 };

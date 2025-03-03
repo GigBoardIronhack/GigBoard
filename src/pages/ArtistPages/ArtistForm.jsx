@@ -18,6 +18,9 @@ const ArtistForm = ({ artist, isEditing }) => {
   const [promoterCapacityChecked, setPromoterCapacityChecked] = useState(false);
   const [promoterBoostChecked, setPromoterBoostChecked] = useState(false);
   const [error, setError] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false); 
+  const [errorImg, setErrorImg] = useState({})
+ 
 
 
   const [artistData, setArtistData] = useState({
@@ -42,6 +45,19 @@ const ArtistForm = ({ artist, isEditing }) => {
   });
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const isValid =
+      artistData.name.trim() !== "" &&
+      artistData.description.trim() !== "" &&
+      artistData.spotiUrl.trim() !== "" &&
+      artistData.style.length > 0 && 
+      (typeof artistData.imageUrl === "string" || artistData.imageUrl instanceof File) && 
+      artistData.basePrice > 0; 
+  
+    setIsFormValid(isValid);
+  }, [artistData, isEditing]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -95,6 +111,9 @@ const ArtistForm = ({ artist, isEditing }) => {
 
       navigate(`/artists/${newArtist.id}`);
     } catch (error) {
+      if(error.message === "Image error"){
+        setErrorImg(error)
+      }
       console.log(error);
     }
   };
@@ -111,7 +130,7 @@ const ArtistForm = ({ artist, isEditing }) => {
       );
     }
   }, [artist]);
-  console.log("Selected Styles:", selectedStyles.join(", "));
+
 
   const handleStyleChange = (e) => {
     setSelectedStyles(e.value);
@@ -140,8 +159,10 @@ const ArtistForm = ({ artist, isEditing }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className=" bg-white dark:bg-[#101C29] min-h-screen flex items-center justify-center">
+    <div className="container mx-auto px-4 py-16">
+      <form onSubmit={handleSubmit} className="bg-[#004e64] container mx-auto px-8 p-6 rounded mb-5-lg shadow-lg w-full max-w-md">
+      <h1 className="text-2xl font-semibold text-white mb-4 text-center">Crear Artista</h1>
         <FloatLabel>
           <InputText
             type="text"
@@ -149,8 +170,10 @@ const ArtistForm = ({ artist, isEditing }) => {
             id="name"
             onChange={handleChange}
             value={artistData.name}
+            className="w-full  dark:bg-[#101C29] dark:text-zinc-300 p-2 border border-[#d76a03] rounded mb-5"
+
           />
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name"><p className="flex align-top">Name</p></label>
         </FloatLabel>
         <FloatLabel>
           <InputText
@@ -159,6 +182,7 @@ const ArtistForm = ({ artist, isEditing }) => {
             id="description"
             onChange={handleChange}
             value={artistData.description}
+            className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5 "
           />
         <label htmlFor="description">Descripción</label>
         </FloatLabel>
@@ -169,6 +193,7 @@ const ArtistForm = ({ artist, isEditing }) => {
             id="spotiUrl"
             onChange={handleChange}
             value={artistData.spotiUrl}
+            className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5 "
           />
         <label htmlFor="spotiUrl">Link de Spotify</label>
         </FloatLabel>
@@ -179,12 +204,39 @@ const ArtistForm = ({ artist, isEditing }) => {
             id="youtubeUrl"
             onChange={handleChange}
             value={artistData.youtubeUrl}
+            className="dark:bg-[#101C29] w-full p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300 "
           />
         <label htmlFor="youtubeUrl">Link de Youtube</label>
         </FloatLabel>
-        <label htmlFor="imageUrl">
+        
+          <div>
+          <FloatLabel>
+              <InputText type="text" name="instagram" id="instagram" onChange={handleChange} value={artistData.instagram}
+               className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300 " />
+            <label htmlFor="instagram">Instagram</label>
+            </FloatLabel>
+            <FloatLabel>
+              <InputText type="text" name="tiktok" id="tiktok" onChange={handleChange} value={artistData.tiktok}
+                 className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300 "
+              />
+            <label htmlFor="tiktok">Tiktok</label>
+            </FloatLabel>
+            <FloatLabel>
+              <InputText type="text" name="facebook" id="facebook" onChange={handleChange} value={artistData.facebook}
+                 className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 "
+              />
+            <label htmlFor="facebook">Facebook</label>
+            </FloatLabel>
+            <FloatLabel>
+              <InputText type="text" name="twitter" id="twitter" onChange={handleChange} value={artistData.twitter}
+                 className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300 "
+              />
+            <label htmlFor="twitter">Twitter</label>
+            </FloatLabel>
+          </div>
+          <label htmlFor="imageUrl" className="block mb-2">
           {artistData.imageUrl && (
-            <div>
+            <div className="mb-2 flex justify-center">
               <p>Imagen actual:</p>
               <img
                 src={
@@ -195,32 +247,16 @@ const ArtistForm = ({ artist, isEditing }) => {
                 alt="Imagen actual"
                 width="100"
               />
+               {errorImg?.message && <p className="text-red-500 text-sm mt-1">Formato de imagen no valido. La imagen debe de ser jpg, png, o jpeg.</p>}
             </div>
           )}
-          <div>
-          <FloatLabel>
-              <InputText type="text" name="instagram" id="instagram" onChange={handleChange} value={artistData.instagram}/>
-            <label htmlFor="instagram">Instagram</label>
-            </FloatLabel>
-            <FloatLabel>
-              <InputText type="text" name="tiktok" id="tiktok" onChange={handleChange} value={artistData.tiktok}/>
-            <label htmlFor="tiktok">Tiktok</label>
-            </FloatLabel>
-            <FloatLabel>
-              <InputText type="text" name="facebook" id="facebook" onChange={handleChange} value={artistData.facebook}/>
-            <label htmlFor="facebook">Facebook</label>
-            </FloatLabel>
-            <FloatLabel>
-              <InputText type="text" name="twitter" id="twitter" onChange={handleChange} value={artistData.twitter}/>
-            <label htmlFor="twitter">Twitter</label>
-            </FloatLabel>
-          </div>
           <input
             type="file"
             id="imageUrl"
             name="imageUrl"
             onChange={handleChange}
             style={{ width: "132px", marginRight: "30px" }}
+
           />
         </label>
 
@@ -233,7 +269,7 @@ const ArtistForm = ({ artist, isEditing }) => {
             filter
             placeholder="Select styles"
             maxSelectedLabels={3}
-            className=""
+            className="dark:bg-[#101C29]"
           />
           {error && <p style={{ color: "red" }}>{error}</p>}
         </div>
@@ -249,11 +285,12 @@ const ArtistForm = ({ artist, isEditing }) => {
             required
             onChange={handleNumberChange}
             value={artistData.basePrice}
+            className="dark:bg-[#101C29] w-full p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300 "
           />
         </label>
         <h2>BONUS!</h2>
         <label htmlFor="pricingModifiers" placeholder="tipo de evento">
-          <div className="card flex justify-content-center">
+          <div className="card flex justify-content-center dark:dark:text-zinc-300 dark:bg-[#101C29]">
           ¿Quieres añadir Bonus en base al tipo de Evento contratante?
             <InputSwitch
               checked={promoterRoleChecked}
@@ -272,6 +309,7 @@ const ArtistForm = ({ artist, isEditing }) => {
             onChange={handleNumberChange}
             value={artistData.club}
             style={{width:"40px", marginLeft:"10px"}}
+            className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5 "
 
           />% <br />
           Porcentaje extra para festival 
@@ -284,6 +322,7 @@ const ArtistForm = ({ artist, isEditing }) => {
             onChange={handleNumberChange}
             value={artistData.festival}
             style={{width:"40px", marginLeft:"10px"}}
+            className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5 "
           />% <br />
           Porcentaje extra para eventos especiales
          
@@ -296,6 +335,7 @@ const ArtistForm = ({ artist, isEditing }) => {
             onChange={handleNumberChange}
             value={artistData.specialEvent}
             style={{width:"40px", marginLeft:"10px"}}
+            className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border rounded mb-5 "
           />% <br />
             </div>
             )}
@@ -305,7 +345,7 @@ const ArtistForm = ({ artist, isEditing }) => {
         placeholder="tipo de evento"
         style={{marginTop: "10px"}}>
           ¿Quieres añadir bonus en base a la capacidad del Evento contratante?
-          <div className="card flex justify-content-center">
+          <div className="card flex justify-content-center dark:bg-[#101C29]">
             <InputSwitch
               checked={promoterCapacityChecked}
               onChange={(e) => setPromoterCapacityChecked(e.value)}
@@ -322,6 +362,7 @@ const ArtistForm = ({ artist, isEditing }) => {
             min={0}
             onChange={handleNumberChange}
             value={artistData.small}
+            className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5 "
           />
           <input
             type="number"
@@ -331,13 +372,14 @@ const ArtistForm = ({ artist, isEditing }) => {
             min={0}
             onChange={handleNumberChange}
             value={artistData.large}
+            className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5 "
           />
             </div>
             )}
         </label>
         <label htmlFor="weekendBoost" placeholder="tipo de evento">
           ¿Quieres añadir Bonus por fin de semana o meses de verano?
-          <div className="card flex justify-content-center">
+          <div className="card flex justify-content-center dark:bg-[#101C29]">
             <InputSwitch
               checked={promoterBoostChecked}
               onChange={(e) => setPromoterBoostChecked(e.value)}
@@ -354,9 +396,9 @@ const ArtistForm = ({ artist, isEditing }) => {
               name="weekendBoost"
               id="weekendBoost"
               min={0}
-
               onChange={handleNumberChange}
               value={artistData.weekendBoost}
+              className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5 "
             />
             </label>
             <label htmlFor="monthBoost" placeholder="tipo de evento">
@@ -367,15 +409,22 @@ const ArtistForm = ({ artist, isEditing }) => {
               name="monthBoost"
               id="monthBoost"
               min={0}
-
               onChange={handleNumberChange}
               value={artistData.monthBoost}
+              className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5 "
             />
             </label>
             </div>)}
           
-        <button type="submit">{isEditing ? "Edit" : "Register"}</button>
+            <button
+            type="submit"
+            className={`w-full p-2 rounded mb-5 text-white ${isFormValid ? "bg-[#d76a03] hover:bg-[#e3b505]" : "bg-gray-400 cursor-not-allowed"}`}
+            disabled={!isFormValid}
+          >
+            {isEditing ? "Editar" : "Registrarse"}
+          </button>
       </form>
+      </div>
     </div>
   );
 };
