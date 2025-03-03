@@ -34,17 +34,25 @@ const PurposalEditAgency = ({id, setNeedRefresh}) => {
     e.preventDefault();
     try {
       const editedPurposal = await editPurposal(id, { status: purposalData.status });
-      {editedPurposal.status === "rejected" &&
-        console.log("ENTRO AQUI",editPurposal.purposalChat)
-        await deletePurposal(editedPurposal.id)
-        await deleteChat(editedPurposal.purposalChat)
-        await setNeedRefresh(true)
+  
+      if (editedPurposal.status === "rejected") {
+        console.log("ENTRO AQUI", editedPurposal.purposalChat);
+  
+        await deletePurposal(editedPurposal.id);
+  
+        if (editedPurposal.purposalChat) {
+          await deleteChat(editedPurposal.purposalChat);
+        }
+  
+        setNeedRefresh(true);
       }
+  
       navigate("/purposals");
     } catch (error) {
       console.error("Error al actualizar el estado:", error);
     }
   };
+  
 
   if (!purposalData) return <p>Cargando...</p>;
 
