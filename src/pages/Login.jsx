@@ -9,6 +9,7 @@ const Login = () => {
   });
   const [error, setError] = useState(null);
   const { login, isAuthLoaded, currentUser } = useContext(AuthContext);
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,10 +38,11 @@ const Login = () => {
   }
 
   return (
-    <div className="bg-white dark:bg-[#101C29] min-h-screen flex items-center justify-center">
-      <form onSubmit={handleSubmit} className="bg-[#004e64] p-6 rounded-lg shadow-lg w-full max-w-md">
+    <div className=" bg-white dark:bg-[#101C29] min-h-screen flex items-center justify-center">
+    <div className="container mx-auto px-4">
+      <form onSubmit={handleSubmit} className="bg-[#004e64] container mx-auto px-8 p-6 rounded-lg shadow-lg w-full max-w-md">
         <div>
-          <h1 className="text-2xl font-semibold text-white mb-4 text-center">Bienvenido a GigBoard</h1>
+          <h1 className="text-2xl font-semibold text-white mb-4 text-center transition-all   p-4 text-1xl sm:text-2xl lg:text-3xl">Bienvenido a GigBoard</h1>
           <label htmlFor="email" className="block mb-2">
             <input
               type="text"
@@ -73,6 +75,7 @@ const Login = () => {
           </div>
         )}
       </form>
+      </div>
     </div>
   );
 };
