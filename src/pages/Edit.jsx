@@ -8,7 +8,7 @@ const Edit = () => {
 
   return (
     <div>
-      <Register user={currentUser} isEditing />
+      <Register user={currentUser} key={currentUser.id} isEditing />
     </div>
   );
 };

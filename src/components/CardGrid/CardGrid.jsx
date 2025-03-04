@@ -13,7 +13,7 @@ const CardGrid = ( { cards, type, setNeedRefresh } ) => {
     {type === "artists" && 
         cards.map((card, index)=>(
             
-            <div key={index}>
+            <div key={index} className="container flex mb-4">
                 <ArtistCard  card={card}/>
             </div>
         ))

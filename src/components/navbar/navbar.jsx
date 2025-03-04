@@ -17,7 +17,7 @@ const Navbar = () => {
   }, [pathname]);
 
   return (
-    <nav className="relative bg-gray-200 p-4">
+    <nav className="relative z-50 bg-gray-200 p-4">
       <div className="flex justify-between items-center w-full">
         {/* Botón de hamburguesa para móviles */}
         <button 
