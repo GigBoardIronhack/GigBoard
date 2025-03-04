@@ -9,7 +9,7 @@ const WideArtistCard = ({ card }) => {
   const isOwner = currentUser && card.agency === currentUser.id;
 
   return (
-    <div className="max-w-4xl w-full bg-[#004E64] shadow-lg rounded-2xl overflow-hidden grid gap-2
+    <div className="max-w-4xl w-full bg-[#004E64] mb-4 shadow-lg rounded-2xl overflow-hidden grid gap-2
       grid-cols-1 grid-rows-4 
       md:grid-cols-2 md:grid-rows-2 
       lg:grid-cols-3 lg:grid-rows-2">

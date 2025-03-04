@@ -7,7 +7,6 @@ import DeletePurposal from "../../pages/PurposalPages/DeletePurposal";
 const WidePurposalCard = ({ card }) => {
     const { currentUser } = useContext(AuthContext);
     const isOwner = currentUser && card.promoter === currentUser.id;
-  console.log("CAAAAARRDDD",card);
   return (
     <div>
       <h1>Purposals</h1>
