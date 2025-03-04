@@ -8,7 +8,7 @@ import { InputText } from "primereact/inputtext";
 import { FloatLabel } from "primereact/floatlabel";
 
 const Register = ({ isEditing }) => {
-  const { isAuthLoaded, currentUser, setCurrentUser } = useContext(AuthContext);
+  const { isAuthLoaded, currentUser, setCurrentUser, getCurrentUser } = useContext(AuthContext);
   const [isFormValid, setIsFormValid] = useState(false); 
   const [backendErrors, setBackendErrors] = useState({});
  
@@ -33,7 +33,7 @@ const Register = ({ isEditing }) => {
       userData.email.trim() !== "" &&
       userData.cif.trim() !== "" &&
       userData.role !== "" &&
-      userData.imageUrl instanceof File &&
+      (typeof userData.imageUrl === "string" || userData.imageUrl instanceof File) && 
       (!isEditing ? userData.password.trim() !== "" : true);
 
     setIsFormValid(isValid);
@@ -72,10 +72,9 @@ const Register = ({ isEditing }) => {
 
     try {
       if (isEditing) {
-        console.log(uploadData.get("email"));
         const updatedUser = await updateUser(uploadData);
-        console.log(updateUser);
         setCurrentUser(updatedUser);
+        await getCurrentUser()
         navigate("/dashboard");
         return;
       }

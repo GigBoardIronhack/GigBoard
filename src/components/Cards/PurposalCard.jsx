@@ -18,8 +18,8 @@ const PurposalCard = ({ card, setNeedRefresh }) => {
   console.log("LA TARHETITTTTTAAA", card);
 
   return (
-    <>
-    <div className="container flex flex-col items-center">
+    <>{/* 
+    <div className="container  flex flex-col items-center">
       <div>
         <h2 >{card?.artist?.name}</h2>
       </div>
@@ -43,16 +43,21 @@ const PurposalCard = ({ card, setNeedRefresh }) => {
         </div>
       </div>
     </div>
-    <Card className="container flex flex-col sm:flex-row justify-center items-center">
-      <CardHeader floated={false}>
-        <img className="w-full h-auto sm:w-40 sm:h-40md:max-w-md"  src={card.artist.imageUrl} alt={card.artist.name} />
+    
+    
+    
+     */}
+    
+    <Card className="container flex flex-col sm:flex-row justify-center items-center sm:h-50 lg:w-8/12 mb-4 pb-2">
+      <CardHeader  floated={false}>
+        <img className="h-auto  sm:w-40 sm:h-20 sm:h-40md:max-w-md"  src={card.artist.imageUrl} alt={card.artist.name} />
       </CardHeader>
-      <CardBody className="text-center">
+      <CardBody className="text-center flex justify-center">
         <Typography variant="h4" color="blue-gray"  className="mb-2 md:hidden">
         {card?.artist?.name}
         </Typography>
       </CardBody>
-      <CardFooter className="flex justify-center gap-7 pt-2">
+      <CardFooter className="flex justify-center gap-7">
         <Tooltip content="Like">
           <Typography
             as="a"
