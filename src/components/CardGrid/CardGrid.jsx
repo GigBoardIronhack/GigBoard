@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom"
 import ArtistCard from "../Cards/ArtistCard"
 import PurposalCard from "../Cards/PurposalCard"
 import WideArtistCard from "../Cards/WideArtistCard"
@@ -27,10 +28,13 @@ const CardGrid = ( { cards, type, setNeedRefresh } ) => {
     }
     {type === "wideArtists" && 
         cards.slice(0,5).map((card, index)=>(
-            <div key={index}>
+            <Link to={`/artists/${card.id}`} key={index}> 
+            
+            <div key={index} className="container flex mb-4 md:min-w-[120px] md:flex-row md:w-full lg:w-full">
             
                 <WideArtistCard card={card}/>
             </div>
+            </Link>
         ))
     }{type === "widePurposals" && 
         cards.map((card, index)=>(
