@@ -4,6 +4,7 @@ import LinkCreateArtist from "../../components/LinkCreateArtist/LinkCreateArtist
 import CardGrid from "../../components/CardGrid/CardGrid";
 import { listAgencyPurposals } from "../../services/agency.service";
 import { Link } from "react-router-dom";
+import { Button } from "@material-tailwind/react";
 
 const AgencyDashboard = () => {
   const { currentUser } = useContext(AuthContext);
@@ -26,13 +27,16 @@ const AgencyDashboard = () => {
 
   return (
     <>
-      <div className=" container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 lg:grid-rows-3 gap-4">
+      <div className=" container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 lg:grid-rows-3 gap-4 w-3/4">
         <div className="sm:row-span-1 md:col-start-1  lg:col-start-3  dark:bg-gray-800 dark:text-white">
           <h1> Agency Dashboard</h1>
           <h2>hola {currentUser.name}</h2>
           <h3>eres {currentUser.role}</h3>
           <h4>tienes : {currentUser.artists.length} artistas</h4>
-          <LinkCreateArtist />
+          <Button
+                              className="bg-[#D76A03] text-white mb-2 px-4 py-4 w-full rounded-full font-medium shadow-md hover:bg-[#E3B505] hover:text-black transition 
+                              md:mb-0"
+                            ><LinkCreateArtist /></Button>
           <Link to={"/edit"}>Editar Usuario</Link>
         </div>
         <div className="row-span-1 sm:row-span-1 md:col-start-2 md:row-start-1 lg:row-span-2 lg:col-span-2 lg:col-start-1 lg:row-start-1">
