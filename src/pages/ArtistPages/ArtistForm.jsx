@@ -9,6 +9,8 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { InputText } from "primereact/inputtext";
 import { FloatLabel } from "primereact/floatlabel";
 import { InputSwitch } from "primereact/inputswitch";
+import { InputNumber } from "primereact/inputnumber";
+import ExpandableFields from "../../components/Rrss/Rrss.jsx";
 
 
 const ArtistForm = ({ artist, isEditing }) => {
@@ -159,271 +161,73 @@ const ArtistForm = ({ artist, isEditing }) => {
   };
 
   return (
-    <div className=" bg-white dark:bg-[#101C29] min-h-screen flex items-center justify-center">
-    <div className="container mx-auto px-4 py-16">
-      <form onSubmit={handleSubmit} className="bg-[#004e64] container mx-auto px-8 p-6 rounded mb-5-lg shadow-lg w-full max-w-md">
-      <h1 className="text-2xl font-semibold text-white mb-4 text-center">Crear Artista</h1>
-        <FloatLabel>
-          <InputText
-            type="text"
-            name="name"
-            id="name"
-            onChange={handleChange}
-            value={artistData.name}
-            className="w-full  dark:bg-[#101C29] dark:text-zinc-300 p-2 border border-[#d76a03] rounded mb-5"
-
-          />
-          <label htmlFor="name"><p className="flex align-top">Name</p></label>
-        </FloatLabel>
-        <FloatLabel>
-          <InputText
-            type="text"
-            name="description"
-            id="description"
-            onChange={handleChange}
-            value={artistData.description}
-            className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5 "
-          />
-        <label htmlFor="description">Descripción</label>
-        </FloatLabel>
-        <FloatLabel>
-          <InputText
-            type="text"
-            name="spotiUrl"
-            id="spotiUrl"
-            onChange={handleChange}
-            value={artistData.spotiUrl}
-            className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5 "
-          />
-        <label htmlFor="spotiUrl">Link de Spotify</label>
-        </FloatLabel>
-        <FloatLabel>
-          <InputText
-            type="text"
-            name="youtubeUrl"
-            id="youtubeUrl"
-            onChange={handleChange}
-            value={artistData.youtubeUrl}
-            className="dark:bg-[#101C29] w-full p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300 "
-          />
-        <label htmlFor="youtubeUrl">Link de Youtube</label>
-        </FloatLabel>
-        
-          <div>
-          <FloatLabel>
-              <InputText type="text" name="instagram" id="instagram" onChange={handleChange} value={artistData.instagram}
-               className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300 " />
-            <label htmlFor="instagram">Instagram</label>
-            </FloatLabel>
-            <FloatLabel>
-              <InputText type="text" name="tiktok" id="tiktok" onChange={handleChange} value={artistData.tiktok}
-                 className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300 "
-              />
-            <label htmlFor="tiktok">Tiktok</label>
-            </FloatLabel>
-            <FloatLabel>
-              <InputText type="text" name="facebook" id="facebook" onChange={handleChange} value={artistData.facebook}
-                 className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 "
-              />
-            <label htmlFor="facebook">Facebook</label>
-            </FloatLabel>
-            <FloatLabel>
-              <InputText type="text" name="twitter" id="twitter" onChange={handleChange} value={artistData.twitter}
-                 className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300 "
-              />
-            <label htmlFor="twitter">Twitter</label>
-            </FloatLabel>
-          </div>
-          <label htmlFor="imageUrl" className="block mb-2">
-          {artistData.imageUrl && (
-            <div className="mb-2 flex justify-center">
-              <p>Imagen actual:</p>
-              <img
-                src={
-                  typeof artistData.imageUrl === "string"
-                    ? artistData.imageUrl
-                    : URL.createObjectURL(artistData.imageUrl)
-                }
-                alt="Imagen actual"
-                width="100"
-              />
-               {errorImg?.message && <p className="text-red-500 text-sm mt-1">Formato de imagen no valido. La imagen debe de ser jpg, png, o jpeg.</p>}
-            </div>
-          )}
-          <input
-            type="file"
-            id="imageUrl"
-            name="imageUrl"
-            onChange={handleChange}
-            style={{ width: "132px", marginRight: "30px" }}
-
-          />
-        </label>
-
-        <div>
-          <MultiSelect
-            value={selectedStyles}
-            onChange={handleStyleChange}
-            options={GENRES_LIST} 
-            optionLabel="style"
-            filter
-            placeholder="Select styles"
-            maxSelectedLabels={3}
-            className="dark:bg-[#101C29]"
-          />
-          {error && <p style={{ color: "red" }}>{error}</p>}
-        </div>
-
-        <label htmlFor="basePrice">
-          base Price
-          <input
-            type="number"
-            placeholder="basePrice"
-            name="basePrice"
-            id="basePrice"
-            min={0}
-            required
-            onChange={handleNumberChange}
-            value={artistData.basePrice}
-            className="dark:bg-[#101C29] w-full p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300 "
-          />
-        </label>
-        <h2>BONUS!</h2>
-        <label htmlFor="pricingModifiers" placeholder="tipo de evento">
-          <div className="card flex justify-content-center dark:dark:text-zinc-300 dark:bg-[#101C29]">
-          ¿Quieres añadir Bonus en base al tipo de Evento contratante?
-            <InputSwitch
-              checked={promoterRoleChecked}
-              onChange={(e) => setPromoterRoleChecked(e.value)}
-            />
-          </div>
-            {promoterRoleChecked && (
-            <div>
-            Porcentaje extra para clubes 
-          <input
-            type="number"
-            placeholder="club"
-            name="club"
-            id="club"
-            min={0}
-            onChange={handleNumberChange}
-            value={artistData.club}
-            style={{width:"40px", marginLeft:"10px"}}
-            className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5 "
-
-          />% <br />
-          Porcentaje extra para festival 
-          <input
-            type="number"
-            placeholder="festival"
-            name="festival"
-            id="festival"
-            min={0}
-            onChange={handleNumberChange}
-            value={artistData.festival}
-            style={{width:"40px", marginLeft:"10px"}}
-            className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5 "
-          />% <br />
-          Porcentaje extra para eventos especiales
-         
-          <input
-            type="number"
-            placeholder="specialEvent"
-            name="specialEvent"
-            id="specialEvent"
-            min={0}
-            onChange={handleNumberChange}
-            value={artistData.specialEvent}
-            style={{width:"40px", marginLeft:"10px"}}
-            className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border rounded mb-5 "
-          />% <br />
-            </div>
-            )}
-        </label>
-        <label 
-        htmlFor="capacity" 
-        placeholder="tipo de evento"
-        style={{marginTop: "10px"}}>
-          ¿Quieres añadir bonus en base a la capacidad del Evento contratante?
-          <div className="card flex justify-content-center dark:bg-[#101C29]">
-            <InputSwitch
-              checked={promoterCapacityChecked}
-              onChange={(e) => setPromoterCapacityChecked(e.value)}
-            />
-          </div>
-          {promoterCapacityChecked && (
-            <div>
-
-          <input
-            type="number"
-            placeholder="small"
-            name="small"
-            id="small"
-            min={0}
-            onChange={handleNumberChange}
-            value={artistData.small}
-            className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5 "
-          />
-          <input
-            type="number"
-            placeholder="large"
-            name="large"
-            id="large"
-            min={0}
-            onChange={handleNumberChange}
-            value={artistData.large}
-            className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5 "
-          />
-            </div>
-            )}
-        </label>
-        <label htmlFor="weekendBoost" placeholder="tipo de evento">
-          ¿Quieres añadir Bonus por fin de semana o meses de verano?
-          <div className="card flex justify-content-center dark:bg-[#101C29]">
-            <InputSwitch
-              checked={promoterBoostChecked}
-              onChange={(e) => setPromoterBoostChecked(e.value)}
-            />
-          </div>
-          </label>
-          {promoterBoostChecked && (
-            <div>
-            <label htmlFor="weekendBoost" placeholder="tipo de evento">
-            Bonus por fines de semana
-            <input
-              type="number"
-              placeholder="weekendBoost"
-              name="weekendBoost"
-              id="weekendBoost"
-              min={0}
-              onChange={handleNumberChange}
-              value={artistData.weekendBoost}
-              className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5 "
-            />
-            </label>
-            <label htmlFor="monthBoost" placeholder="tipo de evento">
-            Bonus meses de verano (Junio, Julio y Agosto)
-            <input
-              type="number"
-              placeholder="monthBoost"
-              name="monthBoost"
-              id="monthBoost"
-              min={0}
-              onChange={handleNumberChange}
-              value={artistData.monthBoost}
-              className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5 "
-            />
-            </label>
-            </div>)}
+    <div className="bg-white dark:bg-[#101C29] min-h-screen flex items-center justify-center">
+      <div className="container mx-auto px-4 py-16">
+        <form onSubmit={handleSubmit} className="dark:bg-[#004e64] container mx-auto px-8 p-6 rounded mb-5-lg shadow-lg w-full max-w-6xl">
+          <h1 className="text-2xl font-semibold text-white mb-4 text-center">Crear Artista</h1>
           
-            <button
-            type="submit"
-            className={`w-full p-2 rounded mb-5 text-white ${isFormValid ? "bg-[#d76a03] hover:bg-[#e3b505]" : "bg-gray-400 cursor-not-allowed"}`}
-            disabled={!isFormValid}
-          >
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div>
+              <FloatLabel>
+                <InputText type="text" name="name" id="name" onChange={handleChange} value={artistData.name} className="w-full dark:bg-[#101C29] dark:text-zinc-300 p-2 border border-[#d76a03] rounded mb-5" />
+                <label htmlFor="name">Nombre *</label>
+              </FloatLabel>
+              <FloatLabel>
+                <InputText type="text" name="description" id="description" onChange={handleChange} value={artistData.description} className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5" />
+                <label htmlFor="description">Descripción *</label>
+              </FloatLabel>
+              <div className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5">
+              <label htmlFor="imageUrl" className="block mb-2"> Imagen de perfil *
+                {artistData.imageUrl && (
+                  <div className="mb-2 flex justify-center">
+                    <img src={typeof artistData.imageUrl === "string" ? artistData.imageUrl : URL.createObjectURL(artistData.imageUrl)} alt="Imagen actual" width="100" />
+                    {errorImg?.message && <p className="text-red-500 text-sm mt-1">Formato de imagen no válido.</p>}
+                  </div>
+                )}
+                <input type="file" id="imageUrl" name="imageUrl" onChange={handleChange} className="w-full" />
+              </label>
+              </div>
+              <div className="w-full dark:bg-[#101C29] dark:text-zinc-300 p-2 border border-[#d76a03] rounded mb-5">
+
+              <MultiSelect value={selectedStyles} onChange={handleStyleChange} options={GENRES_LIST} optionLabel="style" filter placeholder="Seleccionar estilos" maxSelectedLabels={3} className="dark:bg-[#101C29]" />
+              </div>
+            </div>
+            <div>
+              
+              <ExpandableFields handleChange={handleChange} artistData={artistData}/>
+            </div>
+            <div>
+            <FloatLabel>
+
+              <label htmlFor="basePrice">Base Price *</label>
+              <InputNumber inputId="currency-germany" value={artistData.basePrice} onValueChange={(e) => handleNumberChange({ target: { name: 'basePrice', value: e.value } })} mode="currency" currency="EUR" locale="de-DE" className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300" />
+            </FloatLabel>
+              
+              <label>Bonus por tipo de evento</label>
+              <InputSwitch checked={promoterRoleChecked} onChange={(e) => setPromoterRoleChecked(e.value)} />
+              {promoterRoleChecked && ['club', 'festival', 'specialEvent'].map((field) => (
+                <input key={field} type="number" name={field} id={field} min={0} onChange={handleNumberChange} value={artistData[field]} placeholder={field} className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300" />
+              ))}
+              
+              <label>Bonus por capacidad del evento</label>
+              <InputSwitch checked={promoterCapacityChecked} onChange={(e) => setPromoterCapacityChecked(e.value)} />
+              {promoterCapacityChecked && ['small', 'large'].map((field) => (
+                <input key={field} type="number" name={field} id={field} min={0} onChange={handleNumberChange} value={artistData[field]} placeholder={field} className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300" />
+              ))}
+              
+              <label>Bonus por fechas especiales</label>
+              <InputSwitch checked={promoterBoostChecked} onChange={(e) => setPromoterBoostChecked(e.value)} />
+              {promoterBoostChecked && ['weekendBoost', 'monthBoost'].map((field) => (
+                <input key={field} type="number" name={field} id={field} min={0} onChange={handleNumberChange} value={artistData[field]} placeholder={field} className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300" />
+              ))}
+            </div>
+          </div>
+
+          <button type="submit" className={`w-full p-2 rounded mb-5 text-white ${isFormValid ? "bg-[#d76a03] hover:bg-[#e3b505]" : "bg-gray-400 cursor-not-allowed"}`} disabled={!isFormValid}>
             {isEditing ? "Editar" : "Registrarse"}
           </button>
-      </form>
+          <p className="dark:text-zinc-300 text-black">Los campos marcados con * son obligatorios</p>
+        </form>
       </div>
     </div>
   );
