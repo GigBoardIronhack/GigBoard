@@ -9,12 +9,17 @@ const CardGrid = ({ cards, type, setNeedRefresh }) => {
   console.log("Cards recibidos en CardGrid:", cards);
 
   return (
-    <div className="overflow-y-auto max-h-[600px] flex flex-col gap-4 p-4 mt-10">
+    <div className="overflow-y-auto max-h-[600px] flex flex-col gap-4 p-4 mt-10 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
+    
+
       {type === "artists" &&
         cards.map((card, index) => (
+            <>
+            <h1>Artists</h1>
           <div key={index} className="flex-shrink-0">
             <ArtistCard card={card} />
           </div>
+            </>
         ))
       }
       {type === "purposals" &&

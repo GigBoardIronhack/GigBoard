@@ -4,7 +4,6 @@ import LinkCreateArtist from "../../components/LinkCreateArtist/LinkCreateArtist
 import CardGrid from "../../components/CardGrid/CardGrid";
 import { listAgencyPurposals } from "../../services/agency.service";
 import { Link } from "react-router-dom";
-import { Button } from "@material-tailwind/react";
 
 const AgencyDashboard = () => {
   const { currentUser } = useContext(AuthContext);

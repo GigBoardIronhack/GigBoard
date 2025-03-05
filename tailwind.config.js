@@ -1,7 +1,8 @@
-const {heroui} = require('@heroui/theme');
+const { heroui } = require('@heroui/theme');
 const withMT = require("@material-tailwind/react/utils/withMT");
+
 /** @type {import('tailwindcss').Config} */
-export default withMT({
+module.exports = withMT({
   important: true,
   content: [
     "./src/**/*.{js,ts,jsx,tsx}", // Busca clases de Tailwind en toda la carpeta `src`
@@ -10,5 +11,8 @@ export default withMT({
   theme: {
     extend: {},
   },
-  plugins: [heroui()],
+  plugins: [
+    heroui(),
+    require('tailwind-scrollbar'), // Agregamos el plugin del scrollbar
+  ],
 });
