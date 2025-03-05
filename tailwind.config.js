@@ -5,14 +5,14 @@ const withMT = require("@material-tailwind/react/utils/withMT");
 module.exports = withMT({
   important: true,
   content: [
-    "./src/**/*.{js,ts,jsx,tsx}", // Busca clases de Tailwind en toda la carpeta `src`
-    "./node_modules/@heroui/theme/dist/components/**/*.js", // Incluye todos los componentes de HeroUI
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@heroui/theme/dist/components/**/*.js",
   ],
   theme: {
     extend: {},
   },
   plugins: [
     heroui(),
-    require('tailwind-scrollbar'), // Agregamos el plugin del scrollbar
+    require('tailwind-scrollbar'),
   ],
 });
