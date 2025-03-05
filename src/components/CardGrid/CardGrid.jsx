@@ -5,46 +5,41 @@ import PurposalCard from "../Cards/PurposalCard"
 import WideArtistCard from "../Cards/WideArtistCard"
 import WidePurposalCard from "../Cards/WidePurposalCard"
 
+const CardGrid = ({ cards, type, setNeedRefresh }) => {
+  console.log("Cards recibidos en CardGrid:", cards);
 
-const CardGrid = ( { cards, type, setNeedRefresh } ) => {
-    console.log("Cards recibidos en CardGrid:", cards); 
-   
   return (
-    <div>
-    {type === "artists" && 
-        cards.map((card, index)=>(
-            
-            <div key={index} className="container flex mb-4">
-                <ArtistCard  card={card}/>
-            </div>
+    <div className="overflow-y-auto max-h-[600px] flex flex-col gap-4 p-4 mt-10">
+      {type === "artists" &&
+        cards.map((card, index) => (
+          <div key={index} className="flex-shrink-0">
+            <ArtistCard card={card} />
+          </div>
         ))
-    }{type === "purposals" && 
-        cards.map((card, index)=>(
-            <div key={index}>
-            
-                <PurposalCard card={card} setNeedRefresh={setNeedRefresh}/>
-            </div>
+      }
+      {type === "purposals" &&
+        cards.map((card, index) => (
+          <div key={index} className="flex-shrink-0">
+            <PurposalCard card={card} setNeedRefresh={setNeedRefresh} />
+          </div>
         ))
-    }
-    {type === "wideArtists" && 
-        cards.slice(0,5).map((card, index)=>(
-            <Link to={`/artists/${card.id}`} key={index}> 
-            
-            <div key={index} className="container flex mb-4 md:min-w-[120px] md:flex-row md:w-full lg:w-full">
-            
-                <WideArtistCard card={card}/>
+      }
+      {type === "wideArtists" &&
+        cards.map((card, index) => (
+          <Link to={`/artists/${card.id}`} key={index} className="flex-shrink-0">
+            <div className="flex md:min-w-[120px] md:flex-row md:w-full lg:w-full">
+              <WideArtistCard card={card} />
             </div>
-            </Link>
+          </Link>
         ))
-    }{type === "widePurposals" && 
-        cards.map((card, index)=>(
-            <div key={index}>
-                
-                <WidePurposalCard card={card} setNeedRefresh={setNeedRefresh} />
-            </div>
+      }
+      {type === "widePurposals" &&
+        cards.map((card, index) => (
+          <div key={index} className="flex-shrink-0">
+            <WidePurposalCard card={card} />
+          </div>
         ))
-    }
-    
+      }
     </div>
   )
 }

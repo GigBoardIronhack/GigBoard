@@ -27,7 +27,7 @@ const AgencyDashboard = () => {
 
   return (
     <>
-      <div className=" container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 lg:grid-rows-3 gap-4 w-3/4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 lg:grid-rows-3 gap-4 w-full h-full mx-auto p-4">
         <div className="sm:row-span-1 md:col-start-1  lg:col-start-3  dark:bg-gray-800 dark:text-white">
           <h1> Agency Dashboard</h1>
           <h2>hola {currentUser.name}</h2>
