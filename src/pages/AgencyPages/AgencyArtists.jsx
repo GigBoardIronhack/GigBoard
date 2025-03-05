@@ -6,7 +6,7 @@ const AgencyArtists = () => {
   const { currentUser } = useContext(AuthContext)
   return (
     <>
-    <CardGrid type="wideArtists" cards={currentUser.artists} />
+    <CardGrid type="artists" cards={currentUser.artists} />
       
     </>
   )
