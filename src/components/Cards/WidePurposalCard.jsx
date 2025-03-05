@@ -15,12 +15,12 @@ const WidePurposalCard = ({ card, setNeedRefresh }) => {
     <div>
       <div className="flex flex-col p-4  lg:min-h-[120px] lg:row-span-2 lg:flex-row justify-around shadow-medium rounded-small">
         <div className="flex flex-col py-4 items-center justify-center p-2">
-          <div className="flex flex-row ">
-            <div>
+          <div className="flex flex-col lg:flex-row ">
+            <div >
             {currentUser.role === "promoter" && (
                 <p>propuesta para</p>
               )}
-              <p>{card?.promoter?.name}</p>
+              <p className="w-20 lg:w-20   overflow-hidden text-ellipsis whitespace-nowrap">{card?.promoter?.name}</p>
               
             </div>
             <div>
@@ -33,8 +33,8 @@ const WidePurposalCard = ({ card, setNeedRefresh }) => {
                 <path d="M10 17l5-5-5-5v10z" />
               </svg>
             </div>
-            <div>
-              <p>{card?.artist?.name}</p>
+            <div className="text-center ">
+              <p className="w-60 lg:w-40  overflow-hidden text-ellipsis whitespace-nowrap">{card?.artist?.name}</p>
             </div>
           </div>
 

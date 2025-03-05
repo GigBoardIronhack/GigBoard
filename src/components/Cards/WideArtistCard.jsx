@@ -32,7 +32,7 @@ const WideArtistCard = ({ card }) => {
         </div>
         <div className="text-center flex justify-center w-full">
           <div  color="blue-gray" className="mb-2 m-0">
-           <h2 className=" text-xl">{card?.name}</h2> 
+           <h2 className="w-60 lg:w-40 py-3  overflow-hidden text-ellipsis whitespace-nowrap">{card?.name}</h2> 
           </div>
         </div>
         <div className="w-full p-0">
