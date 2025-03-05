@@ -40,7 +40,7 @@ const CardGrid = ( { cards, type, setNeedRefresh } ) => {
         cards.map((card, index)=>(
             <div key={index}>
                 
-                <WidePurposalCard card={card}/>
+                <WidePurposalCard card={card} setNeedRefresh={setNeedRefresh} />
             </div>
         ))
     }

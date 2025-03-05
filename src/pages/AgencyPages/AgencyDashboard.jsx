@@ -39,12 +39,13 @@ const AgencyDashboard = () => {
                             ><LinkCreateArtist /></Button>
           <Link to={"/edit"}>Editar Usuario</Link>
         </div>
-        <div className="row-span-1 sm:row-span-1 md:col-start-2 md:row-start-1 lg:row-span-2 lg:col-span-2 lg:col-start-1 lg:row-start-1">
+        <div className="row-span-1 lg:row-span-2 lg:col-span-2 lg:col-start-1 lg:row-start-1">
           <CardGrid type="wideArtists" cards={currentUser.artists} />
         </div>
-        <div className="row-span-1 sm:row-span-1 lg:row-span-2 lg:col-span-1 lg:col-start-4 lg:row-start-1">
+        <div className="row-span-1 lg:row-span-2 lg:col-span-2 lg:col-start-4 lg:row-start-1">
           <CardGrid type="widePurposals" cards={agencyPurposals} />
         </div>
+        
         
       </div>
     </>
