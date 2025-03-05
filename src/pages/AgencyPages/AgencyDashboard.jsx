@@ -33,10 +33,10 @@ const AgencyDashboard = () => {
           <h2>hola {currentUser.name}</h2>
           <h3>eres {currentUser.role}</h3>
           <h4>tienes : {currentUser.artists.length} artistas</h4>
-          <Button
-                              className="bg-[#D76A03] text-white mb-2 px-4 py-4 w-full rounded-full font-medium shadow-md hover:bg-[#E3B505] hover:text-black transition 
-                              md:mb-0"
-                            ><LinkCreateArtist /></Button>
+          <LinkCreateArtist className="w-full"/>
+
+
+
           <Link to={"/edit"}>Editar Usuario</Link>
         </div>
         <div className="row-span-1 lg:row-span-2 lg:col-span-2 lg:col-start-1 lg:row-start-1">
@@ -45,8 +45,6 @@ const AgencyDashboard = () => {
         <div className="row-span-1 lg:row-span-2 lg:col-span-2 lg:col-start-4 lg:row-start-1">
           <CardGrid type="widePurposals" cards={agencyPurposals} />
         </div>
-        
-        
       </div>
     </>
   );
