@@ -19,25 +19,23 @@ const WideArtistCard = ({ card }) => {
 
   return (
     <>
-      <Card className="container flex flex-col w-full  justify-center items-center mb-4
-       
-       lg:w-full lg:min-h-[120px] lg:flex-row">
-        <CardHeader
-          className="md:w-1/3 md:h-auto bg-cover bg-center"
-          floated={false}
+      <div className="container  flex flex-col w-full shadow-medium  p-4 justify-center items-center mb-4
+       lg:w-full lg:min-h-[120px]  lg:flex-row rounded-small">
+        <div
+          className=" bg-cover bg-center overflow-hidden rounded-lg"
         >
           <img
-            className="h-auto sm:w-40 sm:h-20 bg-cover w-full object-cover"
+            className="h-auto p-2  bg-cover rounded-lg w-full object-cover"
             src={card.imageUrl}
             alt={card.name}
           />
-        </CardHeader>
-        <CardBody className="text-center flex justify-center w-full">
-          <Typography variant="h4" color="blue-gray" className="mb-2 m-0">
-            {card?.name}
-          </Typography>
-        </CardBody>
-        <CardBody className="w-full p-0">
+        </div>
+        <div className="text-center flex justify-center w-full">
+          <div  color="blue-gray" className="mb-2 m-0">
+           <h2 className=" text-xl">{card?.name}</h2> 
+          </div>
+        </div>
+        <div className="w-full p-0">
           {isOwner && (
               <div className="w-full flex flex-col lg:flex-row justify-around lg:justify-end">
                 <Link to={`/artists/edit/${card.id}`}>
@@ -67,11 +65,12 @@ const WideArtistCard = ({ card }) => {
                   </Button>
                 </Link>
                 <DeleteArtist id={card.id} />
+                
               </div>
             
           )}
-        </CardBody>
-      </Card>
+        </div>
+      </div>
     </>
   );
 };

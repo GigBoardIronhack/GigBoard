@@ -12,13 +12,16 @@ const WidePurposalCard = ({ card, setNeedRefresh }) => {
   const fecha = card.eventDate.split("T")[0];
   return (
     <>
-      <h1>Purposals</h1>
     <div>
-      <div className="flex flex-col   lg:row-span-2 lg:flex-row justify-around shadow-medium rounded">
+      <div className="flex flex-col p-4  lg:min-h-[120px] lg:row-span-2 lg:flex-row justify-around shadow-medium rounded-small">
         <div className="flex flex-col py-4 items-center justify-center p-2">
           <div className="flex flex-row ">
             <div>
+            {currentUser.role === "promoter" && (
+                <p>propuesta para</p>
+              )}
               <p>{card?.promoter?.name}</p>
+              
             </div>
             <div>
               <svg
@@ -40,11 +43,11 @@ const WidePurposalCard = ({ card, setNeedRefresh }) => {
           </div>
         </div>
 
-        <div className="flex flex-col  p-2 lg-flex-row lg:flex-row justify-around  items-center">
+        <div className="flex flex-col  lg-flex-row lg:flex-row justify-around  items-center">
           <div className="w-full">
+          
             <Link to={`/purposals/${card.id}/${card.purposalChat}`}></Link>
 
-            <div></div>
 
             {currentUser.role === "agency" ? (
               <div className=" flex items-center">
@@ -55,8 +58,9 @@ const WidePurposalCard = ({ card, setNeedRefresh }) => {
               />
               </div>
             ) : isOwner ? (
-              <div className="p-2  flex flex-row justify-center">
-                <Link to={`/purposals/${card.id}/${card.purposalChat}`}>
+              <div className="flex flex-col lg:flex-row justify-around">
+              <div>
+                <Link to={`/edit/purposals/${card.id}`}>
                   <button
                     className="bg-[#D76A03]  text-white mb-2 px-4 py-4 w-full rounded-full font-medium shadow-md hover:bg-[#E3B505] hover:text-black transition 
                     lg:mb-0"
@@ -77,21 +81,26 @@ const WidePurposalCard = ({ card, setNeedRefresh }) => {
                     </svg>
                     
 
-                        <DeletePurposal id={card.id} />
                     <p className="lg:hidden  ">Editar</p>
                   </button>
                 </Link>
+                </div>
+                <div>
+
+                        <DeletePurposal id={card.id} />
+                </div>
               </div>
             ): null}
           </div>
           <div className=" flex flex-col lg:flex-row w-full lg:w-auto justify-around p-0">
             <Link to={`/purposals/${card.id}/${card.purposalChat}`}>
+            <div>
               <button
-                className="bg-[#15d703] text-white mb-2 px-4 py-4 w-full rounded-full font-medium shadow-md hover:bg-[#69e305] hover:text-black transition 
+                className="bg-[#15d703] text-white mb-2 px-3 py-3 lg:px-4 lg:py-4 w-full rounded-full font-medium shadow-md hover:bg-[#69e305] hover:text-black transition 
                     lg:mb-0"
               >
                 <svg
-                  className="w-5 hidden lg:block"
+                  className="w-4 hidden lg:block"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -111,6 +120,7 @@ const WidePurposalCard = ({ card, setNeedRefresh }) => {
                 </svg>
                 <p className="lg:hidden w-full">Chat</p>
               </button>
+                </div>
             </Link>
           </div>
         </div>

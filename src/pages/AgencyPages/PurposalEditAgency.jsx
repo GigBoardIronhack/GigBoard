@@ -72,7 +72,7 @@ const PurposalEditAgency = ({id, setNeedRefresh}) => {
       <option value="rejected">Rechazado</option>
     </select>
     
-    {/* Ícono del select */}
+    
     <div className="absolute inset-y-0 right-0  flex items-center pr-3 pointer-events-none">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +92,7 @@ const PurposalEditAgency = ({id, setNeedRefresh}) => {
   </div>
   <button className="sm:hidden lg:block">
   <svg
-  style={{ width: "60px" }}
+  style={{ width: "57px" }}
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -109,7 +109,7 @@ const PurposalEditAgency = ({id, setNeedRefresh}) => {
 
   <button
     type="submit"
-    className="sm:block lg:hidden rounded-full px-4 mb-2 sm:w-full lg:w-auto py-4 mt-4 bg-blue-600 text-white font-semibold  hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 transition duration-300 lg:px-3 lg:py-2"
+    className="sm:block lg:hidden rounded-full px-4 mb-2 sm:w-full lg:w-auto py-3 mt-4 bg-blue-700 text-white font-semibold  hover:bg-blue-300 hover:text-black  focus:ring-2 focus:ring-blue-500 transition duration-300 lg:px-3 lg:py-2"
   >
     Actualizar
   </button>
