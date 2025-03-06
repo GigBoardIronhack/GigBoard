@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 const AgencyDashboard = () => {
   const { currentUser } = useContext(AuthContext);
   const [agencyPurposals, setAgencyPurposals] = useState([]);
+  const [needRefresh, setNeedRefresh] = useState(true);
+  
 
   useEffect(() => {
     const fetchPurposal = async () => {
@@ -21,8 +23,11 @@ const AgencyDashboard = () => {
         console.log(err);
       }
     };
-    fetchPurposal();
-  }, []);
+    if (needRefresh) {
+      fetchPurposal();
+      setNeedRefresh(false); // 🔄 Después de actualizar, lo marcamos como `false`
+    }
+  }, [needRefresh]);
 
   return (
     <div className="grid grid-cols-1 grid-rows-[50px_1/2fr_1fr_1fr] lg:grid-rows-[auto_1fr_1fr_1fr] lg:grid-cols-5 gap-2 lg:gap-4 w-full h-full mx-auto p-4">
@@ -61,11 +66,11 @@ const AgencyDashboard = () => {
       </div>
 
       <div className="border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-span-2 lg:row-span-3 lg:row-start-2">
-        <CardGrid type="wideArtists" cards={currentUser.artists} />
+        <CardGrid type="wideArtists" cards={currentUser.artists} setNeedRefresh={setNeedRefresh} />
       </div>
 
       <div className="border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-span-2 lg:row-span-3 lg:col-start-4 lg:row-start-2">
-        <CardGrid type="widePurposals" cards={agencyPurposals} />
+        <CardGrid type="widePurposals" cards={agencyPurposals} setNeedRefresh={setNeedRefresh} />
       </div>
     </div>
   );

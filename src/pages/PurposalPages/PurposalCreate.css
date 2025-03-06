@@ -1,0 +1,125 @@
+/* Envuelve el calendario con un contenedor para darle margen y centrarlo */
+.calendar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+  }
+  
+  /* Estilo para el calendario */
+  .styled-calendar {
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para hacerlo más moderno */
+    background-color: #fff; /* Fondo blanco */
+    width: 100%; /* Asegura que se ajuste al contenedor */
+    max-width: 350px; /* Tamaño máximo del calendario */
+    padding: 10px; /* Padding interno */
+  }
+  
+  /* Estilos para los días de la semana */
+  .react-calendar__month-view__weekdays {
+    background-color: #f5f5f5; /* Fondo gris claro */
+    font-weight: bold;
+    color: #333; /* Color oscuro */
+    padding: 10px 0;
+  }
+  
+  /* Estilos para los días */
+  .react-calendar__month-view__days {
+    font-family: 'Roboto', sans-serif; /* Tipo de fuente moderno */
+    color: #444; /* Color de los días */
+  }
+  
+  .react-calendar__tile {
+    border-radius: 5px; /* Bordes redondeados para las celdas */
+    padding: 10px;
+    font-size: 14px;
+    transition: background-color 0.2s, color 0.2s; /* Transición suave */
+  }
+  
+
+  .react-calendar__tile--active {
+    background-color: #007BFF; /* Fondo azul para el día seleccionado */
+    color: white; /* Texto blanco en el día seleccionado */
+  }
+  
+  .react-calendar__tile--hasActive {
+    background-color: #d1e7ff; /* Fondo azul claro para días con actividad */
+  }
+  
+  .react-calendar__month-view__days__day--weekend {
+    color: #f44336; /* Colorea los fines de semana (rojo) */
+  }
+  
+  .react-calendar__tile--now {
+    background-color: #ffeb3b; /* Fondo amarillo para el día de hoy */
+    color: #000;
+    font-weight: bold;
+  }
+  
+  /* Estilos para el contorno del calendario (el borde exterior) */
+  .react-calendar__navigation {
+    background-color: #009da8; /* Fondo azul para el encabezado de navegación */
+    border-radius: 8px 8px 0 0; /* Bordes redondeados en la parte superior */
+    color: #fff;
+    height: 60px; /* Texto blanco */
+    padding: 10px 0;
+  }
+  
+  .react-calendar__navigation button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+
+  
+  .react-calendar__navigation button:disabled {
+    color: rgba(255, 255, 255, 0.5); /* Coloreamos los botones deshabilitados */
+  }
+/* Eliminar el fondo gris de las flechas de navegación desactivadas */
+.react-calendar__navigation button:disabled {
+    background: none;  /* Eliminar el fondo */
+    color: rgba(255, 255, 255, 0.5);  /* Color más claro para el texto de la flecha */
+    border: none;  /* Eliminar bordes */
+  }
+  
+  /* Estilos para las flechas de navegación */
+  .react-calendar__navigation button {
+    background: none; /* Eliminar el fondo por defecto */
+    border: none;     /* Eliminar el borde */
+    color: white;     /* Color de las flechas */
+    font-size: 20px;  /* Tamaño de las flechas */
+    font-weight: bold;/* Negrita */
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;  /* Centrado de la flecha */
+    justify-content: center; /* Centrado de la flecha */
+  }
+  
+  /* Flechas de navegación (anterior/siguiente) */
+
+  
+  /* Efecto de hover sobre las flechas */
+  
+  /* Estilo para el botón de navegación activo (no desactivado) */
+  .react-calendar__navigation button:enabled {
+    background: none !important;
+    color: white; /* Color blanco para las flechas activas */
+  }
+  .react-calendar__navigation button:hover {
+    background: none !important; /* Eliminar cualquier fondo en hover */
+    color: white; /* Mantener el color blanco de las flechas */
+  }
+  
+  /* Eliminar el fondo gris predeterminado en el hover */
+  .react-calendar__navigation button:active {
+    background: none !important; /* Eliminar el fondo al hacer clic */
+    color: white; /* Mantener el color blanco al hacer clic */
+  }
+    

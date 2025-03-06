@@ -6,15 +6,25 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { deleteChat } from "../../services/chat.service";
 
-const DeletePurposal = ({ id, chatId }) => {
+const DeletePurposal = ({ id, chatId, setNeedRefresh }) => {
   const { getCurrentUser } = useContext(AuthContext);
   const navigate = useNavigate();
+
 
   const handleDelete = async () => {
     try {
       await deletePurposal(id);
-      await deleteChat(chatId);
+      
+      if(chatId){
+        await deleteChat(chatId);
+
+      }
       await getCurrentUser();
+      if (typeof setNeedRefresh === "function") { 
+        setNeedRefresh(true); 
+      } else {
+        console.warn("setNeedRefresh no es una función", setNeedRefresh);
+      }
       navigate("/dashboard");
     } catch (error) {
       console.error("Error al eliminar artista:", error);

@@ -1,0 +1,9 @@
+/* Estilo para todos los números */
+.styled-number {
+/* Peso un poco más fuerte para resaltar */
+    color: #000000; /* Texto blanco para contraste */
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    margin: 10px 0; /* Espaciado vertical */
+    
+}
