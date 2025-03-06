@@ -30,9 +30,12 @@ const WideArtistCard = ({ card }) => {
             alt={card.name}
           />
         </div>
-        <div className="text-center flex justify-center w-full">
-          <div  color="blue-gray" className="mb-2 m-0">
-           <h2 className="w-60 lg:w-40 py-3  overflow-hidden text-ellipsis whitespace-nowrap">{card?.name}</h2> 
+        <div className="text-center flex justify-center items-center flex-col w-full lg:w-1/3">
+          <div  color="blue-gray" className="mb-2 m-0 w-2/3">
+           <h2 className="pt-2 overflow-hidden text-ellipsis whitespace-nowrap">{card?.name}</h2> 
+          </div>
+          <div className="pb-2">
+          <p>{card.style.toString().split(",").join(" | ")}</p>
           </div>
         </div>
         <div className="w-full p-0">
