@@ -38,6 +38,7 @@ const PurposalEdit = () => {
   
   return (
     <div>
+    
     <PurposalCreate purposal={purposal}  isEditing />
       
     </div>
