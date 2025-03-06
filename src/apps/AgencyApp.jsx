@@ -20,9 +20,8 @@ const AgencyApp = () => {
      <AnimatePresence mode="wait">
         <motion.div
           key={location.pathname}
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0, transition: { duration: 0.3 } }}
-          exit={{ opacity: 0, y: 50, transition: { duration: 0.3 } }}
+          initial={{ opacity: 1, y: -50 }}
+          animate={{ opacity: 1, y: 0, transition: { duration: 1 } }}
         >
     <Routes>
       <Route path="/dashboard" element={<AgencyDashboard />} />

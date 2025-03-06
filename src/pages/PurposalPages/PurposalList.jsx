@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -41,7 +40,6 @@ const PurposalList = () => {
 
   return (
     <div>
-      <h2>Purposals</h2>
     {currentUser.role === "promoter" ? ( 
       promoterPurposals &&
       <CardGrid type="purposals" cards={promoterPurposals} setNeedRefresh={setNeedRefresh}/>

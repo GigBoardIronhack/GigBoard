@@ -1,48 +1,42 @@
 /* eslint-disable react/prop-types */
 
-import { useContext } from "react";
-import { deletePurposal } from "../../services/purposal.service";
-import { AuthContext } from "../../contexts/AuthContext";
+
+import { deletePurposal, editPurposal } from "../../services/purposal.service";
 import { useNavigate } from "react-router-dom";
 import { deleteChat } from "../../services/chat.service";
 
-const DeletePurposal = ({ id, chatId, setNeedRefresh }) => {
-  const { getCurrentUser } = useContext(AuthContext);
+
+const DeletePurposal = ({ id, setNeedRefresh }) => {
+
+
   const navigate = useNavigate();
 
 
   const handleDelete = async () => {
     try {
-      await deletePurposal(id);
-      
-      if(chatId){
-        await deleteChat(chatId);
 
-      }
-      await getCurrentUser();
-      if (typeof setNeedRefresh === "function") { 
-        setNeedRefresh(true); 
-      } else {
-        console.warn("setNeedRefresh no es una función", setNeedRefresh);
-      }
-      navigate("/dashboard");
-    } catch (error) {
-      console.error("Error al eliminar artista:", error);
-    }
-  };
+          const editedPurposal = await editPurposal(id);
+            await deleteChat(editedPurposal.purposalChat);
+            await deletePurposal(editedPurposal.id);
+            setNeedRefresh(true);
+      } catch (error) {
+          console.error("Error al actualizar el estado:", error);
+        }
+        navigate("/dashboard");
+      };
+
   return (
     <button
-      className=" bg-[#d70303]  text-white mb-2 px-4 py-4 w-full rounded-full font-medium shadow-md hover:bg-[#ff8465] hover:text-black transition 
-                    lg:mb-0"
+      className=" bg-[#d70303] text-white px-4 py-2 rounded-full font-medium shadow-md hover:bg-[#ff8465] hover:text-black transition flex items-center justify-center w-full"
       onClick={handleDelete}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
-        strokeWidth={1.5}
+        strokeWidth="1.5"
         stroke="currentColor"
-        className="size-4 hidden lg:block"
+        className="w-6 h-6"
       >
         <path
           strokeLinecap="round"
@@ -51,7 +45,7 @@ const DeletePurposal = ({ id, chatId, setNeedRefresh }) => {
         />
       </svg>
       <div className="block lg:hidden w-full">
-        <p>eliminar</p>
+        <p>Delete</p>
       </div>
     </button>
   );

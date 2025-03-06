@@ -1,28 +1,103 @@
-import RecommendedArtists from "../../components/RecommendedArtists/RecommendedArtists";
-import CardGrid from "../../components/CardGrid/CardGrid"
 import { useContext, useEffect, useState } from "react";
-import { getPurposals } from "../../services/purposal.service";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import RecommendedArtists from "../../components/RecommendedArtists/RecommendedArtists";
+import CardGrid from "../../components/CardGrid/CardGrid";
 import { AuthContext } from "../../contexts/AuthContext";
-import { getCurrentUserService } from "../../services/auth.service";
+import { getPurposals } from "../../services/purposal.service";
 
 const PromoterDashboard = () => {
-  const [purposals, setPurposals] = useState([])
-  useEffect(()=>{
+  const { currentUser } = useContext(AuthContext);
+  const [purposals, setPurposals] = useState([]);
+  const [needRefresh, setNeedRefresh] = useState(true);
+
+  useEffect(() => {
     const fetchPurposals = async () => {
-      const purposals = await getPurposals();
-      setPurposals(purposals)
+      try {
+        const purposals = await getPurposals();
+        setPurposals(Array.isArray(purposals) ? purposals : []);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    if (needRefresh) {
+      fetchPurposals();
+      setNeedRefresh(false);
     }
-    fetchPurposals()
-    
-  }, [])
-  return(
-    <>
-      <h1> Promoter Dashboard</h1>
+  }, [needRefresh]);
 
-      <RecommendedArtists />
-      <CardGrid type="widePurposals" cards={purposals} />
-    </>
-  )
-}
+  return (
+    <div className="grid grid-cols-1 grid-rows-[50px_1/2fr_1fr_1fr] lg:grid-rows-[auto_1fr_1fr_1fr] lg:grid-cols-5 gap-2 lg:gap-4 w-full h-full mx-auto p-4">
 
-export default PromoterDashboard
+      <div className="text-center border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-span-5">
+        <h1 className="text-2xl lg:text-4xl font-bold uppercase dark:text-white mb-1">
+          Promoter Dashboard
+        </h1>
+      </div>
+
+      <motion.div
+        key={location.pathname}
+        initial={{ opacity: 1, x: -50 }}
+        animate={{ opacity: 1, x: 0, transition: { duration: 1 } }}
+        className="w-full h-full lg:col-span-2 row-start-3 lg:row-span-3 lg:row-start-2"
+      >
+        <div className="border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 w-full h-full">
+          <CardGrid type="widePurposals" cards={purposals} setNeedRefresh={setNeedRefresh} />
+        </div>
+      </motion.div>
+
+      <div className="flex flex-col items-center gap-2 border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-start-3 lg:row-span-2 row-start-2 lg:row-start-2">
+  <h2 className="text-lg lg:text-xl font-semibold dark:text-gray-300 mb-1">
+    {currentUser.name}
+  </h2>
+
+  <img
+    src={currentUser.imageUrl || "/default-user.png"}
+    alt="User profile"
+    className="w-20 h-20 lg:w-24 lg:h-24 rounded-full border-2 border-gray-300 dark:border-gray-600 shadow-sm"
+  />
+
+  <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">
+    CIF: <span className="font-semibold">{currentUser.cif}</span>
+  </p>
+
+  {/* Nueva línea con descripción del venue */}
+  {currentUser.promoterRole && (
+    <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400 text-center">
+      Your venue is a{" "}
+      <span className="font-semibold capitalize">{currentUser.promoterRole}</span>
+      {currentUser.promoterCapacity && (
+        <>
+          {" "}with a capacity for{" "}
+          <span className="font-semibold">{currentUser.promoterCapacity}</span>{" "}
+          persons.
+        </>
+      )}
+    </p>
+  )}
+
+  <Link to="/edit">
+    <div className="bg-[#036AD7] text-white text-center mb-2 mt-2 px-4 py-4 w-full max-w-xs lg:w-full rounded-full font-medium shadow-md hover:bg-[#0593E3] hover:text-black transition cursor-pointer">
+      Edit Profile
+    </div>
+  </Link>
+</div>
+
+
+
+      <motion.div
+        key={location.pathname}
+        initial={{ opacity: 1, x: 50 }}
+        animate={{ opacity: 1, x: 0, transition: { duration: 1 } }}
+        className="w-full h-full min-h-[calc(100%)] lg:col-span-2 lg:row-span-3 lg:row-start-2 flex"
+      >
+        <div className="border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 w-full h-full">
+          <RecommendedArtists />
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+export default PromoterDashboard;
