@@ -5,11 +5,16 @@ import { deletePurposal, editPurposal } from "../../services/purposal.service";
 import { useNavigate } from "react-router-dom";
 import { deleteChat } from "../../services/chat.service";
 
+
 const DeletePurposal = ({ id, setNeedRefresh }) => {
+
+
   const navigate = useNavigate();
+
 
   const handleDelete = async () => {
     try {
+
           const editedPurposal = await editPurposal(id);
             await deleteChat(editedPurposal.purposalChat);
             await deletePurposal(editedPurposal.id);
@@ -19,6 +24,7 @@ const DeletePurposal = ({ id, setNeedRefresh }) => {
         }
         navigate("/dashboard");
       };
+
   return (
     <button
       className=" bg-[#d70303] text-white px-4 py-2 rounded-full font-medium shadow-md hover:bg-[#ff8465] hover:text-black transition flex items-center justify-center w-full"

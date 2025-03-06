@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import DeleteArtist from "../../pages/ArtistPages/DeleteArtist";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+
 import { Button } from "@material-tailwind/react";
+
 
 const WideArtistCard = ({ card }) => {
   const { currentUser } = useContext(AuthContext);

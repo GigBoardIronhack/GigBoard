@@ -11,6 +11,7 @@ const AgencyDashboard = () => {
   const [agencyPurposals, setAgencyPurposals] = useState([]);
   const [needRefresh, setNeedRefresh] = useState(true);
 
+
   useEffect(() => {
     const fetchPurposal = async () => {
       try {
@@ -25,9 +26,11 @@ const AgencyDashboard = () => {
     };
     if (needRefresh) {
       fetchPurposal();
+
       setNeedRefresh(false);
     }
   }, [currentUser, needRefresh]);
+
 
   return (
     <div className="grid grid-cols-1 grid-rows-[50px_1/2fr_1fr_1fr] lg:grid-rows-[auto_1fr_1fr_1fr] lg:grid-cols-5 gap-2 lg:gap-4 w-full h-full mx-auto p-4">
@@ -65,11 +68,13 @@ const AgencyDashboard = () => {
 
         <LinkCreateArtist className="w-full max-w-xs" />
 
+
         <Link to="/edit">
           <div className="bg-[#036AD7] text-white text-center mb-2 mt-2 px-4 py-4 w-full max-w-xs lg:w-full rounded-full font-medium shadow-md hover:bg-[#0593E3] hover:text-black transition cursor-pointer">
             Editar Perfil
           </div>
         </Link>
+
       </div>
       <motion.div
         key={location.pathname}

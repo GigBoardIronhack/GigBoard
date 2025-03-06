@@ -10,12 +10,14 @@ import Calculator from "../../components/Calculator/Calculator";
 import { getArtist } from "../../services/artist.service";
 import { createChatService } from "../../services/chat.service";
 import "react-datepicker/dist/react-datepicker.min.css";
+import "./PurposalCreate.css"
 
 const PurposalCreate = ({ purposal, isEditing }) => {
   const { currentUser } = useContext(AuthContext);
   const { id } = useParams();
   const [artist, setArtist] = useState(purposal?.artist || {});
   const [disabledDates, setDisabledDates] = useState([]);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
     const fetchPurposals = async () => {
@@ -40,7 +42,8 @@ const PurposalCreate = ({ purposal, isEditing }) => {
 
     fetchPurposals();
   }, [id]);
-
+  
+  
   const isTileDisabled = ({ date }) => {
     return disabledDates.some((d) => d.toDateString() === date.toDateString());
   };
@@ -68,19 +71,28 @@ const PurposalCreate = ({ purposal, isEditing }) => {
     purposalChat: purposal?.purposalChat || null,
     notes: purposal?.notes || [],
   });
-
+  
+  useEffect(() => {
+    // Comprobar si los campos requeridos están completos y válidos
+    const isValid =
+      purposalData.eventDate && // Verifica que la fecha del evento no esté vacía
+      (typeof purposalData.notes === 'string' ? purposalData.notes.trim() !== "" : purposalData.notes.join('').trim() !== ""); // Verifica que las notas no estén vacías (eliminando espacios en blanco)
+  
+    setIsFormValid(isValid); // Actualiza el estado de validación
+  }, [purposalData, isEditing]);
   console.log("Estado inicial purposalData:", purposalData);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!isFormValid) return;
     console.log("Datos enviados al backend:", purposalData);
 
     if (!purposalData.eventDate || !(purposalData.eventDate instanceof Date)) {
       console.error("Invalid or missing eventDate");
       return;
     }
-
+    
     try {
       let purposalChat;
       if (!isEditing) {
@@ -124,7 +136,7 @@ const PurposalCreate = ({ purposal, isEditing }) => {
       );
     }
   };
-
+  
   const handleDateChange = (date) => {
     setPurposalData((prevState) => ({
       ...prevState,
@@ -159,48 +171,83 @@ const PurposalCreate = ({ purposal, isEditing }) => {
     }));
   };
 
+
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <div>
+    <div className="flex justify-center">
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white p-6 shadow-lg rounded-lg w-full max-w-5xl"
+      >
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center bg-gray-100 shadow-md rounded-lg overflow-hidden">
+            <div className="flex-1 p-4">
+              <h2 className="text-lg font-semibold text-gray-900">
+                {artist?.name}
+              </h2>
+              {console.log("ARTISTA", artist)}
+              {artist?.purposals &&
+                artist?.purposals.map((purposal) => (
+                  <div key={purposal.id}>
+                    <p>Next events</p>
+                    <p>{purposal?.eventDate?.split("T")[0]}</p>
+                    {console.log(purposal.eventDate)}
+                  </div>
+                ))}
+            </div>
+          </div>
+
+          <div className="p-4 bg-gray-100 flex justify-center content-center rounded-lg shadow-md">
             <Calendar
               onChange={handleDateChange}
               value={purposalData.eventDate}
               minDate={new Date()}
+              className="styled-calendar"
               tileDisabled={isTileDisabled}
               tileClassName={({ date, view }) =>
                 isTileDisabled({ date, view })
-                  ? "bg-red-500 text-white opacity-50 rounded-md"
+                  ? `bg-red-500 text-white opacity-50 rounded-md group-hover:${artist.purposals[0].promoter}`
                   : ""
               }
             />
-            {artist && (
-              <Calculator
-                artist={artist}
-                key={artist.id}
-                weekendBoost={weekendBoost}
-                summerBoost={summerBoost}
-                onPriceChange={handlePriceChange}
-              />
-            )}
           </div>
+        </div>
+
+        <div className="p-4 bg-gray-100 rounded-lg shadow-md flex">
+          {artist && (
+            <Calculator
+              artist={artist}
+              key={artist.id}
+              weekendBoost={weekendBoost}
+              summerBoost={summerBoost}
+              onPriceChange={handlePriceChange}
+            />
+          )}
+        </div>
+
+        <div className="flex flex-col  gap-4">
           {!isEditing && (
-            <label htmlFor="notes">
+            <label htmlFor="notes" className="w-full">
               <textarea
                 placeholder="Añadir notas..."
                 name="notes"
                 id="notes"
                 onChange={handleChange}
                 value={purposalData.notes || ""}
-                rows={4}
-                cols={50}
+                rows={6}
+                className={"w-full h-[100%] p-3 border rounded-lg shadow-md"}
+           
               />
             </label>
           )}
-        </div>
 
-        <button type="submit">{isEditing ? "Edit" : "Enviar"}</button>
+          <button
+            type="submit"
+            className={`w-full p-2 rounded text-white ${isFormValid ? "bg-[#d76a03] hover:bg-[#e3b505]" : "bg-gray-400 cursor-not-allowed"}`}
+            disabled={!isFormValid}
+          >
+            {isEditing ? "Editar" : "Enviar"}
+          </button>
+        </div>
       </form>
     </div>
   );

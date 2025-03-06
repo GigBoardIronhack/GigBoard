@@ -12,6 +12,7 @@ import {
   Tooltip,
   Button,
 } from "@material-tailwind/react";
+import DeletePurposal from "../../pages/PurposalPages/DeletePurposal";
 
 const PurposalCard = ({ card, setNeedRefresh }) => {
   const { currentUser } = useContext(AuthContext);
@@ -50,7 +51,7 @@ const PurposalCard = ({ card, setNeedRefresh }) => {
     
     <Card className="container flex flex-col sm:flex-row justify-center items-center sm:h-50 lg:w-8/12 mb-4 pb-2">
       <CardHeader  floated={false}>
-        <img className="h-auto  sm:w-40 sm:h-20 sm:h-40md:max-w-md"  src={card.artist.imageUrl} alt={card.artist.name} />
+        <img className="h-auto  sm:w-40 sm:h-20 sm:h-40md:max-w-md"  src={card?.artist?.imageUrl} alt={card?.artist?.name} />
       </CardHeader>
       <CardBody className="text-center flex justify-center">
         <Typography variant="h4" color="blue-gray"  className="mb-2 md:hidden">
@@ -61,7 +62,7 @@ const PurposalCard = ({ card, setNeedRefresh }) => {
         <Tooltip content="Like">
           <Typography
             as="a"
-            href={card.artist.rrss.facebook}
+            href={card?.artist?.rrss?.facebook}
             variant="lead"
             color="blue"
             target="blank"
@@ -73,7 +74,7 @@ const PurposalCard = ({ card, setNeedRefresh }) => {
         <Tooltip content="Follow">
           <Typography
             as="a"
-            href={card.artist.rrss.twitter}
+            href={card?.artist?.rrss?.twitter}
             variant="lead"
             color="light-blue"
             target="blank"
@@ -85,7 +86,7 @@ const PurposalCard = ({ card, setNeedRefresh }) => {
         <Tooltip content="Follow">
           <Typography
             as="a"
-            href={card.artist.rrss.instagram}
+            href={card?.artist?.rrss?.instagram}
             variant="lead"
             target="blank"
             color="purple"
@@ -109,6 +110,9 @@ const PurposalCard = ({ card, setNeedRefresh }) => {
              
         </Button>
             </Link>
+            <div>
+                    <DeletePurposal id={card.id} setNeedRefresh={setNeedRefresh} />
+                  </div>
       </CardFooter>
       )}
       <CardFooter className="p-2 flex flex-row justify-center">

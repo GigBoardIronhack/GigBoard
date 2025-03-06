@@ -11,6 +11,7 @@ const PurposalList = () => {
   const [promoterPurposals, setPromoterPurposals] = useState([]);
   const [agencyPurposals, setAgencyPurposals]= useState([]);
   const [needRefresh, setNeedRefresh] = useState(true);
+  console.log("setNeedRefresh en PurposalList:", setNeedRefresh);
 
       useEffect(() => {
         if (!currentUser) return;
@@ -41,7 +42,7 @@ const PurposalList = () => {
     <div>
     {currentUser.role === "promoter" ? ( 
       promoterPurposals &&
-      <CardGrid type="purposals" cards={promoterPurposals}/>
+      <CardGrid type="purposals" cards={promoterPurposals} setNeedRefresh={setNeedRefresh}/>
         ) 
         : 
         (

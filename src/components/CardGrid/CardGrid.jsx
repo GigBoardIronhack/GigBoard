@@ -8,6 +8,7 @@ import WidePurposalCard from "../Cards/WidePurposalCard";
 
 const CardGrid = ({ cards, type, setNeedRefresh }) => {
   console.log("Cards recibidos en CardGrid:", cards);
+  console.log("setNeedRefresh en CardGrid:", setNeedRefresh); 
 
   const getTitle = () => {
     switch (type) {
@@ -59,16 +60,20 @@ const CardGrid = ({ cards, type, setNeedRefresh }) => {
 
         {type === "wideArtists" &&
           cards.map((card, index) => (
+
             <WideArtistCard key={index} card={card} />
+
           ))}
 
         {type === "widePurposals" &&
           cards.map((card, index) => (
+
             <WidePurposalCard
               key={index}
               card={card}
               setNeedRefresh={setNeedRefresh}
             />
+
           ))}
       </div>
     </div>

@@ -52,6 +52,7 @@ const PurposalEditAgency = ({ id, setNeedRefresh }) => {
   if (!purposalData) return <p>Cargando...</p>;
 
   return (
+
     <form onSubmit={handleSubmit} className="flex items-center w-full space-x-2">
       {/* Select - 3/4 del ancho */}
       <div className="w-3/4 relative">
@@ -65,6 +66,7 @@ const PurposalEditAgency = ({ id, setNeedRefresh }) => {
           <option value="accepted">Aceptado</option>
           <option value="rejected">Rechazado</option>
         </select>
+
 
         {/* Icono de flecha dentro del select */}
         <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
