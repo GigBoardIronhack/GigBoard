@@ -11,62 +11,55 @@ const CardGrid = ({ cards, type, setNeedRefresh }) => {
   const getTitle = () => {
     switch (type) {
       case "artists":
-        return "Artistas";
-      case "purposals":
-        return "Propuestas";
       case "wideArtists":
-        return "Artistas";
+        return { title: "Artistas", link: "/artists" };
+      case "purposals":
       case "widePurposals":
-        return "Propuestas";
+        return { title: "Propuestas", link: "/purposals" };
       default:
-        return "";
+        return { title: "", link: "#" };
     }
   };
 
+  const { title, link } = getTitle();
+
   return (
     <div>
-
       {cards.length > 0 && (
-        <h1 className="text-2xl font-bold text-center mb-4">{getTitle()}</h1>
+        <h1 className="text-2xl font-bold text-center mb-4">
+          <Link to={link}>{title}</Link>
+        </h1>
       )}
-      
+
       <div className="overflow-y-auto max-h-[600px] flex flex-col gap-4 p-4 mt-10 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
+        {type === "artists" &&
+          cards.map((card, index) => (
+            <div key={index} className="flex-shrink-0">
+              <ArtistCard card={card} />
+            </div>
+          ))}
 
-      {type === "artists" &&
-        cards.map((card, index) => (
-          <div key={index} className="flex-shrink-0">
-            <ArtistCard card={card} />
-          </div>
-        ))
-      }
+        {type === "purposals" &&
+          cards.map((card, index) => (
+            <div key={index} className="flex-shrink-0">
+              <PurposalCard card={card} setNeedRefresh={setNeedRefresh} />
+            </div>
+          ))}
 
-      {type === "purposals" &&
-        cards.map((card, index) => (
-          <div key={index} className="flex-shrink-0">
-            <PurposalCard card={card} setNeedRefresh={setNeedRefresh} />
-          </div>
-        ))
-      }
-
-      {type === "wideArtists" &&
-        cards.map((card, index) => (
-          <Link to={`/artists/${card.id}`} key={index} className="flex-shrink-0">
-            <div className="flex md:min-w-[120px] md:flex-row md:w-full lg:w-full">
+        {type === "wideArtists" &&
+          cards.map((card, index) => (
+            <div key={index} className="flex-shrink-0">
               <WideArtistCard card={card} />
             </div>
-          </Link>
-        ))
-      }
+          ))}
 
-      {type === "widePurposals" &&
-        cards.map((card, index) => (
-          <div key={index} className="flex-shrink-0">
-            <WidePurposalCard card={card} />
-          </div>
-        ))
-      }
-
-    </div>
+        {type === "widePurposals" &&
+          cards.map((card, index) => (
+            <div key={index} className="flex-shrink-0">
+              <WidePurposalCard card={card} />
+            </div>
+          ))}
+      </div>
     </div>
   );
 };
