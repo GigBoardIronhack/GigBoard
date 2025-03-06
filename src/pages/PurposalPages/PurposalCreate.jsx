@@ -162,7 +162,21 @@ const PurposalCreate = ({ purposal, isEditing }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div>
+      <div>
+      <div className="flex items-center bg-white shadow-md rounded-lg overflow-hidden w-full max-w-lg">
+      {/* Imagen del artista */}
+      <img
+        src={artist.imageUrl}
+        alt={artist.name}
+        className="w-32 h-32 object-cover rounded-l-lg"
+      />
+
+      {/* Información del artista */}
+      <div className="flex-1 p-4">
+        <h2 className="text-lg font-semibold text-gray-900">{artist.name}</h2>
+        <p className="text-gray-500">{artist.genre}</p>
+      </div>
+    </div>
           <div>
             <Calendar
               onChange={handleDateChange}
@@ -175,6 +189,9 @@ const PurposalCreate = ({ purposal, isEditing }) => {
                   : ""
               }
             />
+           
+    </div>
+            <div>
             {artist && (
               <Calculator
                 artist={artist}

@@ -4,12 +4,6 @@ import DeleteArtist from "../../pages/ArtistPages/DeleteArtist";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Typography,
-  Tooltip,
   Button,
 } from "@material-tailwind/react";
 
