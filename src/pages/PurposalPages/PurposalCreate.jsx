@@ -19,6 +19,25 @@
    const [disabledDates, setDisabledDates] = useState([]);
    const [isFormValid, setIsFormValid] = useState(false);
 
+    useEffect(() => {
+      const fetchPurposals = async () => {
+        try {
+          let artistData;
+      
+      if (isEditing) {
+        if (!purposal?.artist?.id) {
+          console.error("ID del artista no disponible en edición");
+          return;
+        }
+        artistData = await getArtist(purposal.artist.id);
+      } else {
+        if (!id) {
+          console.error("ID del artista no disponible en creación");
+          return;
+        }
+        artistData = await getArtist(id);
+      }
+        
    useEffect(() => {
     const fetchPurposals = async () => {
       try {
