@@ -8,14 +8,18 @@ import WidePurposalCard from "../Cards/WidePurposalCard";
 
 const CardGrid = ({ cards, type, setNeedRefresh }) => {
   console.log("Cards recibidos en CardGrid:", cards);
-  console.log("setNeedRefresh en CardGrid:", setNeedRefresh); 
+  console.log("setNeedRefresh en CardGrid:", setNeedRefresh);
 
   const getTitle = () => {
     switch (type) {
       case "artists":
+        return { title: "Artists", link: "/artists" };
+      case "favoriteArtists":
+        return { title: "Favorite Artists", link: "/artists/favorites" };
       case "wideArtists":
         return { title: "Artists", link: "/artists" };
       case "purposals":
+        return { title: "Purposals", link: "/purposals" };
       case "widePurposals":
         return { title: "Purposals", link: "/purposals" };
       default:
@@ -33,49 +37,45 @@ const CardGrid = ({ cards, type, setNeedRefresh }) => {
 
       {cards.length === 0 && (
         <p className="text-center text-gray-500 lg:mt-10">
-          You don't have any {title.toLowerCase()} yet 😢 
+          You don't have any {title.toLowerCase()} yet 😢
         </p>
       )}
 
-      <div
-        className={`${
-          type === "artists"
-            ? "grid grid-cols-1 lg:grid-cols-4 gap-4 justify-items-center"
-            : "flex flex-col gap-4 items-center"
-        } p-4 mt-10 overflow-y-auto max-h-[600px] scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200`}
-      >
-        {type === "artists" &&
-          cards
-            .slice(0, 9)
-            .map((card, index) => <ArtistCard key={index} card={card} />)}
+      {type === "artists" ||
+      type === "purposals" ||
+      type === "favoriteArtists" ? (
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 justify-items-center p-4 mt-10 overflow-y-auto max-h-[600px] scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
+          {(type === "artists" || type === "favoriteArtists") &&
+            cards
+              .slice(0, 9)
+              .map((card, index) => <ArtistCard key={index} card={card} />)}
 
-        {type === "purposals" &&
-          cards.map((card, index) => (
-            <PurposalCard
-              key={index}
-              card={card}
-              setNeedRefresh={setNeedRefresh}
-            />
-          ))}
+          {type === "purposals" &&
+            cards.map((card, index) => (
+              <PurposalCard
+                key={index}
+                card={card}
+                setNeedRefresh={setNeedRefresh}
+              />
+            ))}
+        </div>
+      ) : (
+        <div className="flex flex-col gap-4 items-center p-4 mt-10 overflow-y-auto max-h-[600px] scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
+          {type === "wideArtists" &&
+            cards.map((card, index) => (
+              <WideArtistCard key={index} card={card} />
+            ))}
 
-        {type === "wideArtists" &&
-          cards.map((card, index) => (
-
-            <WideArtistCard key={index} card={card} />
-
-          ))}
-
-        {type === "widePurposals" &&
-          cards.map((card, index) => (
-
-            <WidePurposalCard
-              key={index}
-              card={card}
-              setNeedRefresh={setNeedRefresh}
-            />
-
-          ))}
-      </div>
+          {type === "widePurposals" &&
+            cards.map((card, index) => (
+              <WidePurposalCard
+                key={index}
+                card={card}
+                setNeedRefresh={setNeedRefresh}
+              />
+            ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -76,7 +76,7 @@ const PurposalCreate = ({ purposal, isEditing }) => {
     // Comprobar si los campos requeridos están completos y válidos
     const isValid =
       purposalData.eventDate && // Verifica que la fecha del evento no esté vacía
-      (typeof purposalData.notes === 'string' ? purposalData.notes.trim() !== "" : purposalData.notes.join('').trim() !== ""); // Verifica que las notas no estén vacías (eliminando espacios en blanco)
+      ( !isEditing ? (typeof purposalData.notes === 'string' ? purposalData.notes.trim() !== "" : purposalData.notes.join('').trim() !== "") :true ); // Verifica que las notas no estén vacías (eliminando espacios en blanco)
   
     setIsFormValid(isValid); // Actualiza el estado de validación
   }, [purposalData, isEditing]);
@@ -224,7 +224,7 @@ const PurposalCreate = ({ purposal, isEditing }) => {
           )}
         </div>
 
-        <div className="flex flex-col  gap-4">
+        <div className="flex flex-col gap-4">
           {!isEditing && (
             <label htmlFor="notes" className="w-full">
               <textarea

@@ -23,11 +23,10 @@ const FavoriteArtists = () => {
 
   return (
     <div>
-      <h2>Artistas Favoritos</h2>
       {loading ? (
         <p>Cargando favoritos...</p>
       ) : favoriteArtists.length > 0 ? (
-        <CardGrid type="wideArtists" cards={favoriteArtists} />
+        <CardGrid type="favoriteArtists" cards={favoriteArtists} />
       ) : (
         <p>No tienes artistas favoritos.</p>
       )}
