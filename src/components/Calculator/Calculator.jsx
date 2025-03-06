@@ -1,6 +1,9 @@
 /* eslint-disable react/prop-types */
 import { AuthContext } from "../../contexts/AuthContext";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import "./Calculator.css"
+
+import AnimatedNumbers from "react-animated-numbers";
 
 const Calculator = ({ artist, weekendBoost, summerBoost, onPriceChange }) => {
   const { currentUser } = useContext(AuthContext);
@@ -22,25 +25,138 @@ const Calculator = ({ artist, weekendBoost, summerBoost, onPriceChange }) => {
   const summerBonus = summerBoost ? artist.basePrice * artist?.pricingModifiers?.monthBoost : 0;
 
   const negotiatedPrice = artist.basePrice + clubBonus + festivalBonus + specialEventBonus + smallBonus + largeBonus + weekendBonus + summerBonus;
+  const [countedPrice, setCountedPrice] = useState(artist.basePrice);
   useEffect(() => {
-    onPriceChange(negotiatedPrice); // 🔥 Debe actualizar `PurposalCreate`
-  }, [negotiatedPrice]);
+    if (negotiatedPrice !== countedPrice) {  // Solo actualiza si el precio ha cambiado
+      setCountedPrice(negotiatedPrice); // Solo actualizamos cuando hay un cambio en el precio
+      onPriceChange(negotiatedPrice); // Actualizamos el precio en el estado padre
+    }
+  }, [negotiatedPrice, countedPrice, onPriceChange]);
 
   console.log(clubBonus, festivalBonus, specialEventBonus, smallBonus, largeBonus, weekendBonus, summerBonus, negotiatedPrice);
 
   return (
-    <div>
-      <h2>{artist.basePrice}</h2>
-      {isClub && <p> + {clubBonus}</p>}
-      {isFestival && <p> + {festivalBonus}</p>}
-      {isSpecialEvent && <p> + {specialEventBonus}</p>}
-      {isSmallVenue && <p> + {smallBonus}</p>}
-      {isLargeVenue && <p> + {largeBonus}</p>}
-      {weekendBoost && <p> + {weekendBonus}</p>}
-      {summerBoost && <p> + {summerBonus}</p>}
+    <div className="flex flex-column w-full">
+    <div className="flex flex-column items-start w-full ">
 
-      {console.log(negotiatedPrice)}
-      <h2>TOTAL: {negotiatedPrice}</h2>
+    <div className="flex w-full justify-between border-b-2 border-gray-500">
+      <div> 
+      <h2 className="styled-number text-xl  sm:text-1xl md:text-1xl lg:text-xl " >Base price </h2>
+      </div>
+      <div className="flex justify-end">
+      <h2  className="styled-number flex  text-xl sm:text-1xl md:text-1xl lg:text-xl ">{artist.basePrice}</h2>
+      </div>
+      </div>
+      
+      <div className="flex w-full flex-col">
+
+        {isClub && (
+        <div className="flex w-full justify-between border-b-2">
+        <div>
+         <p className="styled-number text-xl sm:text-1xl md:text-1xl lg:text-xl ">
+         Club Bonus 
+         </p>
+        </div>
+        <div className="flex justify-end">
+         <p className="styled-number text-xl sm:text-1xl md:text-1xl lg:text-xl ">+ {clubBonus}</p>
+         </div>
+        </div>
+        )}
+
+
+
+        {isFestival && (
+        <div className="flex w-full justify-between border-b-2">
+          <div>
+         <p className="styled-number text-xl sm:text-1xl md:text-1xl lg:text-xl ">
+        Festival Bonus </p>
+        </div>
+          <div className="flex justify-end">
+        <p className="styled-number text-xl sm:text-1xl md:text-1xl lg:text-xl ">+ {festivalBonus}</p>
+        </div>
+        </div>
+      )}
+
+        {isSpecialEvent &&(
+        <div className="flex w-full justify-between border-b-2">
+        <div> 
+         <p className="styled-number text-xl sm:text-1xl md:text-1xl lg:text-xl "> 
+        Special Event Bonus </p>
+        </div>
+          <div  className="flex justify-end">
+       <p className="styled-number text-xl sm:text-1xl md:text-1xl lg:text-xl ">  + {specialEventBonus}</p>
+       </div>
+        </div>
+      )}
+        {isSmallVenue &&(
+        <div className="flex w-full justify-between border-b-2">
+          <div>
+         <p className="styled-number text-xl sm:text-1xl md:text-1xl lg:text-xl ">
+        Small Bonus </p>
+        </div>
+          <div className="flex justify-end">
+        <p className="styled-number text-xl sm:text-1xl md:text-1xl lg:text-xl "> + {smallBonus}</p>
+        </div>
+        </div>
+      )}
+
+      
+        {isLargeVenue && (
+        <div className="flex w-full justify-between border-b-2">
+          <div>
+         <p className="styled-number text-xl sm:text-1xl md:text-1xl lg:text-xl ">
+        large Bonus </p>
+        </div>
+          <div className="flex justify-end">
+        <p className="styled-number text-xl sm:text-1xl md:text-1xl lg:text-xl ">+ {largeBonus}</p>
+        </div>
+        </div>
+      )}
+
+        {weekendBoost && (
+        <div className="flex w-full justify-between border-b-2">
+        <div>
+         <p className="styled-number text-xl sm:text-1xl md:text-1xl lg:text-xl ">
+        Weekend Bonus </p>
+        </div>
+          <div className="flex justify-end">
+        <p className="styled-number text-xl sm:text-1xl md:text-1xl lg:text-xl ">+ {weekendBonus}</p>
+        </div>
+        </div>
+      )}
+
+        {summerBoost && (
+        <div className="flex w-full justify-between border-b-2">
+        <div>
+         <p className="styled-number text-xl sm:text-1xl md:text-1xl lg:text-xl ">
+        Summer Bonus</p>
+        </div>
+        <div className="flex justify-end">
+       <p className="styled-number text-xl sm:text-1xl md:text-1xl lg:text-xl ">  + {summerBonus}</p>
+       </div>
+        </div>
+      )}
+
+      </div>
+     
+      <div className="flex w-full justify-between border-b-2">
+      <div>
+      <h1 className=" sm:text-center styled-number text-xl sm:text-1xl md:text-1xl lg:text-xl "> Total price  </h1>
+      </div>
+        <div className="flex justify-end">
+        <h2  className=" text-light-green-500 styled-number text-xl sm:text-1xl md:text-1xl lg:text-xl   text-center sm:text-center">
+          <AnimatedNumbers
+            key={countedPrice}  // Cambiar el key forzará a que el componente se reinicie cada vez que el precio cambie
+            includeComma // Añadir comas a los números
+            animateToNumber={countedPrice} // El número al que queremos animar
+            fontStyle={{ fontSize: 32, fontWeight: "bold" }} // Estilo de la fuente
+            duration={1000} // Duración de la animación en milisegundos
+            easing="easeOutQuad" // Easing de la animación
+          />
+        </h2>
+        </div>
+      </div>
+      </div>
     </div>
   );
 };

@@ -83,7 +83,7 @@ const WidePurposalCard = ({ card, setNeedRefresh }) => {
                     </Link>
                   </div>
                   <div>
-                    <DeletePurposal id={card.id} />
+                    <DeletePurposal id={card.id} setNeedRefresh={setNeedRefresh} />
                   </div>
                 </div>
               ) : null}
