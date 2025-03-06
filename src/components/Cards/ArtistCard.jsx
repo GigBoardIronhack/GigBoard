@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import DeleteArtist from "../../pages/ArtistPages/DeleteArtist";
-import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { Button } from "@material-tailwind/react";
 import { motion } from "framer-motion";
@@ -9,9 +9,14 @@ import { motion } from "framer-motion";
 const ArtistCard = ({ card }) => {
   const { currentUser } = useContext(AuthContext);
   const isOwner = currentUser && card.agency === currentUser.id;
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="relative group w-64 rounded-lg overflow-hidden shadow-lg bg-white">
+    <div
+      className="relative group w-64 rounded-lg overflow-hidden shadow-lg bg-white"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <Link to={`/artists/${card.id}`} className="block relative">
         <div className="overflow-hidden">
           <img
@@ -27,23 +32,21 @@ const ArtistCard = ({ card }) => {
           </p>
         </div>
       </Link>
+
       {isOwner && (
-        <div className="absolute top-2 right-2 flex space-x-2">
-        <motion.div
-  key={location.pathname}
-  initial={{ opacity: 0, x: 50 }} 
-  animate={{ opacity: 1, x: 0, transition: { duration: 0.5 } }} 
-  className="w-full h-full lg:col-span-2 lg:row-span-3 lg:row-start-2"
->
-  <div className="border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-span-2 lg:row-span-3 lg:col-start-4 lg:row-start-2">
-    <CardGrid type="widePurposals" cards={agencyPurposals} setNeedRefresh={setNeedRefresh} />
-  </div>
-</motion.div>
+        <div
+          className="absolute top-2 right-2 flex space-x-2"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={isHovered ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
+            transition={{ duration: 0.5 }}
+            className="w-full h-full lg:col-span-2 lg:row-span-3 lg:row-start-2"
+          >
             <Link to={`/artists/edit/${card.id}`}>
-              <Button
-                className="bg-[#036AD7] text-white mb-2 px-4 py-4 w-full rounded-full font-medium shadow-md hover:bg-[#0593E3] hover:text-black transition 
-                lg:mb-0"
-              >
+              <Button className="bg-[#036AD7] text-white mb-2 px-4 py-4 w-full rounded-full font-medium shadow-md hover:bg-[#0593E3] hover:text-black transition lg:mb-0">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -61,8 +64,16 @@ const ArtistCard = ({ card }) => {
                 <p className="block lg:hidden w-full">Editar</p>
               </Button>
             </Link>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={isHovered ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+            transition={{ duration: 0.5 }}
+            className="w-full h-full lg:col-span-2 lg:row-span-3 lg:row-start-2"
+          >
             <DeleteArtist id={card.id} />
-          
+          </motion.div>
         </div>
       )}
     </div>

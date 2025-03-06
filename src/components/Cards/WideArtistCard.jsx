@@ -10,20 +10,23 @@ const WideArtistCard = ({ card }) => {
   const isOwner = currentUser && card.agency === currentUser.id;
 
   return (
-    <div className="container flex flex-col w-full shadow-medium p-4 justify-center items-center mb-4
-       lg:w-full lg:min-h-[120px] lg:flex-row rounded-small">
-      
+    <div
+      className="container flex flex-col w-full shadow-medium p-4 justify-center items-center mb-4
+       lg:w-full lg:min-h-[120px] lg:flex-row rounded-small"
+    >
       <div className="w-full lg:w-1/5 flex justify-center items-center overflow-hidden rounded-lg">
-  <img
-    className="w-3/4 object-cover rounded-lg"
-    src={card.imageUrl}
-    alt={card.name}
-  />
-</div>
+        <img
+          className="w-3/4 object-cover rounded-lg"
+          src={card.imageUrl}
+          alt={card.name}
+        />
+      </div>
 
       <div className="text-center flex justify-center items-center flex-col w-full lg:w-3/5">
         <div className="pt-2 w-2/3">
-          <h2 className="overflow-hidden text-ellipsis whitespace-nowrap">{card?.name}</h2>
+          <h2 className="overflow-hidden text-ellipsis whitespace-nowrap">
+            {card?.name}
+          </h2>
         </div>
         <div className="pb-2">
           <p>{card.style.toString().split(",").join(" | ")}</p>
