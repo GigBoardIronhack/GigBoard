@@ -22,8 +22,22 @@
     useEffect(() => {
       const fetchPurposals = async () => {
         try {
-          const artistData = await getArtist(purposal?.artist?.id);
-          console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD", artistData);
+          let artistData;
+      
+      if (isEditing) {
+        if (!purposal?.artist?.id) {
+          console.error("ID del artista no disponible en edición");
+          return;
+        }
+        artistData = await getArtist(purposal.artist.id);
+      } else {
+        if (!id) {
+          console.error("ID del artista no disponible en creación");
+          return;
+        }
+        artistData = await getArtist(id);
+      }
+        
 
           if (!artistData?.purposals || !Array.isArray(artistData?.purposals)) {
             console.error("No hay purposals o no es un array.");
@@ -41,7 +55,7 @@
       };
 
       fetchPurposals();
-    }, [purposal?.artist?.id]);
+    }, [isEditing, purposal?.artist?.id, id]);
     
     
     const isTileDisabled = ({ date }) => {
