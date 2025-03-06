@@ -38,16 +38,16 @@ const PurposalEditAgency = ({id, setNeedRefresh}) => {
       if (editedPurposal.status === "rejected") {
         console.log("ENTRO AQUI", editedPurposal.purposalChat);
   
+        await deleteChat(editedPurposal.purposalChat);
         await deletePurposal(editedPurposal.id);
   
-        if (editedPurposal.purposalChat) {
-          await deleteChat(editedPurposal.purposalChat);
-        }
+        
+        
   
         setNeedRefresh(true);
       }
   
-      navigate("/purposals");
+      navigate("/dashboard");
     } catch (error) {
       console.error("Error al actualizar el estado:", error);
     }
