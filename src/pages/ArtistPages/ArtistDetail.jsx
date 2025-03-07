@@ -10,6 +10,7 @@ import DeleteArtist from "../../pages/ArtistPages/DeleteArtist";
 
 import {  FaInstagram, FaTiktok, FaFacebook, FaTwitter } from "react-icons/fa";
 import '@justinribeiro/lite-youtube'; 
+import ArtistDetailSkeleton from "../../components/Skeleton/ArtistDetailSkeleton";
 
 
 const ArtistDetail = () => {
@@ -20,12 +21,14 @@ const ArtistDetail = () => {
   const [hasPurposal, setHasPurposal] = useState(false);
   const { notify } = useNotification();
   const [purposals, setPurposals] = useState([]);
+  const [isLoading, setIsLoading]= useState(true)
 
   useEffect(() => {
     const getArtistId = async () => {
       try {
         const artist = await getArtist(id);
         setArtist(artist);
+        setIsLoading(false)
 
         if (currentUser.role === "promoter") {
           const favorites = await getFavorites();
@@ -56,6 +59,10 @@ const ArtistDetail = () => {
   };
 
   const isOwner = artist && currentUser && artist.agency?.id === currentUser.id;
+
+  if (isLoading) {
+    return <ArtistDetailSkeleton />;
+  }
 
   return (
     <>
@@ -135,7 +142,7 @@ const ArtistDetail = () => {
                   {purposals.map((purposal) =>
                     purposal && purposal.promoter ? (
                       <div key={purposal.id} className="p-4 border border-gray-300 rounded-lg shadow-sm">
-                        <p className="text-gray-600">{purposal.eventDate}</p>
+                        <p className="text-gray-600">{purposal.eventDate.split("T")[0]}</p>
                         <p className="text-gray-800 font-semibold">{purposal.promoter.name}</p>
                       </div>
                     ) : null

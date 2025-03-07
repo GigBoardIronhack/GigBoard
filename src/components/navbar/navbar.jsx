@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import giglogo from "../../assets/giglogo.png"
 
 const Navbar = () => {
   const { logout, currentUser } = useContext(AuthContext);
@@ -18,6 +19,9 @@ const Navbar = () => {
 
   return (
     <nav className="relative z-50 bg-gray-200 p-4">
+     <div className="absolute top-1/2 left-[60%] lg:left-[54%]  -translate-x-1/2 -translate-y-1/2">
+          <img src={giglogo} alt="gigboard logo" className="object-cover w-1/2" />
+        </div>
       <div className="flex justify-between items-center w-full">
         {/* Botón de hamburguesa para móviles */}
         <button 
@@ -54,7 +58,9 @@ const Navbar = () => {
                 onMouseEnter={() => setShowDropdown(true)}
                 onMouseLeave={() => setShowDropdown(false)}
               >
+              <NavLink to="/artists" >
                 <button className="hover:text-gray-600">Artists</button>
+                </NavLink>
                 {showDropdown && (
                   <div className="absolute top-full bg-white border border-gray-300 rounded shadow-md min-w-[150px]">
                     {currentUser.role === "agency" ? (
@@ -81,6 +87,7 @@ const Navbar = () => {
             </>
           )}
         </div>
+       
 
         {/* Botón de logout */}
         {currentUser && (

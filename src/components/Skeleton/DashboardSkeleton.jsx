@@ -1,4 +1,3 @@
-
 import Skeleton from "react-loading-skeleton"; // Importa la librería
 import "react-loading-skeleton/dist/skeleton.css"; // Asegúrate de importar los estilos
 
@@ -11,20 +10,21 @@ const DashboardSkeleton = () => {
       </div>
 
       {/* Información del usuario (perfil y detalles) */}
-      <div className="flex flex-col items-center gap-2 border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-start-3 lg:col-span-1 lg:row-span-2 lg:row-start-2">
+      <div className="flex flex-col items-center gap-2 border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-start-3 lg:col-span-1 lg:row-span-3 lg:row-start-2">
         <Skeleton circle height={96} width={96} className="mb-4" />
         <Skeleton height={16} width="75%" className="mb-2" />
         <Skeleton height={16} width="66%" className="mb-2" />
         <Skeleton height={16} width="66%" />
+        <Skeleton height={100} width="90%" className="mt-4" /> {/* Extra espacio */}
       </div>
 
       {/* Cards o espacios principales */}
-      <div className="border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-span-2 lg:row-span-2">
-        <Skeleton height={192} className="w-full" />
+      <div className="border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-span-2 lg:row-span-3">
+        <Skeleton height={300} className="w-full" />
       </div>
 
-      <div className="border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-span-2 lg:row-span-2">
-        <Skeleton height={192} className="w-full" />
+      <div className="border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-span-2 lg:row-span-3">
+        <Skeleton height={300} className="w-full" />
       </div>
     </div>
   );
