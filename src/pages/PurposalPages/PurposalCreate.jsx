@@ -11,6 +11,7 @@
   import { createChatService } from "../../services/chat.service";
   import "react-datepicker/dist/react-datepicker.min.css";
   import "./PurposalCreate.css"
+  import FormPurposalSkeleton from "../../components/Skeleton/FormPurposalSkeleton";
 
   const PurposalCreate = ({ purposal, isEditing }) => {
     const { currentUser } = useContext(AuthContext);
@@ -18,6 +19,7 @@
     const [artist, setArtist] = useState(purposal?.artist || {});
     const [disabledDates, setDisabledDates] = useState([]);
     const [isFormValid, setIsFormValid] = useState(false);
+    const [isLoading, setIsLoading]=useState(true)
 
     useEffect(() => {
       const fetchPurposals = async () => {
@@ -30,12 +32,14 @@
           return;
         }
         artistData = await getArtist(purposal.artist.id);
+        setIsLoading(false)
       } else {
         if (!id) {
           console.error("ID del artista no disponible en creación");
           return;
         }
         artistData = await getArtist(id);
+        setIsLoading(false)
       }
         
 
@@ -186,6 +190,10 @@
       }));
     };
 
+    
+if (isLoading) {
+  return <FormPurposalSkeleton />;
+} 
 
     return (
       <div className="flex justify-center">

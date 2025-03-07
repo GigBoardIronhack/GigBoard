@@ -4,6 +4,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { listPromoterPurposals } from "../../services/promoter.service";
 import { listAgencyPurposals } from "../../services/agency.service";
 import CardGrid from "../../components/CardGrid/CardGrid";
+import PurposalsListSkeleton from "../../components/Skeleton/PurposalsListSkeleton"
 
 const PurposalList = () => {
   const {currentUser} = useContext(AuthContext)
@@ -11,6 +12,8 @@ const PurposalList = () => {
   const [promoterPurposals, setPromoterPurposals] = useState([]);
   const [agencyPurposals, setAgencyPurposals]= useState([]);
   const [needRefresh, setNeedRefresh] = useState(true);
+  const [isLoading, setIsLoading]=useState(true)
+
   console.log("setNeedRefresh en PurposalList:", setNeedRefresh);
 
       useEffect(() => {
@@ -21,11 +24,13 @@ const PurposalList = () => {
             if (currentUser.role === "agency") {
               const agencyPurposals = await listAgencyPurposals();
               setAgencyPurposals(Array.isArray(agencyPurposals) ? agencyPurposals : []);
-              console.log("PURPOSALSS AGENCY", agencyPurposals);
+              setIsLoading(false)
+            
             } else if (currentUser.role === "promoter") {
               const promoterPurposals = await listPromoterPurposals();
               setPromoterPurposals(Array.isArray(promoterPurposals) ? promoterPurposals : []);
-              console.log("PURPOSALSS PROMOTER", promoterPurposals);
+              setIsLoading(false)
+              
             }
           } catch (err) {
             console.log(err);
@@ -37,7 +42,18 @@ const PurposalList = () => {
         }
       }, [currentUser, needRefresh]);
       
+      if (isLoading) {
 
+        return (
+        <>
+          <PurposalsListSkeleton />
+          <PurposalsListSkeleton />
+          <PurposalsListSkeleton />
+
+        </>
+        )
+          
+      }
   return (
     <div>
     {currentUser.role === "promoter" ? ( 

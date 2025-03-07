@@ -3,11 +3,15 @@ import { useEffect, useState } from "react";
 import { listArtists } from "../../services/promoter.service";
 import CardGrid from "../../components/CardGrid/CardGrid";
 import Select from "react-select";
+import ArtistSkeleton from "../../components/Skeleton/ArtistSkeleton";
 
 const PromoterArtists = () => {
   const [artists, setArtists] = useState([]);
   const [selectedStyles, setSelectedStyles] = useState([]);
   const [nameFilter, SetNameFilter] = useState("");
+  const [isLoading, setIsLoading]=useState(true)
+
+
 
   useEffect(() => {
     const fetchArtists = async () => {
@@ -18,6 +22,7 @@ const PromoterArtists = () => {
           ? response.artists
           : [];
         setArtists(artistsArray);
+        setIsLoading(false)
       } catch (error) {
         console.error(error);
         setArtists([]);
@@ -68,6 +73,10 @@ const PromoterArtists = () => {
 
     return matchesStyles && matchesName;
   });
+
+  if (isLoading) {
+    return <ArtistSkeleton />;
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">

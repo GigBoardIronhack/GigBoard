@@ -5,7 +5,7 @@ import CardGrid from "../../components/CardGrid/CardGrid";
 import { listAgencyPurposals } from "../../services/agency.service";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import WideSkeleton from "../../components/Skeleton/WideSkeleton"
+import DashboardSkeleton from "../../components/Skeleton/DashboardSkeleton"
 
 const AgencyDashboard = () => {
   const { currentUser } = useContext(AuthContext);
@@ -35,7 +35,7 @@ const AgencyDashboard = () => {
   }, [currentUser, needRefresh]);
 
   if (isLoading) {
-    return <WideSkeleton />;
+    return <DashboardSkeleton />;
   }
   return (
     
@@ -88,7 +88,7 @@ const AgencyDashboard = () => {
 
 
       <motion.div
-        key={location.pathname}
+        key={location.key}
         initial={{ opacity: 1, x: -50 }}
         animate={{ opacity: 1, x: 0, transition: { duration: 1 } }}
         className="w-full h-full lg:col-span-2 lg:row-span-3 lg:row-start-2"
@@ -102,7 +102,7 @@ const AgencyDashboard = () => {
         
      
       <motion.div
-        key={location.pathname}
+        key={location.key}
         initial={{ opacity: 1, x: 50 }}
         animate={{ opacity: 1, x: 0, transition: { duration: 1 } }}
         className="w-full h-full min-h-[calc(100%)] lg:col-span-2 lg:row-span-3 lg:row-start-2 flex"

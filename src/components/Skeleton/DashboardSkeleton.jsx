@@ -1,8 +1,8 @@
-import React from "react";
+
 import Skeleton from "react-loading-skeleton"; // Importa la librería
 import "react-loading-skeleton/dist/skeleton.css"; // Asegúrate de importar los estilos
 
-const WideSkeleton = () => {
+const DashboardSkeleton = () => {
   return (
     <div className="grid grid-cols-1 grid-rows-[50px_1/2fr_1fr_1fr] lg:grid-rows-[auto_1fr_1fr_1fr] lg:grid-cols-5 gap-2 lg:gap-4 w-full h-full mx-auto p-4">
       {/* Título del Dashboard */}
@@ -30,4 +30,4 @@ const WideSkeleton = () => {
   );
 };
 
-export default WideSkeleton;
+export default DashboardSkeleton;

@@ -19,35 +19,7 @@ const PurposalCard = ({ card, setNeedRefresh }) => {
   console.log("LA TARHETITTTTTAAA", card);
 
   return (
-    <>{/* 
-    <div className="container  flex flex-col items-center">
-      <div>
-        <h2 >{card?.artist?.name}</h2>
-      </div>
-      <div>
-        <img src={card.artist.imageUrl} alt={card.artist.name} />
-      </div>
-      <div className="flex flex-row">
-        <div>
-          <Link to={`/purposals/${card.id}/${card.purposalChat}`}>
-            <button>Chat</button>
-          </Link>
-        </div>
-        <div>
-          {currentUser.role === "agency" ? (
-            <PurposalEditAgency id={card.id} setNeedRefresh={setNeedRefresh} />
-          ) : (
-            <Link to={`/edit/purposals/${card.id}`}>
-              <button>Editar</button>
-            </Link>
-          )}
-        </div>
-      </div>
-    </div>
-    
-    
-    
-     */}
+    <>
     
     <Card className="container flex flex-col sm:flex-row justify-center items-center sm:h-50 lg:w-8/12 mb-4 pb-2">
       <CardHeader  floated={false}>
