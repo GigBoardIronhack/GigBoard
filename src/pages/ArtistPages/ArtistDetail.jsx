@@ -7,8 +7,10 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { getFavorites, toggleFavorite } from "../../services/favorite.service";
 import { useNotification } from "../../contexts/NotificationContext";
 import DeleteArtist from "../../pages/ArtistPages/DeleteArtist";
+
 import {  FaInstagram, FaTiktok, FaFacebook, FaTwitter } from "react-icons/fa";
 import '@justinribeiro/lite-youtube'; 
+
 
 const ArtistDetail = () => {
   const [artist, setArtist] = useState(null);
@@ -58,6 +60,7 @@ const ArtistDetail = () => {
   return (
     <>
       {artist ? (
+
         <div
           className="relative min-h-screen flex items-center justify-center bg-cover bg-center"
           style={{ backgroundImage: `url(${artist.imageUrl})` }}
@@ -103,6 +106,7 @@ const ArtistDetail = () => {
                   </div>
                 </div>
               </div>
+
 
             </div>
             {!artist.youtubeUrl ? (

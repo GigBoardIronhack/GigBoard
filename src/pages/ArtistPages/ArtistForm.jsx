@@ -23,6 +23,10 @@ const ArtistForm = ({ artist, isEditing }) => {
   const [error, setError] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
   const [errorImg, setErrorImg] = useState({});
+  const spotifyRegex = /^https:\/\/open\.spotify\.com(\/intl-[a-zA-Z-]+)?\/(track|album|playlist|artist)\/[a-zA-Z0-9]+(?:\?.*)?$/;
+  const youtubeRegex = /(?:https?:\/\/(?:www\.)?youtube\.com\/(?:watch\?v=|(?:v|e(?:mbed)?)\/|.*[?&]v=))([a-zA-Z0-9_-]{11})(?:[?&].*)?/;
+
+
 
   const [artistData, setArtistData] = useState({
     name: artist?.name || "",
@@ -59,9 +63,23 @@ const ArtistForm = ({ artist, isEditing }) => {
 
     setIsFormValid(isValid);
   }, [artistData, isEditing]);
-
+  
+  
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
+
+    if (!spotifyRegex.test(artistData.spotiUrl)) {
+      setError("Por favor, ingresa un enlace válido de Spotify.");
+      return;
+    } else {
+      setError("");
+    }
+    if (!youtubeRegex.test(artistData.youtubeUrl)) {
+      setError("Por favor, ingresa un enlace válido youtube.");
+      return;
+    } else {
+      setError("");
+    }
     if (selectedStyles.length === 0) {
       setError(
         "Este campo es obligatorio. Debes seleccionar al menos una opción."
@@ -253,6 +271,8 @@ const ArtistForm = ({ artist, isEditing }) => {
                 handleChange={handleChange}
                 artistData={artistData}
               />
+              {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+            
             </div>
             <div>
               <h1 className="text-2xl font-semibold text-black text-center row-span-1 min-h-20">
