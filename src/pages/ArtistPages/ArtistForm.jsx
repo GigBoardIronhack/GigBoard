@@ -23,6 +23,8 @@ const ArtistForm = ({ artist, isEditing }) => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [errorImg, setErrorImg] = useState({});
   const spotifyRegex = /^https:\/\/open\.spotify\.com(\/intl-[a-zA-Z-]+)?\/(track|album|playlist|artist)\/[a-zA-Z0-9]+(?:\?.*)?$/;
+  const youtubeRegex = /(?:https?:\/\/(?:www\.)?youtube\.com\/(?:watch\?v=|(?:v|e(?:mbed)?)\/|.*[?&]v=))([a-zA-Z0-9_-]{11})(?:[?&].*)?/;
+
 
 
   const [artistData, setArtistData] = useState({
@@ -67,6 +69,12 @@ const ArtistForm = ({ artist, isEditing }) => {
 
     if (!spotifyRegex.test(artistData.spotiUrl)) {
       setError("Por favor, ingresa un enlace válido de Spotify.");
+      return;
+    } else {
+      setError("");
+    }
+    if (!youtubeRegex.test(artistData.youtubeUrl)) {
+      setError("Por favor, ingresa un enlace válido youtube.");
       return;
     } else {
       setError("");
