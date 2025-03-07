@@ -58,6 +58,7 @@ const PurposalCard = ({ card, setNeedRefresh }) => {
             initial={{ opacity: 0, y: -50 }}
             animate={isHovered ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
             transition={{ duration: 0.5 }}
+
           >
             <Link to={`/edit/purposals/${card.id}`}>
               <button className="bg-[#036AD7] text-white px-3 py-2 rounded-full font-medium shadow-md hover:bg-[#0593E3] hover:text-black transition flex items-center justify-center">

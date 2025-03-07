@@ -5,17 +5,20 @@ import RecommendedArtists from "../../components/RecommendedArtists/RecommendedA
 import CardGrid from "../../components/CardGrid/CardGrid";
 import { AuthContext } from "../../contexts/AuthContext";
 import { getPurposals } from "../../services/purposal.service";
+import DashboardSkeleton from "../../components/Skeleton/DashboardSkeleton";
 
 const PromoterDashboard = () => {
   const { currentUser } = useContext(AuthContext);
   const [purposals, setPurposals] = useState([]);
   const [needRefresh, setNeedRefresh] = useState(true);
+  const [isLoading, setIsLoading]=useState(true)
 
   useEffect(() => {
     const fetchPurposals = async () => {
       try {
         const purposals = await getPurposals();
         setPurposals(Array.isArray(purposals) ? purposals : []);
+        setIsLoading(false)
       } catch (err) {
         console.log(err);
       }
@@ -26,6 +29,9 @@ const PromoterDashboard = () => {
       setNeedRefresh(false);
     }
   }, [needRefresh]);
+  if (isLoading) {
+    return <DashboardSkeleton />;
+  }
 
   return (
     <div className="grid grid-cols-1 grid-rows-[50px_1/2fr_1fr_1fr] lg:grid-rows-[auto_1fr_1fr_1fr] lg:grid-cols-5 gap-2 lg:gap-4 w-full h-full mx-auto p-4">
@@ -37,7 +43,7 @@ const PromoterDashboard = () => {
       </div>
 
       <motion.div
-        key={location.pathname}
+        key={location.key}
         initial={{ opacity: 1, x: -50 }}
         animate={{ opacity: 1, x: 0, transition: { duration: 1 } }}
         className="w-full h-full lg:col-span-2 row-start-3 lg:row-span-3 lg:row-start-2"
@@ -87,7 +93,7 @@ const PromoterDashboard = () => {
 
 
       <motion.div
-        key={location.pathname}
+        key={location.key}
         initial={{ opacity: 1, x: 50 }}
         animate={{ opacity: 1, x: 0, transition: { duration: 1 } }}
         className="w-full h-full min-h-[calc(100%)] lg:col-span-2 lg:row-span-3 lg:row-start-2 flex"

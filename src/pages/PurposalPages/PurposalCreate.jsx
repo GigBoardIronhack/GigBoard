@@ -11,21 +11,29 @@ import { useNavigate, useParams } from "react-router-dom";
   import { createChatService } from "../../services/chat.service";
   import "react-datepicker/dist/react-datepicker.min.css";
   import "./PurposalCreate.css"
+
+  import FormPurposalSkeleton from "../../components/Skeleton/FormPurposalSkeleton";
+
+
   const PurposalCreate = ({ purposal, isEditing }) => {
     const { currentUser } = useContext(AuthContext);
     const { id } = useParams();
     const [artist, setArtist] = useState(purposal?.artist || {});
     const [disabledDates, setDisabledDates] = useState([]);
     const [isFormValid, setIsFormValid] = useState(false);
-    
+
+    const [isLoading, setIsLoading]=useState(true)
+
     useEffect(() => {
       const fetchPurposals = async () => {
         try {
           let artistData;
           if (isEditing) {
         artistData = await getArtist(purposal.artist.id);
+        setIsLoading(false)
       } else {
         artistData = await getArtist(id);
+        setIsLoading(false)
       }
       console.log("**************************************", artistData);
           if (!artistData?.purposals || !Array.isArray(artistData?.purposals)) {
@@ -154,6 +162,13 @@ import { useNavigate, useParams } from "react-router-dom";
         negotiatedPrice: newPrice,
       }));
     };
+
+    
+if (isLoading) {
+  return <FormPurposalSkeleton />;
+} 
+
+
     return (
       <div className="flex justify-center">
         <form

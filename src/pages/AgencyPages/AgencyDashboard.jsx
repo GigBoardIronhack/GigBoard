@@ -5,11 +5,13 @@ import CardGrid from "../../components/CardGrid/CardGrid";
 import { listAgencyPurposals } from "../../services/agency.service";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import DashboardSkeleton from "../../components/Skeleton/DashboardSkeleton"
 
 const AgencyDashboard = () => {
   const { currentUser } = useContext(AuthContext);
   const [agencyPurposals, setAgencyPurposals] = useState([]);
   const [needRefresh, setNeedRefresh] = useState(true);
+  const [isLoading, setIsLoading]=useState(true)
 
 
   useEffect(() => {
@@ -19,6 +21,7 @@ const AgencyDashboard = () => {
         setAgencyPurposals(
           Array.isArray(agencyPurposals) ? agencyPurposals : []
         );
+        setIsLoading(false)
         console.log("PURPOSALS AGENCY", agencyPurposals);
       } catch (err) {
         console.log(err);
@@ -26,14 +29,19 @@ const AgencyDashboard = () => {
     };
     if (needRefresh) {
       fetchPurposal();
-
+      
       setNeedRefresh(false);
     }
   }, [currentUser, needRefresh]);
 
-
+  if (isLoading) {
+    return <DashboardSkeleton />;
+  }
   return (
+    
     <div className="grid grid-cols-1 grid-rows-[50px_1/2fr_1fr_1fr] lg:grid-rows-[auto_1fr_1fr_1fr] lg:grid-cols-5 gap-2 lg:gap-4 w-full h-full mx-auto p-4">
+  
+          
       <div className="text-center border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-span-5">
         <h1 className="text-2xl lg:text-4xl font-bold uppercase dark:text-white mb-1">
           Agency Dashboard
@@ -42,7 +50,7 @@ const AgencyDashboard = () => {
 
       <div className="flex flex-col items-center gap-2 border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-start-3 lg:row-span-2 lg:row-start-2">
         <h2 className="text-lg lg:text-xl font-semibold dark:text-gray-300 mb-1">
-          {currentUser.name}
+          {currentUser.name }
         </h2>
 
         <img
@@ -76,8 +84,11 @@ const AgencyDashboard = () => {
         </Link>
 
       </div>
+        
+
+
       <motion.div
-        key={location.pathname}
+        key={location.key}
         initial={{ opacity: 1, x: -50 }}
         animate={{ opacity: 1, x: 0, transition: { duration: 1 } }}
         className="w-full h-full lg:col-span-2 lg:row-span-3 lg:row-start-2"
@@ -86,8 +97,12 @@ const AgencyDashboard = () => {
           <CardGrid type="wideArtists" cards={currentUser.artists} />
         </div>
       </motion.div>
+
+
+        
+     
       <motion.div
-        key={location.pathname}
+        key={location.key}
         initial={{ opacity: 1, x: 50 }}
         animate={{ opacity: 1, x: 0, transition: { duration: 1 } }}
         className="w-full h-full min-h-[calc(100%)] lg:col-span-2 lg:row-span-3 lg:row-start-2 flex"
@@ -101,6 +116,7 @@ const AgencyDashboard = () => {
         </div>
       </motion.div>
     </div>
+
   );
 };
 
