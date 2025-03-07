@@ -5,6 +5,7 @@ import { listPromoterPurposals } from "../../services/promoter.service";
 import { listAgencyPurposals } from "../../services/agency.service";
 import CardGrid from "../../components/CardGrid/CardGrid";
 import PurposalsListSkeleton from "../../components/Skeleton/PurposalsListSkeleton"
+import MyArtistSkeleton from "../../components/Skeleton/MyArtistSkeleton";
 
 const PurposalList = () => {
   const {currentUser} = useContext(AuthContext)
@@ -25,7 +26,6 @@ const PurposalList = () => {
               const agencyPurposals = await listAgencyPurposals();
               setAgencyPurposals(Array.isArray(agencyPurposals) ? agencyPurposals : []);
               setIsLoading(false)
-            
             } else if (currentUser.role === "promoter") {
               const promoterPurposals = await listPromoterPurposals();
               setPromoterPurposals(Array.isArray(promoterPurposals) ? promoterPurposals : []);
@@ -46,10 +46,8 @@ const PurposalList = () => {
 
         return (
         <>
-          <PurposalsListSkeleton />
-          <PurposalsListSkeleton />
-          <PurposalsListSkeleton />
-
+          <MyArtistSkeleton/>
+          
         </>
         )
           

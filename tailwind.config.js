@@ -9,7 +9,11 @@ module.exports = withMT({
     "./node_modules/@heroui/theme/dist/components/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+       sans: ["Be Vietnam Pro", "sans-serif"],
+      },
+    },
   },
   plugins: [
     heroui(),
