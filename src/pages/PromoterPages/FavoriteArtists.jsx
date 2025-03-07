@@ -30,7 +30,6 @@ if (isLoading) {
     <div>
       <h2>Artistas Favoritos</h2>
         <CardGrid type="wideArtists" cards={favoriteArtists} />
-     
     </div>
   );
 };

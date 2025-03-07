@@ -10,8 +10,16 @@ const WidePurposalCard = ({ card, setNeedRefresh }) => {
   const isOwner = currentUser && card.promoter === currentUser.id;
   const fecha = card.eventDate.split("T")[0];
 
+  // Determinar color de fondo/borde según el estado
+  const statusStyles = {
+    pending: "bg-yellow-100 border-yellow-500",
+    accepted: "bg-green-100 border-green-500",
+    rejected: "bg-red-100 border-red-500",
+  };
+
   return (
-    <div className="container flex flex-col w-full shadow-medium p-4 justify-center items-center mb-4 lg:w-full lg:min-h-[120px] lg:flex-row rounded-small">
+    <div className={`container flex flex-col w-full shadow-medium p-4 justify-center items-center mb-4 lg:w-full lg:min-h-[120px] lg:flex-row rounded-small border-2 ${statusStyles[card.status] || "bg-white border-gray-300"}`}>
+      
       <div className="w-full lg:w-1/5 flex justify-center items-center overflow-hidden rounded-lg">
         <img
           className="w-3/4 object-cover rounded-lg"
@@ -43,7 +51,6 @@ const WidePurposalCard = ({ card, setNeedRefresh }) => {
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{fecha}</p>
       </div>
 
-
       <div className="w-full lg:w-2/6 p-0 flex flex-col justify-between h-full">
         <div className="flex justify-center items-center lg:justify-end space-x-2 h-full w-full">
           {currentUser.role === "agency" && (
@@ -52,7 +59,6 @@ const WidePurposalCard = ({ card, setNeedRefresh }) => {
                 id={card.id}
                 setNeedRefresh={setNeedRefresh}
               />
-
             </div>
           )}
 
@@ -120,5 +126,6 @@ const WidePurposalCard = ({ card, setNeedRefresh }) => {
     </div>
   );
 };
+
 
 export default WidePurposalCard;

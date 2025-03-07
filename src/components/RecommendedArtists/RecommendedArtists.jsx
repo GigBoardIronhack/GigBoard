@@ -12,10 +12,9 @@ const RecommendedArtists = () => {
         const data = await getRecommendedArtists();
         console.log("🎯 Artistas recibidos en el frontend:", data);
 
-        // Asegurar que cada artista tenga 'id'
         const artistsWithId = data.map((artist) => ({
           ...artist,
-          id: artist._id, // Mapeamos _id a id si es necesario
+          id: artist._id,
         }));
 
         setRecommendedArtists(artistsWithId);
