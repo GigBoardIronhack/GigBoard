@@ -6,10 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { InputText } from "primereact/inputtext";
 import { FloatLabel } from "primereact/floatlabel";
+
 const Register = ({ isEditing }) => {
   const { isAuthLoaded, currentUser, setCurrentUser, getCurrentUser } = useContext(AuthContext);
   const [isFormValid, setIsFormValid] = useState(false);
   const [backendErrors, setBackendErrors] = useState({});
+
   const [userData, setUserData] = useState({
     name: currentUser?.name || "",
     email: currentUser?.email || "",
@@ -59,6 +61,7 @@ const Register = ({ isEditing }) => {
         const updatedUser = await updateUser(uploadData);
         setCurrentUser(updatedUser);
         await getCurrentUser()
+       
         navigate("/dashboard");
         return;
       }
@@ -100,6 +103,7 @@ const Register = ({ isEditing }) => {
       promoterRole: value,
     }));
   };
+
   return (
     <div className=" bg-white dark:bg-[#101C29] min-h-screen flex items-center justify-center">
     <div className="container mx-auto px-4">
