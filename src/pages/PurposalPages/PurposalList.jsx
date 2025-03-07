@@ -4,7 +4,6 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { listPromoterPurposals } from "../../services/promoter.service";
 import { listAgencyPurposals } from "../../services/agency.service";
 import CardGrid from "../../components/CardGrid/CardGrid";
-import PurposalsListSkeleton from "../../components/Skeleton/PurposalsListSkeleton"
 import MyArtistSkeleton from "../../components/Skeleton/MyArtistSkeleton";
 
 const PurposalList = () => {
@@ -53,7 +52,7 @@ const PurposalList = () => {
           
       }
   return (
-    <div>
+    <div className="h-screen bg-gradient-to-b from-[#f64aff] via-[#7c3aed] to-[#1e293b]">
     {currentUser.role === "promoter" ? ( 
       promoterPurposals &&
       <CardGrid type="purposals" cards={promoterPurposals} setNeedRefresh={setNeedRefresh}/>

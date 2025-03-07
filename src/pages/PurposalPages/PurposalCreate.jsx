@@ -170,10 +170,10 @@ if (isLoading) {
 
 
     return (
-      <div className="flex justify-center">
+      <div className="flex justify-center p-6">
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white p-6 shadow-lg rounded-lg w-full max-w-5xl"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white shadow-lg rounded-lg w-full max-w-5xl p-6 bg-opacity-60"
         >
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-center bg-gray-100 shadow-md rounded-lg overflow-hidden">
@@ -232,7 +232,7 @@ if (isLoading) {
             )}
             <button
               type="submit"
-              className={`w-full p-2 rounded text-white ${isFormValid ? "bg-[#D76A03] hover:bg-[#E3B505]" : "bg-gray-400 cursor-not-allowed"}`}
+              className={`w-full p-2 rounded text-white ${isFormValid ? "bg-[#7c3aed] hover:bg-[#936ed4] hover:text-black" : "bg-gray-400 cursor-not-allowed"}`}
               disabled={!isFormValid}
             >
               {isEditing ? "Editar" : "Enviar"}

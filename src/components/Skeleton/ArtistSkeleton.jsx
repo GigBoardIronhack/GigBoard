@@ -2,7 +2,7 @@ import Skeleton from "react-loading-skeleton"
 
 const ArtistSkeleton = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
+    <div className="max-w-7xl mx-auto px-4 py-6 ">
    
     <section className="mb-6">
       <Skeleton height={24} width="50%" className="mb-2" />

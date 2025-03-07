@@ -27,7 +27,7 @@ const ArtistCard = ({ card }) => {
 
   return (
     <div
-      className="relative group w-64 rounded-lg overflow-hidden shadow-lg bg-white"
+      className="relative group w-64 rounded-lg overflow-hidden shadow-lg bg-white bg-opacity-60"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

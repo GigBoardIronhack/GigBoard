@@ -3,7 +3,7 @@ import Skeleton from "react-loading-skeleton";
 
 const MyArtistSkeleton = ({ isOwner }) => {
   return (
-    <div className="relative group w-64 rounded-lg overflow-hidden shadow-lg bg-white">
+    <div className="relative group w-64 rounded-lg overflow-hidden shadow-lg bg-white ">
       <div className="block relative">
         <div className="overflow-hidden">
           <Skeleton height={256} className="w-full h-64 object-cover" />

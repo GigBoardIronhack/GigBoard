@@ -29,8 +29,8 @@ const PurposalDetail = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen max-h-[90vh] bg-gray-100 dark:bg-gray-900 px-4 py-6">
-      <div className="w-full max-w-4xl flex flex-col bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden h-full">
+    <div className="flex justify-center items-center h-screen bg-gray-100 dark:bg-gray-900 px-4 py-6 bg-gradient-to-b from-[#f64aff] via-[#7c3aed] to-[#1e293b]">
+      <div className="w-full max-w-4xl flex flex-col bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden h-full bg-opacity-60">
         
         <div className="w-full h-56 lg:h-64 relative">
           <img
