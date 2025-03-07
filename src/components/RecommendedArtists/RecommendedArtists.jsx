@@ -37,7 +37,7 @@ const RecommendedArtists = () => {
 
       <div className="p-4 mt-2 overflow-y-auto max-h-[600px] scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
         {loading ? (
-          <p className="text-center text-gray-500 dark:text-gray-400">
+          <p className="text-center text-gray-500 dark:">
             Loading recommendations...
           </p>
         ) : recommendedArtists.length > 0 ? (
@@ -47,7 +47,7 @@ const RecommendedArtists = () => {
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-500 dark:text-gray-400">
+          <p className="text-center text-gray-500 dark:">
           There are no recommendations yet. 😢
           </p>
         )}

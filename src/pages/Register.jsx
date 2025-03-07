@@ -165,7 +165,7 @@ const Register = ({ isEditing }) => {
             id="role"
             onChange={handleOptionChange}
             value={userData.role || ""}
-            className="w-full p-2 border border-[#D76A03] rounded mb-2 text-gray-400"
+            className="w-full p-2 border border-[#D76A03] rounded mb-2 "
           >
             <option value="" disabled>
               --Select an Option--
@@ -181,7 +181,7 @@ const Register = ({ isEditing }) => {
               id="promoterRole"
               onChange={handlePromoterChange}
               value={userData.promoterRole}
-              className="w-full p-2 border border-[#D76A03] rounded mb-2 text-gray-400"
+              className="w-full p-2 border border-[#D76A03] rounded mb-2 "
             >
               <option value="club">Club</option>
               <option value="festival">Festival</option>

@@ -64,13 +64,12 @@ const PromoterDashboard = () => {
     className="w-20 h-20 lg:w-24 lg:h-24 rounded-full border-2 border-gray-300 dark:border-gray-600 shadow-sm"
   />
 
-  <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">
+  <p className="text-xs lg:text-sm text-gray-500 ">
     CIF: <span className="font-semibold">{currentUser.cif}</span>
   </p>
 
-  {/* Nueva línea con descripción del venue */}
   {currentUser.promoterRole && (
-    <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400 text-center">
+    <p className="text-xs lg:text-sm text-gray-500  text-center">
       Your venue is a{" "}
       <span className="font-semibold capitalize">{currentUser.promoterRole}</span>
       {currentUser.promoterCapacity && (

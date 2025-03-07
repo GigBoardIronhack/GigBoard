@@ -38,7 +38,7 @@ const PurposalCard = ({ card, setNeedRefresh }) => {
           <h1 className="text-lg font-semibold text-gray-800 dark:text-gray-200 truncate">
             {card.artist?.name || "Unknown Artist"}
           </h1>
-          <p className="text-sm text-gray-600 dark:text-gray-400">{fecha}</p>
+          <p className="text-sm text-gray-600 dark:">{fecha}</p>
           <p className="text-sm text-gray-700 dark:text-gray-300 font-medium mt-1">
             Negotiated Price:{" "}
             <span className="font-bold">

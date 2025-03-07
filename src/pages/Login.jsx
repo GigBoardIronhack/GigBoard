@@ -59,7 +59,7 @@ const Login = () => {
               id="email"
               name="email"
               onChange={handleChange}
-              className="w-full p-2 border border-[#d76a03] rounded text-gray-400"
+              className="w-full p-2 border border-[#d76a03] rounded "
               placeholder="email"
             />
           </label>
@@ -71,7 +71,7 @@ const Login = () => {
               id="password"
               name="password"
               onChange={handleChange}
-              className="w-full p-2 border border-[#d76a03] rounded text-gray-400"
+              className="w-full p-2 border border-[#d76a03] rounded "
               placeholder="password"
             />
           </label>

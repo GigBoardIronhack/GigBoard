@@ -48,7 +48,7 @@ const WidePurposalCard = ({ card, setNeedRefresh }) => {
           </p>
         </div>
 
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{fecha}</p>
+        <p className="text-sm text-gray-500 dark: mt-1">{fecha}</p>
       </div>
 
       <div className="w-full lg:w-2/6 p-0 flex flex-col justify-between h-full">

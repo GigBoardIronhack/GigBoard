@@ -60,11 +60,11 @@ const AgencyDashboard = () => {
           className="w-20 h-20 lg:w-24 lg:h-24 rounded-full border-2 border-gray-300 dark:border-gray-600 shadow-sm"
         />
 
-        <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-xs lg:text-sm dark:">
           CIF: {currentUser.cif}
         </p>
         {currentUser.artists.length === 0 ? (
-          <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-xs lg:text-sm text-gray-500 dark:">
             Aún no has añadido artistas, añade tu primer Artista!!
           </p>
         ) : (
