@@ -5,7 +5,7 @@ const PurposalsListSkeleton = () => {
   return (
    
 
-    <div className="relative w-64 group  rounded-lg overflow-hidden shadow-lg border-2 border-gray-300 bg-white">
+    <div className="relative w-64 group  rounded-lg overflow-hidden shadow-lg border-2 border-gray-300 bg-white ">
       
       {/* Imagen de carga */}
       <div className="overflow-hidden">

@@ -61,7 +61,8 @@ const ArtistDetail = () => {
   const isOwner = artist && currentUser && artist.agency?.id === currentUser.id;
 
   if (isLoading) {
-    return <ArtistDetailSkeleton />;
+
+    return <div className="h-screen bg-gradient-to-b from-[#f64aff] via-[#7c3aed] to-[#1e293b]"> <ArtistDetailSkeleton /> </div>;
   }
 
   return (

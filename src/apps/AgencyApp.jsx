@@ -12,13 +12,13 @@ import DeleteArtist from "../pages/ArtistPages/DeleteArtist";
 import FilterArtists from "../pages/FilterArtists/FilterArtists";
 import { AnimatePresence, motion } from "framer-motion";
 
+
 const AgencyApp = () => {
   return (
     <>
-
    
      <AnimatePresence mode="wait">
-        <motion.div
+        <motion.div className="bg-gradient-to-b from-[#f64aff] via-[#7c3aed] to-[#1e293b]"
           key={location.pathname}
           initial={{ opacity: 1, y: -50 }}
           animate={{ opacity: 1, y: 0, transition: { duration: 1 } }}

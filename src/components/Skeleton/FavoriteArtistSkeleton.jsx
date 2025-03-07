@@ -4,7 +4,7 @@ const FavoriteArtistSkeleton = () => {
   return (
     <div
       className="container flex flex-col w-full shadow-medium p-4 justify-center items-center mb-4
-       lg:w-full lg:min-h-[120px] lg:flex-row rounded-small"
+       lg:w-full lg:min-h-[120px] lg:flex-row rounded-small "
     >
       {/* Imagen del artista (skeleton) */}
       <div className="w-full lg:w-1/5 flex justify-center items-center overflow-hidden rounded-lg">

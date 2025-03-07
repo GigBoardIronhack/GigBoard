@@ -177,11 +177,11 @@ const ArtistForm = ({ artist, isEditing }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-[#101C29] mt-5 flex items-center justify-center">
+    <div className="bg-white dark:bg-[#101C29] pt-5 flex items-center justify-center bg-opacity-0">
       <div className="mx-auto">
         <form
           onSubmit={handleSubmit}
-          className="dark:bg-[#004e64] container mx-auto rounded shadow-lg w-full"
+          className="dark:bg-[#004e64] p-6 container mx-auto rounded shadow-lg w-full bg-white bg-opacity-60"
         >
         
           <h1 className="text-5xl font-semibold text-black mb-10 text-center">
@@ -200,7 +200,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                   id="name"
                   onChange={handleChange}
                   value={artistData.name}
-                  className="w-full dark:bg-[#101C29] dark:text-zinc-300 p-2 border border-[#d76a03] rounded mb-5"
+                  className="w-full dark:bg-[#101C29] dark:text-zinc-300 p-2 border border-[#7c3aed] rounded mb-5"
                 />
                 <label htmlFor="name">Nombre *</label>
               </FloatLabel>
@@ -212,11 +212,11 @@ const ArtistForm = ({ artist, isEditing }) => {
                   id="description"
                   onChange={handleChange}
                   value={artistData.description}
-                  className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5"
+                  className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#7c3aed] border rounded mb-5"
                 />
                 <label htmlFor="description">Descripción *</label>
               </FloatLabel>
-              <div className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#d76a03] border rounded mb-5">
+              <div className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#7c3aed] border rounded mb-5">
                 <label htmlFor="imageUrl" className="block mb-2">
                   {" "}
                   Imagen de perfil *
@@ -247,7 +247,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                   />
                 </label>
               </div>
-              <div className="w-full dark:bg-[#101C29] dark:text-zinc-300 p-2 border border-[#d76a03] rounded mb-5">
+              <div className="w-full dark:bg-[#101C29] dark:text-zinc-300 p-2 border border-[#7c3aed] rounded mb-5">
                 <MultiSelect
                   value={selectedStyles}
                   onChange={handleStyleChange}
@@ -288,7 +288,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                   mode="currency"
                   currency="EUR"
                   locale="de-DE"
-                  className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300"
+                  className="w-full dark:bg-[#101C29] p-2 border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
                 />
               </FloatLabel>
               <label>Bonus por tipo de evento</label>
@@ -306,7 +306,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     step={0.1}
                     value={artistData.club}
                     onValueChange={(e) => handleNumberChange("club", e.value)}
-                    className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] p-2 border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
 
@@ -320,7 +320,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     onValueChange={(e) =>
                       handleNumberChange("festival", e.value)
                     }
-                    className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] p-2 border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
 
@@ -334,7 +334,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     onValueChange={(e) =>
                       handleNumberChange("specialEvent", e.value)
                     }
-                    className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] p-2 border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
                 </div>
@@ -354,7 +354,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     step={0.1}
                     value={artistData.small}
                     onValueChange={(e) => handleNumberChange("small", e.value)}
-                    className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] p-2 border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
 
@@ -366,7 +366,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     step={0.1}
                     value={artistData.large}
                     onValueChange={(e) => handleNumberChange("large", e.value)}
-                    className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] p-2 border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
                 </div>
@@ -388,7 +388,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     onValueChange={(e) =>
                       handleNumberChange("weekendBoost", e.value)
                     }
-                    className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] p-2 border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
 
@@ -402,7 +402,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     onValueChange={(e) =>
                       handleNumberChange("monthBoost", e.value)
                     }
-                    className="w-full dark:bg-[#101C29] p-2 border-[#d76a03] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] p-2 border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
                 </div>
@@ -415,8 +415,8 @@ const ArtistForm = ({ artist, isEditing }) => {
             type="submit"
             className={`w-full p-2 rounded mb-5 text-white mt-8 ${
               isFormValid
-                ? "bg-[#d76a03] hover:bg-[#e3b505]"
-                : "bg-gray-400 cursor-not-allowed"
+                ? "bg-[#7c3aed] hover:bg-[#936ed4] hover:text-black"
+                : "bg-gray-400 cursor-not-allowed "
             }`}
             disabled={!isFormValid}
           >

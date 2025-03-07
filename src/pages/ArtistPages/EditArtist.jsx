@@ -31,7 +31,7 @@ const EditArtist = () => {
   {!artist && <p>No hay artista para mostrar</p> }
 
   return (
-    <div>
+    <div className="h-screen bg-gradient-to-b from-[#f64aff] via-[#7c3aed] to-[#1e293b]">
 
       <ArtistForm  artist={artist} key={artist.id}  isEditing/>
 

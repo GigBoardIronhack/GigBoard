@@ -14,7 +14,7 @@ const WideArtistCard = ({ card }) => {
   return (
     <div
       className="container flex flex-col w-full shadow-medium p-4 justify-center items-center mb-4
-       lg:w-full lg:min-h-[120px] lg:flex-row rounded-small"
+       lg:w-full lg:min-h-[120px] lg:flex-row rounded-small bg-white bg-opacity-80"
     >
       <div className="w-full lg:w-1/5 flex justify-center items-center overflow-hidden rounded-lg">
         <img
@@ -40,7 +40,7 @@ const WideArtistCard = ({ card }) => {
           <div className="w-full flex flex-col lg:flex-row justify-around lg:justify-end">
             <Link to={`/artists/edit/${card.id}`}>
               <Button
-                className="bg-[#036AD7] text-white mb-2 px-4 py-4 w-full rounded-full font-medium shadow-md hover:bg-[#0593E3] hover:text-black transition 
+                className="bg-[#7c3aed] text-white mb-2 px-4 py-4 w-full rounded-full font-medium shadow-md hover:bg-[#936ed4] hover:text-black transition 
                 lg:mb-0"
               >
                 <svg
