@@ -17,34 +17,29 @@ import { useNavigate, useParams } from "react-router-dom";
     const [artist, setArtist] = useState(purposal?.artist || {});
     const [disabledDates, setDisabledDates] = useState([]);
     const [isFormValid, setIsFormValid] = useState(false);
+    
     useEffect(() => {
       const fetchPurposals = async () => {
         try {
           let artistData;
-      if (isEditing) {
-        if (!purposal?.artist?.id) {
-          console.error("ID del artista no disponible en edición");
-          return;
-        }
+          if (isEditing) {
         artistData = await getArtist(purposal.artist.id);
       } else {
-        if (!id) {
-          console.error("ID del artista no disponible en creación");
-          return;
-        }
         artistData = await getArtist(id);
       }
+      console.log("**************************************", artistData);
           if (!artistData?.purposals || !Array.isArray(artistData?.purposals)) {
             console.error("No hay purposals o no es un array.");
             return;
           }
-          const bookedDates = artistData.purposals
+          const bookedDates = artistData?.purposals
             .filter((p) => p.eventDate)
             .map((p) => new Date(p.eventDate));
           console.log("Fechas de purposals:", bookedDates);
           setDisabledDates(bookedDates);
         } catch (error) {
-          console.error("Error al obtener las purposals:",  error.message || error);
+          console.error("❌ Error al obtener las purposals:", error.response?.data || error.message || error);
+
         }
       };
       fetchPurposals();
@@ -69,7 +64,7 @@ import { useNavigate, useParams } from "react-router-dom";
     }, [purposal, id]);
     const [purposalData, setPurposalData] = useState({
       negotiatedPrice: purposal?.negotiatedPrice || null,
-      eventDate: purposal?.eventDate ? new Date(purposal.eventDate) : null, // :marca_de_verificación_blanca: Asegurar conversión a Date
+      eventDate: purposal?.eventDate ? new Date(purposal?.eventDate) : null,
       status: purposal?.status ||  "pending",
       purposalChat: purposal?.purposalChat || null,
       notes: purposal?.notes || [],
