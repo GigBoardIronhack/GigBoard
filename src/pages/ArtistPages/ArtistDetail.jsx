@@ -11,6 +11,7 @@ import instagramImg from "../../assets/instagram.png";
 import tiktokImg from "../../assets/tik-tok.png";
 import facebookImg from "../../assets/facebook.png";
 import twitterImg from "../../assets/logotipos.png";
+import '@justinribeiro/lite-youtube';
 
 const ArtistDetail = () => {
   const [artist, setArtist] = useState(null);
@@ -83,6 +84,12 @@ const ArtistDetail = () => {
           <p>{artist.name}</p>
           <img src={artist.imageUrl} alt={artist.name} />
           <Spotify link={artist.spotiUrl} />
+
+        {artist.youtubeUrl && (
+          <div>
+          <lite-youtube videoid={artist.youtubeUrl.split("=").pop()}/>
+          </div>
+        )}
 
           {artist.rrss.instagram && (
             <div>
