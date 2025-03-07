@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { getFavorites } from "../../services/favorite.service";
 import CardGrid from "../../components/CardGrid/CardGrid";
+import FavoriteArtistSkeleton from "../../components/Skeleton/FavoriteArtistSkeleton";
 
 const FavoriteArtists = () => {
   const [favoriteArtists, setFavoriteArtists] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading]=useState(true)
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -14,23 +15,21 @@ const FavoriteArtists = () => {
       } catch (error) {
         console.error("Error al obtener favoritos:", error);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
     fetchFavorites();
   }, []);
 
+if (isLoading) {
+    return <FavoriteArtistSkeleton />;
+  } 
+
   return (
     <div>
       <h2>Artistas Favoritos</h2>
-      {loading ? (
-        <p>Cargando favoritos...</p>
-      ) : favoriteArtists.length > 0 ? (
         <CardGrid type="wideArtists" cards={favoriteArtists} />
-      ) : (
-        <p>No tienes artistas favoritos.</p>
-      )}
     </div>
   );
 };

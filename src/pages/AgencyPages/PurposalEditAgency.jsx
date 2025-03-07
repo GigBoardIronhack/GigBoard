@@ -33,28 +33,29 @@ const PurposalEditAgency = ({ id, setNeedRefresh }) => {
     e.preventDefault();
     try {
       const editedPurposal = await editPurposal(id, { status: purposalData.status });
-
+  
       if (editedPurposal.status === "rejected") {
         console.log("ENTRO AQUI", editedPurposal.purposalChat);
-
+  
         await deleteChat(editedPurposal.purposalChat);
         await deletePurposal(editedPurposal.id);
-
-        setNeedRefresh(true);
       }
 
+      setNeedRefresh(true);
+  
       navigate("/dashboard");
     } catch (error) {
       console.error("Error al actualizar el estado:", error);
     }
   };
+  
 
   if (!purposalData) return <p>Cargando...</p>;
 
   return (
 
     <form onSubmit={handleSubmit} className="flex items-center w-full space-x-2">
-      {/* Select - 3/4 del ancho */}
+
       <div className="w-3/4 relative">
         <select
           name="status"
@@ -68,7 +69,6 @@ const PurposalEditAgency = ({ id, setNeedRefresh }) => {
         </select>
 
 
-        {/* Icono de flecha dentro del select */}
         <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,7 @@ const PurposalEditAgency = ({ id, setNeedRefresh }) => {
         </div>
       </div>
 
-      {/* Botón de confirmación - 1/4 del ancho */}
+
       <button type="submit" className="w-1/4 flex justify-center items-center">
         <svg
           style={{ width: "57px" }}

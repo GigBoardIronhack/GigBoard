@@ -1,34 +1,34 @@
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
-
   return (
-    
-    <div className=" container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-    <div className="bg-white dark:bg-gray-900 text-black dark:text-white">
-      <h1>Modo Automático</h1>
-      <p>Este texto cambiará de color según el tema del sistema.</p>
-    </div>
-    <div className="bg-red-500 rounded hover:bg-black transition-all  text-white p-4 text-1xl sm:text-3xl lg:text-4xl">
-      ¡Si esto es rojo, Tailwind funciona! 🎉
-    </div>
-    <div className="bg-blue-500 rounded text-white p-4 text-2xl sm:text-4xl lg:text-5xl">
-      ¡Si esto es azul, Tailwind funciona! 🎉
-    </div>
-    <div className="hidden sm:block">Solo en tablet o más grande</div>
-    <div className="block sm:hidden">Solo en móviles</div>
-    <div className="min-h-screen bg-white text-black dark:bg-gray-900 dark:text-white flex items-center justify-center">
-      <h1 className="text-3xl">🌗 Modo Oscuro/Claro en Tailwind</h1>
-    </div>
-    <div className="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-    
-        <h1>Modo Automático</h1>
-        <p>Este texto cambiará de color según el tema del sistema.</p>
-    
-  </div>
-    </div>
+    <div className="relative w-full h-screen flex items-center justify-center overflow-hidden">
 
+      <video
+        className="absolute top-0 left-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+        src="../public/0307.mp4"
+      >
+        
+      </video>
 
-  )
-}
+      <div className="absolute inset-0 bg-black bg-opacity-20"></div>
 
-export default LandingPage
+      <div className="relative z-10 text-center text-white px-6">
+        <h1 className="text-7xl font-bold mb-4">Welcome to GigBoard</h1>
+        <p className="text-lg mb-6">Discover, connect, and book gigs effortlessly.</p>
+        <Link to="/register">
+
+        <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition">
+          Get Started
+        </button>
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default LandingPage;
