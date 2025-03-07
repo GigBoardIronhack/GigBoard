@@ -34,9 +34,9 @@ const PromoterDashboard = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 grid-rows-[50px_1/2fr_1fr_1fr] lg:grid-rows-[auto_1fr_1fr_1fr] lg:grid-cols-5 gap-2 lg:gap-4 w-full h-full mx-auto p-4">
+    <div className="grid grid-cols-1 grid-rows-[50px_1/2fr_1fr_1fr] lg:grid-rows-[auto_1fr_1fr_1fr] lg:grid-cols-5 gap-2 lg:gap-4 w-full h-full mx-auto p-4 ">
 
-      <div className="text-center border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-span-5">
+      <div className="text-center border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-span-5 bg-opacity-60">
         <h1 className="text-2xl lg:text-4xl font-bold uppercase dark:text-white mb-1">
           Promoter Dashboard
         </h1>
@@ -48,12 +48,12 @@ const PromoterDashboard = () => {
         animate={{ opacity: 1, x: 0, transition: { duration: 1 } }}
         className="w-full h-full lg:col-span-2 row-start-3 lg:row-span-3 lg:row-start-2"
       >
-        <div className="border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 w-full h-full">
+        <div className="border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 w-full h-full bg-opacity-60">
           <CardGrid type="widePurposals" cards={purposals} setNeedRefresh={setNeedRefresh} />
         </div>
       </motion.div>
 
-      <div className="flex flex-col items-center gap-2 border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-start-3 lg:row-span-2 row-start-2 lg:row-start-2">
+      <div className="flex flex-col items-center gap-2 border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-start-3 lg:row-span-2 row-start-2 lg:row-start-2 bg-opacity-60">
   <h2 className="text-lg lg:text-xl font-semibold dark:text-gray-300 mb-1">
     {currentUser.name}
   </h2>
@@ -98,7 +98,7 @@ const PromoterDashboard = () => {
         animate={{ opacity: 1, x: 0, transition: { duration: 1 } }}
         className="w-full h-full min-h-[calc(100%)] lg:col-span-2 lg:row-span-3 lg:row-start-2 flex"
       >
-        <div className="border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 w-full h-full">
+        <div className="border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 w-full h-full bg-opacity-60">
           <RecommendedArtists />
         </div>
       </motion.div>

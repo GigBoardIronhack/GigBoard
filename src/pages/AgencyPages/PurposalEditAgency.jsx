@@ -53,10 +53,10 @@ const PurposalEditAgency = ({ id, setNeedRefresh }) => {
   if (!purposalData) return <p>Cargando...</p>;
 
   return (
-
+    
     <form onSubmit={handleSubmit} className="flex items-center w-full space-x-2">
 
-      <div className="w-3/4 relative">
+      <div className="w-3/4 relative ">
         <select
           name="status"
           value={purposalData.status}

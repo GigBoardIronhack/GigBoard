@@ -52,7 +52,7 @@ const ExpandableFields = ({ handleChange, artistData }) => {
                 id={name}
                 onChange={handleChange}
                 value={artistData[name] || ""}
-                className="dark:bg-[#101C29] p-2 border-[#d76a03] border rounded dark:text-zinc-300 w-full"
+                className="dark:bg-[#101C29] p-2 border-[#7c3aed] border rounded dark:text-zinc-300 w-full"
               />
               <label htmlFor={name}>{name.charAt(0).toUpperCase() + name.slice(1)}</label>
             </FloatLabel>

@@ -3,30 +3,26 @@ import Skeleton from "react-loading-skeleton"
 
 const PurposalsListSkeleton = () => {
   return (
-    <div className="flex flex-col gap-4 items-center p-4 mt-10 overflow-y-auto max-h-[600px] scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
-      <div className="container flex flex-col sm:flex-row justify-center items-center sm:h-50 lg:w-8/12 mb-4 pb-2 shadow-md">
-       
+   
 
-        {/* Card Body */}
-        <div className="text-center flex justify-center p-4">
-          <Skeleton width={200} height={24} />
-        </div>
+    <div className="relative w-64 group  rounded-lg overflow-hidden shadow-lg border-2 border-gray-300 bg-white ">
+      
+      {/* Imagen de carga */}
+      <div className="overflow-hidden">
+        <Skeleton height={256} width="100%" />
+      </div>
 
-        {/* Card Footer with Social Media */}
-        <div className="flex justify-center gap-7 p-4">
-          <Skeleton circle width={30} height={30} />
-          <Skeleton circle width={30} height={30} />
-          <Skeleton circle width={30} height={30} />
-        </div>
+      {/* Contenido */}
+      <div className="p-4 text-center">
+        <Skeleton height={20} width="80%" className="mb-2" />
+        <Skeleton height={14} width="60%" className="mb-2" />
+        <Skeleton height={16} width="50%" className="mb-2" />
+      </div>
 
-        {/* Card Footer with Buttons */}
-        <div className="flex flex-col sm:flex-row justify-between p-4 gap-2">
-          <div className="w-full flex justify-center">
-            <Skeleton width={120} height={40} />
-          </div>
-         
-        </div>
-        
+      {/* Acciones de usuario (si es dueño) */}
+      <div className="absolute top-2 right-2 flex space-x-2">
+        <Skeleton circle height={32} width={32} />
+        <Skeleton circle height={32} width={32} />
       </div>
     </div>
   

@@ -1,19 +1,33 @@
 /* eslint-disable react/prop-types */
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import DeleteArtist from "../../pages/ArtistPages/DeleteArtist";
 import { AuthContext } from "../../contexts/AuthContext";
 import { Button } from "@material-tailwind/react";
 import { motion } from "framer-motion";
+import MyArtistSkeleton from "../Skeleton/MyArtistSkeleton";
 
 const ArtistCard = ({ card }) => {
   const { currentUser } = useContext(AuthContext);
   const isOwner = currentUser && card.agency === currentUser.id;
   const [isHovered, setIsHovered] = useState(false);
+  const [isLoading, setIsLoading]=useState(true)
+
+  useEffect(() => {
+    if (currentUser !== null && currentUser !== undefined) {
+      setIsLoading(false);
+    }
+  }, [currentUser]);
+  
+  if (isLoading) {
+    return <MyArtistSkeleton />;
+  }
+
+
 
   return (
     <div
-      className="relative group w-64 rounded-lg overflow-hidden shadow-lg bg-white"
+      className="relative group w-64 rounded-lg overflow-hidden shadow-lg bg-white bg-opacity-60"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

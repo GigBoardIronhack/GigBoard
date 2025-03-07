@@ -4,7 +4,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { listPromoterPurposals } from "../../services/promoter.service";
 import { listAgencyPurposals } from "../../services/agency.service";
 import CardGrid from "../../components/CardGrid/CardGrid";
-import PurposalsListSkeleton from "../../components/Skeleton/PurposalsListSkeleton"
+import MyArtistSkeleton from "../../components/Skeleton/MyArtistSkeleton";
 
 const PurposalList = () => {
   const {currentUser} = useContext(AuthContext)
@@ -25,7 +25,6 @@ const PurposalList = () => {
               const agencyPurposals = await listAgencyPurposals();
               setAgencyPurposals(Array.isArray(agencyPurposals) ? agencyPurposals : []);
               setIsLoading(false)
-            
             } else if (currentUser.role === "promoter") {
               const promoterPurposals = await listPromoterPurposals();
               setPromoterPurposals(Array.isArray(promoterPurposals) ? promoterPurposals : []);
@@ -46,16 +45,14 @@ const PurposalList = () => {
 
         return (
         <>
-          <PurposalsListSkeleton />
-          <PurposalsListSkeleton />
-          <PurposalsListSkeleton />
-
+          <MyArtistSkeleton/>
+          
         </>
         )
           
       }
   return (
-    <div>
+    <div className="h-screen bg-gradient-to-b from-[#f64aff] via-[#7c3aed] to-[#1e293b]">
     {currentUser.role === "promoter" ? ( 
       promoterPurposals &&
       <CardGrid type="purposals" cards={promoterPurposals} setNeedRefresh={setNeedRefresh}/>
