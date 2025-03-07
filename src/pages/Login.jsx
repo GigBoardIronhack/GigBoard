@@ -39,7 +39,17 @@ const Login = () => {
 
   return (
     <div className=" bg-white dark:bg-[#101C29] min-h-screen flex items-center justify-center">
-    <div className="container mx-auto px-4">
+    <video
+        className="absolute top-0 left-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+        src="../public/0307.mp4"
+      >
+        
+      </video>
+    <div className="container mx-auto px-4 z-10">
       <form onSubmit={handleSubmit} className="bg-[#004e64] container mx-auto px-8 p-6 rounded-lg shadow-lg w-full max-w-md">
         <div>
           <h1 className="text-2xl font-semibold text-white mb-4 text-center transition-all   p-4 text-1xl sm:text-2xl lg:text-3xl">Bienvenido a GigBoard</h1>
