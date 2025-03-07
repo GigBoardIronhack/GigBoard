@@ -56,6 +56,7 @@ const ExpandableFields = ({ handleChange, artistData }) => {
               />
               <label htmlFor={name}>{name.charAt(0).toUpperCase() + name.slice(1)}</label>
             </FloatLabel>
+           
           </div>
         </div>
       ))}
