@@ -8,6 +8,7 @@ import { GENRES_LIST } from "../../data/styles.js";
 import { MultiSelect } from "primereact/multiselect";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { InputText } from "primereact/inputtext";
+import { InputTextarea } from "primereact/inputtextarea";
 import { FloatLabel } from "primereact/floatlabel";
 import { InputSwitch } from "primereact/inputswitch";
 import { InputNumber } from "primereact/inputnumber";
@@ -204,7 +205,8 @@ const ArtistForm = ({ artist, isEditing }) => {
                 <label htmlFor="name">Nombre *</label>
               </FloatLabel>
               <FloatLabel>
-                <InputText
+                <InputTextarea
+                  maxLength={500}
                   type="text"
                   name="description"
                   id="description"
