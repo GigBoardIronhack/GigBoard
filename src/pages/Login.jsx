@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { loginService } from "../services/auth.service";
 import { AuthContext } from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
+import videoLanding from "../public/0307.webm";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -45,7 +46,7 @@ const Login = () => {
         loop
         muted
         playsInline
-        src="../public/0307.webm"
+        src={videoLanding}
       ></video>
       <div className="container mx-auto px-4 z-10">
         <form

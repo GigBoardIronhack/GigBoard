@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+import videoLanding from "../public/0307.webm";
 
 
 const LandingPage = () => {
@@ -16,7 +17,7 @@ const LandingPage = () => {
         loop
         muted
         playsInline
-        src="../public/0307.webm"
+        src={videoLanding}
       >
         
       </video>
