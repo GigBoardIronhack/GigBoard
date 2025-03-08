@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { InputText } from "primereact/inputtext";
 import { FloatLabel } from "primereact/floatlabel";
+import videoLanding from "../public/0307.webm";
 
 const Register = ({ isEditing }) => {
   const { isAuthLoaded, currentUser, setCurrentUser, getCurrentUser } = useContext(AuthContext);
@@ -112,7 +113,7 @@ const Register = ({ isEditing }) => {
         loop
         muted
         playsInline
-        src="../public/0307.webm"
+        src={videoLanding}
       >
         
       </video>
