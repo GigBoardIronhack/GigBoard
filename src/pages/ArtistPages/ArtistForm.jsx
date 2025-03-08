@@ -289,7 +289,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                   mode="currency"
                   currency="EUR"
                   locale="de-DE"
-                  className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
+                  className="w-full dark:bg-[#101C29] border-[#7c3aed] p-2 border rounded mb-5 dark:text-zinc-300"
                 />
               </FloatLabel>
               <label className="font-bold">Bonus por tipo de evento</label>
@@ -308,7 +308,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     step={0.1}
                     value={artistData.club}
                     onValueChange={(e) => handleNumberChange("club", e.value)}
-                    className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] border-[#7c3aed] p-2 border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
 
@@ -322,7 +322,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     onValueChange={(e) =>
                       handleNumberChange("festival", e.value)
                     }
-                    className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] border-[#7c3aed] p-2 border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
 
@@ -336,7 +336,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     onValueChange={(e) =>
                       handleNumberChange("specialEvent", e.value)
                     }
-                    className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] border-[#7c3aed] p-2 border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
                 </div>
@@ -357,7 +357,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     step={0.1}
                     value={artistData.small}
                     onValueChange={(e) => handleNumberChange("small", e.value)}
-                    className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] border-[#7c3aed] p2 border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
 
@@ -369,7 +369,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     step={0.1}
                     value={artistData.large}
                     onValueChange={(e) => handleNumberChange("large", e.value)}
-                    className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] border-[#7c3aed] p-2 border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
                 </div>
@@ -392,7 +392,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     onValueChange={(e) =>
                       handleNumberChange("weekendBoost", e.value)
                     }
-                    className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] border-[#7c3aed] p-2 border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
 
@@ -406,7 +406,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     onValueChange={(e) =>
                       handleNumberChange("monthBoost", e.value)
                     }
-                    className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] border-[#7c3aed] p-2 border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
                 </div>

@@ -37,7 +37,7 @@ const PurposalEdit = () => {
   {!purposal && <p>No hay purposal para mostrar</p> }
   
   return (
-    <div className="h-screen bg-gradient-to-b from-[#f64aff] via-[#7c3aed] to-[#1e293b] ">
+    <div >
     
     <PurposalCreate purposal={purposal}  isEditing />
       

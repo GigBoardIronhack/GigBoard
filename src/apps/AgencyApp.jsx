@@ -18,7 +18,7 @@ const AgencyApp = () => {
     <>
    
      <AnimatePresence mode="wait">
-        <motion.div className="bg-gradient-to-b from-[#f64aff] via-[#7c3aed] to-[#1e293b]"
+        <motion.div
           key={location.pathname}
           initial={{ opacity: 1, y: -50 }}
           animate={{ opacity: 1, y: 0, transition: { duration: 1 } }}

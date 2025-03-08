@@ -16,7 +16,7 @@ function App() {
 
   useDarkMode()
  
-  if (!isAuthLoaded) return <div className="h-screen bg-gradient-to-b from-[#f64aff] via-[#7c3aed] to-[#1e293b]"> <p>Cargando...</p></div>;
+  if (!isAuthLoaded) return <div > <p>Cargando...</p></div>;
 
   return (
     <>
