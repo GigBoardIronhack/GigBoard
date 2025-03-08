@@ -43,7 +43,7 @@ export const AuthContext = createContext();
   const logout = () => {
     setCurrentUser(null)
     localStorage.removeItem(JWT_TOKEN_KEY);
-    navigate("/login");
+    window.location.assign("/login");
   };
 
   return (
