@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getPurposal } from "../../services/purposal.service";
-import Chat from "../../components/Chat/Chat";
+import Chat from "../../components/chat/Chat";
 import DeletePurposal from "./DeletePurposal";
 import { AuthContext } from "../../contexts/AuthContext";
 
