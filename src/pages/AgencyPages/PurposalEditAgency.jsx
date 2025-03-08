@@ -61,7 +61,7 @@ const PurposalEditAgency = ({ id, setNeedRefresh }) => {
           name="status"
           value={purposalData.status}
           onChange={handleChange}
-          className="block w-full px-4 py-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="block w-full px-4 py-3 text-sm font-medium text-black-700 bg-white border border-gray-300 rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         >
           <option value="pending">Pendiente</option>
           <option value="accepted">Aceptado</option>
@@ -75,7 +75,7 @@ const PurposalEditAgency = ({ id, setNeedRefresh }) => {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            className="w-5 h-5 text-gray-500"
+            className="w-5 h-5 text-black-500"
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
           </svg>

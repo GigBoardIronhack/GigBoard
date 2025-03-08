@@ -43,11 +43,11 @@ const PurposalDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6 h-full">
           
           <div className="flex flex-col space-y-4 justify-center">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white border-b pb-2">
+            <h1 className="text-2xl font-bold text-black-900 dark:text-white border-b pb-2">
               Purposal Details
             </h1>
 
-            <div className="space-y-2 text-gray-700 dark:text-gray-300">
+            <div className="space-y-2 text-black-700 dark:text-black-300">
               <p><strong>🎤 Artist:</strong> {purposal.artist?.name || "Unknown"}</p>
               <p><strong>🏢 Promoter:</strong> {purposal.promoter?.name || "Unknown"}</p>
               <p><strong>📅 Event Date:</strong> {formatDate(purposal.eventDate)}</p>

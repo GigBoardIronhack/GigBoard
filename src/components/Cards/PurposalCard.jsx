@@ -35,11 +35,11 @@ const PurposalCard = ({ card, setNeedRefresh }) => {
         </div>
 
         <div className="p-4 text-center">
-          <h1 className="text-lg font-semibold text-gray-800 dark:text-gray-200 truncate">
+          <h1 className="text-lg font-semibold text-black-800 dark:text-black-200 truncate">
             {card.artist?.name || "Unknown Artist"}
           </h1>
-          <p className="text-sm text-gray-600 dark:text-gray-400">{fecha}</p>
-          <p className="text-sm text-gray-700 dark:text-gray-300 font-medium mt-1">
+          <p className="text-sm text-black-600 dark:">{fecha}</p>
+          <p className="text-sm text-black-700 dark:text-black-300 font-medium mt-1">
             Negotiated Price:{" "}
             <span className="font-bold">
               {card.negotiatedPrice ? `$${card.negotiatedPrice}` : "Not Defined"}
@@ -61,7 +61,7 @@ const PurposalCard = ({ card, setNeedRefresh }) => {
 
           >
             <Link to={`/edit/purposals/${card.id}`}>
-              <button className="bg-[#036AD7] text-white px-3 py-2 rounded-full font-medium shadow-md hover:bg-[#0593E3] hover:text-black transition flex items-center justify-center">
+              <button className="bg-[#7c3aed] text-white px-3 py-2 rounded-full font-medium shadow-md hover:bg-[#936ed4] hover:text-black transition flex items-center justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

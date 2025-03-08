@@ -55,10 +55,10 @@ const Chat = ({ chatId }) => {
         
         {/* 🏆 Título del chat */}
         <div className="p-4 border-b border-gray-300 dark:border-gray-700 text-center">
-          <h1 className="text-lg font-semibold text-gray-800 dark:text-white">
+          <h1 className="text-lg font-semibold text-black-800 dark:text-white">
             Chat {chat?.id}
           </h1>
-          <h5 className="text-sm text-gray-600 dark:text-gray-300 truncate">
+          <h5 className="text-sm text-black-600 dark:text-black-300 truncate">
             {chat?.participants?.map((p) => p.name).join(", ") || "No participants"}
           </h5>
         </div>
@@ -73,7 +73,7 @@ const Chat = ({ chatId }) => {
                 className={`p-3 rounded-lg shadow-sm text-sm max-w-[80%] ${
                   isSender
                     ? "bg-blue-500 text-white self-end ml-auto"
-                    : "bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-300 self-start mr-auto"
+                    : "bg-gray-200 dark:bg-gray-700 text-black-900 dark:text-black-300 self-start mr-auto"
                 }`}
               >
                 <strong>{isSender ? chat?.participants?.[0]?.name : chat?.participants?.[1]?.name}</strong>:{" "}

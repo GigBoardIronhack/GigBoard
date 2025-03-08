@@ -27,7 +27,7 @@ const ArtistCard = ({ card }) => {
 
   return (
     <div
-      className="relative group w-64 rounded-lg overflow-hidden shadow-lg bg-white bg-opacity-60"
+      className="relative group w-64 rounded-lg overflow-hidden mt-5 shadow-lg bg-white bg-opacity-60"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -41,7 +41,7 @@ const ArtistCard = ({ card }) => {
         </div>
         <div className="p-4 text-center">
           <h1 className="text-lg font-semibold">{card.name}</h1>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-black-600">
             {card.style.toString().split(",").join(" | ")}
           </p>
         </div>
@@ -60,7 +60,7 @@ const ArtistCard = ({ card }) => {
             className="w-full h-full lg:col-span-2 lg:row-span-3 lg:row-start-2"
           >
             <Link to={`/artists/edit/${card.id}`}>
-              <Button className="bg-[#036AD7] text-white mb-2 px-4 py-4 w-full rounded-full font-medium shadow-md hover:bg-[#0593E3] hover:text-black transition lg:mb-0">
+              <Button className="bg-[#7c3aed] text-white mb-2 px-4 py-4 w-full rounded-full font-medium shadow-md hover:bg-[#936ed4] hover:text-black transition lg:mb-0">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

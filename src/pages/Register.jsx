@@ -117,7 +117,7 @@ const Register = ({ isEditing }) => {
         
       </video>
     <div className="container mx-auto px-4 z-10">
-      <form onSubmit={handleSubmit} className="bg-[#004E64] container mx-auto px-8 p-6 rounded-lg shadow-lg w-full max-w-md">
+      <form onSubmit={handleSubmit} className="bg-gradient-to-b from-[#f64aff] via-[#7c3aed] to-[#1e293b]  container mx-auto px-8 p-6 rounded-lg shadow-lg w-full max-w-md">
       <h1 className="text-2xl font-semibold text-white mb-4 text-center">Registro</h1>
         <FloatLabel>
           <InputText
@@ -126,7 +126,7 @@ const Register = ({ isEditing }) => {
             id="name"
             onChange={handleChange}
             value={userData.name}
-            className={`w-full p-2 mb-5 dark:bg-[#101C29] border rounded ${backendErrors?.errors?.name ? "border-red-500" : "border-[#D76A03]"}`}
+            className={`w-full p-2 mb-5 dark:bg-[#101C29] border rounded ${backendErrors?.errors?.name ? "border-red-500" : "border-[#7c3aed]"}`}
           />
           <label htmlFor="name" className="block mb-2">
           name</label>
@@ -139,7 +139,7 @@ const Register = ({ isEditing }) => {
             id="email"
             onChange={handleChange}
             value={userData.email}
-            className={`w-full p-2 mb-5 dark:bg-[#101C29] border rounded ${backendErrors?.errors?.email ? "border-red-500" : "border-[#D76A03]"}`}
+            className={`w-full p-2 mb-5 dark:bg-[#101C29] border rounded ${backendErrors?.errors?.email ? "border-red-500" : "border-[#7c3aed]"}`}
           />
           <label htmlFor="email" className="block mb-2">Email
         </label>
@@ -153,7 +153,7 @@ const Register = ({ isEditing }) => {
               id="password"
               onChange={handleChange}
               value={userData.password}
-              className={`w-full p-2 mb-5 dark:bg-[#101C29] border rounded ${backendErrors?.errors?.password ? "border-red-500" : "border-[#D76A03]"}`}
+              className={`w-full p-2 mb-5 dark:bg-[#101C29] border rounded ${backendErrors?.errors?.password ? "border-red-500" : "border-[#7c3aed]"}`}
             />
             <label htmlFor="password" className="block mb-2">password</label>
             {backendErrors?.errors?.password && <p className="text-red-500 text-sm mt-1">{backendErrors?.errors?.password}</p>}
@@ -165,7 +165,7 @@ const Register = ({ isEditing }) => {
             id="role"
             onChange={handleOptionChange}
             value={userData.role || ""}
-            className="w-full p-2 border border-[#D76A03] rounded mb-2 text-gray-400"
+            className="w-full p-2 border border-[#7c3aed] rounded mb-2 "
           >
             <option value="" disabled>
               --Select an Option--
@@ -181,7 +181,7 @@ const Register = ({ isEditing }) => {
               id="promoterRole"
               onChange={handlePromoterChange}
               value={userData.promoterRole}
-              className="w-full p-2 border border-[#D76A03] rounded mb-2 text-gray-400"
+              className="w-full p-2 border border-[#7c3aed] rounded mb-2 "
             >
               <option value="club">Club</option>
               <option value="festival">Festival</option>
@@ -213,7 +213,7 @@ const Register = ({ isEditing }) => {
                 id="cif"
                 onChange={handleChange}
                 value={userData.cif}
-                className={`w-full p-2 border rounded ${backendErrors?.errors?.cif ? "border-red-500" : "border-[#D76A03]"}`}
+                className={`w-full p-2 border rounded ${backendErrors?.errors?.cif ? "border-red-500" : "border-[#7c3aed]"}`}
               />
                 {backendErrors?.errors?.cif && <p className="text-red-500 text-sm mt-1">{backendErrors?.errors?.cif}</p>}
             </label>
@@ -237,13 +237,13 @@ const Register = ({ isEditing }) => {
               id="imageUrl"
               name="imageUrl"
               onChange={handleChange}
-              className={`w-full p-2 border rounded ${backendErrors?.message ? "border-red-500" : "border-[#D76A03]"}`}
+              className={`w-full p-2 border bg-[#7c3aed] rounded ${backendErrors?.message ? "border-red-500" : "border-[#7c3aed] "}`}
             />
             {backendErrors?.message && <p className="text-red-500 text-sm mt-1">Formato de imagen no valido. La imagen debe de ser jpg, png, o jpeg.</p>}
           </label>
           <button
             type="submit"
-            className={`w-full p-2 rounded text-white ${isFormValid ? "bg-[#D76A03] hover:bg-[#E3B505]" : "bg-gray-400 cursor-not-allowed"}`}
+            className={`w-full p-2 rounded text-white ${isFormValid ? "bg-[#7c3aed] hover:bg-[#E3B505]" : "bg-gray-400 cursor-not-allowed"}`}
             disabled={!isFormValid}
           >
             {isEditing ? "Editar" : "Registrarse"}

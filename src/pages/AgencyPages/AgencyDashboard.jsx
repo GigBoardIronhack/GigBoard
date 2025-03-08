@@ -50,7 +50,7 @@ const AgencyDashboard = () => {
       </div>
 
       <div className="flex flex-col items-center gap-2 border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-start-3 lg:row-span-2 lg:row-start-2 bg-opacity-60">
-        <h2 className="text-lg lg:text-xl font-semibold dark:text-gray-300 mb-1">
+        <h2 className="text-lg lg:text-xl font-semibold dark:text-black-300 mb-1">
           {currentUser.name }
         </h2>
 
@@ -60,15 +60,15 @@ const AgencyDashboard = () => {
           className="w-20 h-20 lg:w-24 lg:h-24 rounded-full border-2 border-gray-300 dark:border-gray-600 shadow-sm"
         />
 
-        <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-xs lg:text-sm dark:">
           CIF: {currentUser.cif}
         </p>
         {currentUser.artists.length === 0 ? (
-          <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-xs lg:text-sm text-black-500 dark:">
             Aún no has añadido artistas, añade tu primer Artista!!
           </p>
         ) : (
-          <p className="text-xs lg:text-sm font-medium text-gray-700 dark:text-gray-300">
+          <p className="text-xs lg:text-sm font-medium text-black-700 dark:text-black-300">
             Actualmente tienes{" "}
             <span className="font-bold">{currentUser.artists.length}</span>{" "}
             artistas
