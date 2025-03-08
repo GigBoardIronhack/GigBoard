@@ -3,7 +3,7 @@ import Skeleton from "react-loading-skeleton"
 
 const ArtistDetailSkeleton = () => {
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-cover bg-center h-screen bg-gradient-to-b from-[#f64aff] via-[#7c3aed] to-[#1e293b]">
+    <div className="relative min-h-screen flex items-center justify-center bg-cover bg-center">
       {/* Capa de fondo */}
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 

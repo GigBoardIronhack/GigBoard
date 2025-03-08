@@ -75,11 +75,11 @@ const PromoterArtists = () => {
   });
 
   if (isLoading) {
-    return <div className="h-screen bg-gradient-to-b from-[#f64aff] via-[#7c3aed] to-[#1e293b]"><ArtistSkeleton /></div>;
+    return <div><ArtistSkeleton /></div>;
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6 bg-gradient-to-b from-[#f64aff] via-[#7c3aed] to-[#1e293b]">
+    <div className="max-w-7xl mx-auto px-4 py-6 ">
       <section className="mb-6">
         <label htmlFor="nameFilter" className="block text-lg font-semibold mb-2">
           Buscar artistas por nombre
