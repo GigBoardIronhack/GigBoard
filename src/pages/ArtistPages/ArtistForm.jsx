@@ -289,7 +289,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                   mode="currency"
                   currency="EUR"
                   locale="de-DE"
-                  className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
+                  className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300  text-lg p-2"
                 />
               </FloatLabel>
               <label className="font-bold">Bonus por tipo de evento</label>
