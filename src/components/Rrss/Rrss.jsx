@@ -33,7 +33,7 @@ const ExpandableFields = ({ handleChange, artistData }) => {
   return (
     <div className="relative">
       {socialFields.map(({ name, icon }) => (
-        <div key={name} className="flex items-center gap-3 mb-3">
+        <div key={name} className="flex items-center  gap-3 mb-3">
           <button
             onClick={(e) => handleClick(name, e)}
             className="bg-white p-2 rounded-full shadow-md transition-all duration-300 hover:scale-110"

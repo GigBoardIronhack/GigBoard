@@ -63,7 +63,7 @@ const ArtistDetail = () => {
 
   if (isLoading) {
 
-    return <div className="h-screen bg-gradient-to-b from-[#f64aff] via-[#7c3aed] to-[#1e293b]"> <ArtistDetailSkeleton /> </div>;
+    return <div className=""> <ArtistDetailSkeleton /> </div>;
   }
 
   return (

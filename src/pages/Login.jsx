@@ -51,7 +51,7 @@ const Login = () => {
       <div className="container mx-auto px-4 z-10">
         <form
           onSubmit={handleSubmit}
-          className="bg-gradient-to-b from-[#f64aff] via-[#7c3aed] to-[#1e293b] container mx-auto px-8 p-6 rounded-lg shadow-lg w-full max-w-md"
+          className=" container mx-auto px-8 p-6 rounded-lg shadow-lg w-full max-w-md"
         >
           <div>
             <h1 className="text-2xl font-semibold text-white mb-4 text-center transition-all p-4 text-1xl sm:text-2xl lg:text-3xl">
