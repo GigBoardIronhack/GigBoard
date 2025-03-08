@@ -11,6 +11,7 @@ import DeleteArtist from "../../pages/ArtistPages/DeleteArtist";
 import {  FaInstagram, FaTiktok, FaFacebook, FaTwitter } from "react-icons/fa";
 import '@justinribeiro/lite-youtube'; 
 import ArtistDetailSkeleton from "../../components/Skeleton/ArtistDetailSkeleton";
+import { Button } from "@material-tailwind/react";
 
 
 const ArtistDetail = () => {
@@ -87,8 +88,8 @@ const ArtistDetail = () => {
                   className="w-40 h-40 rounded-full object-cover shadow-lg"
                 />
                 <div>
-                  <h1 className="text-2xl lg:text-4xl  font-bold text-gray-800">{artist.name}</h1>
-                  <p className="text-gray-600 mt-3">{artist.description}</p>
+                  <h1 className="text-2xl lg:text-4xl  font-bold text-black-800">{artist.name}</h1>
+                  <p className="text-black-600 mt-3">{artist.description}</p>
 
                   <div className="flex justify-center lg:justify-start gap-4 mt-4">
                     {artist.rrss.instagram && (
@@ -137,20 +138,20 @@ const ArtistDetail = () => {
 
 
             <div className="mt-10">
-              <h2 className="text-2xl font-semibold text-gray-800">Propuestas</h2>
+              <h2 className="text-2xl font-semibold text-black-800">Propuestas</h2>
               {purposals.length > 0 ? (
                 <div className="mt-4 space-y-3">
                   {purposals.map((purposal) =>
                     purposal && purposal.promoter ? (
                       <div key={purposal.id} className="p-4 border border-gray-300 rounded-lg shadow-sm">
-                        <p className="text-gray-600">{purposal.eventDate.split("T")[0]}</p>
-                        <p className="text-gray-800 font-semibold">{purposal.promoter.name}</p>
+                        <p className="text-black-600">{purposal.eventDate.split("T")[0]}</p>
+                        <p className="text-black-800 font-semibold">{purposal.promoter.name}</p>
                       </div>
                     ) : null
                   )}
                 </div>
               ) : (
-                <p className="text-gray-500 mt-3">No hay propuestas.</p>
+                <p className="text-black-500 mt-3">No hay propuestas.</p>
               )}
             </div>
 
@@ -162,8 +163,8 @@ const ArtistDetail = () => {
                   </button>
                   {!hasPurposal && (
                     <Link to={`/artists/${artist.id}/purposal`}>
-                      <button className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600">
-                        Crear Propuesta
+                      <button className="px-4 py-2 bg-[#7c3aed] hover:bg-[#936ed4] text-white rounded-lg shadow-md ">
+                        Make an Offer
                       </button>
                     </Link>
                   )}
@@ -172,11 +173,26 @@ const ArtistDetail = () => {
 
               {isOwner && (
                 <>
-                  <Link to={`/artists/edit/${artist.id}`}>
-                    <button className="px-4 py-2 bg-yellow-500 text-white rounded-lg shadow-md hover:bg-yellow-600">
-                      Editar
-                    </button>
-                  </Link>
+                <Link to={`/artists/edit/${artist.id}`}>
+                              <Button className="bg-[#7c3aed] text-white mb-2 px-4 py-4 w-full rounded-full font-medium shadow-md hover:bg-[#936ed4] hover:text-black transition lg:mb-0">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  strokeWidth={1.5}
+                                  stroke="currentColor"
+                                  className="size-4 hidden lg:block"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                                  />
+                                </svg>
+                                <p className="block lg:hidden w-full">Editar</p>
+                              </Button>
+                            </Link>
+                  
                   <DeleteArtist id={artist.id} />
                 </>
               )}
@@ -184,7 +200,7 @@ const ArtistDetail = () => {
           </div>
         </div>
       ) : (
-        <p className="text-gray-500 text-center mt-10">Artista no encontrado</p>
+        <p className="text-black-500 text-center mt-10">Artista no encontrado</p>
       )}
     </>
   );

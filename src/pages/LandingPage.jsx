@@ -28,14 +28,14 @@ const LandingPage = () => {
         <p className="text-lg mb-6">Discover, connect, and book gigs effortlessly.</p>
         {currentUser ? (
           <Link to="/dashboard">
-          <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition">
-            Get Started
+          <button className="bg-[#7c3aed] hover:bg-[#936ed4] text-white font-semibold py-3 px-6 rounded-lg transition">
+            Get Started!
           </button>
           </Link>
         ):(
-        <Link to="/register">
-        <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition">
-          Get Started
+        <Link to="/login">
+        <button className="bg-[#7c3aed] hover:bg-[#936ed4] text-white font-semibold py-3 px-6 rounded-lg transition">
+          Get Started!
         </button>
         </Link>
         )}

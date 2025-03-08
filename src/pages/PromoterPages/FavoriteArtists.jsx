@@ -27,9 +27,8 @@ if (isLoading) {
   } 
 
   return (
-    <div>
-      <h2>Artistas Favoritos</h2>
-        <CardGrid type="wideArtists" cards={favoriteArtists} />
+    <div className="h-screen bg-gradient-to-b from-[#f64aff] via-[#7c3aed] to-[#1e293b] ">
+        <CardGrid type="artists" cards={favoriteArtists} />
     </div>
   );
 };

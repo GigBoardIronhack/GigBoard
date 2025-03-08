@@ -34,7 +34,7 @@ const PromoterDashboard = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 grid-rows-[50px_1/2fr_1fr_1fr] lg:grid-rows-[auto_1fr_1fr_1fr] lg:grid-cols-5 gap-2 lg:gap-4 w-full h-full mx-auto p-4 ">
+    <div className="grid grid-cols-1 grid-rows-[50px_1/2fr_1fr_1fr] lg:grid-rows-[auto_1fr_1fr_1fr] lg:grid-cols-5 gap-2 lg:gap-4 w-full h-screen mx-auto p-4 ">
 
       <div className="text-center border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-span-5 bg-opacity-60">
         <h1 className="text-2xl lg:text-4xl font-bold uppercase dark:text-white mb-1">
@@ -54,7 +54,7 @@ const PromoterDashboard = () => {
       </motion.div>
 
       <div className="flex flex-col items-center gap-2 border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-start-3 lg:row-span-2 row-start-2 lg:row-start-2 bg-opacity-60">
-  <h2 className="text-lg lg:text-xl font-semibold dark:text-gray-300 mb-1">
+  <h2 className="text-lg lg:text-xl font-semibold dark:text-black-300 mb-1">
     {currentUser.name}
   </h2>
 
@@ -64,12 +64,12 @@ const PromoterDashboard = () => {
     className="w-20 h-20 lg:w-24 lg:h-24 rounded-full border-2 border-gray-300 dark:border-gray-600 shadow-sm"
   />
 
-  <p className="text-xs lg:text-sm text-gray-500 ">
+  <p className="text-xs lg:text-sm text-black-500 ">
     CIF: <span className="font-semibold">{currentUser.cif}</span>
   </p>
 
   {currentUser.promoterRole && (
-    <p className="text-xs lg:text-sm text-gray-500  text-center">
+    <p className="text-xs lg:text-sm text-black-500  text-center">
       Your venue is a{" "}
       <span className="font-semibold capitalize">{currentUser.promoterRole}</span>
       {currentUser.promoterCapacity && (
@@ -83,7 +83,7 @@ const PromoterDashboard = () => {
   )}
 
   <Link to="/edit">
-    <div className="bg-[#036AD7] text-white text-center mb-2 mt-2 px-4 py-4 w-full max-w-xs lg:w-full rounded-full font-medium shadow-md hover:bg-[#0593E3] hover:text-black transition cursor-pointer">
+    <div className="bg-[#7c3aed] text-white text-center mb-2 mt-2 px-4 py-4 w-full max-w-xs lg:w-full rounded-full font-medium shadow-md hover:bg-[#936ed4] hover:text-black transition cursor-pointer">
       Edit Profile
     </div>
   </Link>

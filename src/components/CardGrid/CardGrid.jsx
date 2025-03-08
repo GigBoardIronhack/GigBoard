@@ -30,13 +30,13 @@ const CardGrid = ({ cards, type, setNeedRefresh }) => {
   const { title, link } = getTitle();
 
   return (
-    <div>
+    <div className="pt-5">
       <h1 className="text-2xl font-bold text-center mb-4">
         <Link to={link}>{title}</Link>
       </h1>
 
       {cards.length === 0 && (
-        <p className="text-center text-gray-500 lg:mt-10">
+        <p className="text-center text-black-500 lg:mt-10">
           You don't have any {title.toLowerCase()} yet 😢
         </p>
       )}
@@ -44,7 +44,7 @@ const CardGrid = ({ cards, type, setNeedRefresh }) => {
       {type === "artists" ||
       type === "purposals" ||
       type === "favoriteArtists" ? (
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 justify-items-center p-4 mt-10 overflow-y-auto max-h-[600px] scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 justify-items-center max-h-screen p-4  mt-10 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
           {(type === "artists" || type === "favoriteArtists") &&
             cards
               .slice(0, 9)

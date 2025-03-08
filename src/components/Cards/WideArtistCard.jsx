@@ -26,7 +26,7 @@ const WideArtistCard = ({ card }) => {
 
       <div className="text-center flex justify-center items-center flex-col w-full lg:w-3/5">
         <div className="pt-2 w-2/3">
-          <h2 className="overflow-hidden text-ellipsis whitespace-nowrap">
+          <h2 className="overflow-hidden text-ellipsis text-lg font-bold whitespace-nowrap">
             {card?.name}
           </h2>
         </div>

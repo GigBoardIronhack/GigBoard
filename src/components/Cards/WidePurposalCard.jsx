@@ -30,7 +30,7 @@ const WidePurposalCard = ({ card, setNeedRefresh }) => {
 
       <div className="text-center flex flex-col justify-center items-center w-full lg:w-3/6">
         <div className="flex flex-wrap justify-center items-center space-x-2 w-full mt-3 lg:justify-start">
-          <p className="text-gray-700 dark:text-gray-300 font-semibold overflow-hidden text-ellipsis whitespace-nowrap max-w-[40%] text-center">
+          <p className="text-black-700 dark:text-black-300 font-semibold overflow-hidden text-ellipsis whitespace-nowrap max-w-[40%] text-center">
             {card.promoter?.name || "Promotor Desconocido"}
           </p>
 
@@ -38,17 +38,17 @@ const WidePurposalCard = ({ card, setNeedRefresh }) => {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            className="w-6 h-6 text-gray-700 dark:text-gray-300"
+            className="w-6 h-6 text-black-700 dark:text-black-300"
           >
             <path d="M10 17l5-5-5-5v10z" />
           </svg>
 
-          <p className="text-gray-700 dark:text-gray-300 font-semibold overflow-hidden text-ellipsis whitespace-nowrap max-w-[40%] text-center">
+          <p className="text-black-700 dark:text-black-300 font-semibold overflow-hidden text-ellipsis whitespace-nowrap max-w-[40%] text-center">
             {card.artist?.name || "Artista Desconocido"}
           </p>
         </div>
 
-        <p className="text-sm text-gray-500 dark: mt-1">{fecha}</p>
+        <p className="text-sm text-black-500 dark: mt-1">{fecha}</p>
       </div>
 
       <div className="w-full lg:w-2/6 p-0 flex flex-col justify-between h-full">
@@ -66,7 +66,7 @@ const WidePurposalCard = ({ card, setNeedRefresh }) => {
             <div className="w-full flex justify-center items-center space-x-2 mt-2 lg:mt-0">
               <div className="w-1/2 flex justify-center">
                 <Link to={`/edit/purposals/${card.id}`} className="w-full">
-                  <button className="bg-[#036AD7] text-white px-4 py-2 rounded-full font-medium shadow-md hover:bg-[#0593E3] hover:text-black transition flex items-center justify-center w-full">
+                  <button className="bg-[#7c3aed] text-white px-4 py-2 rounded-full font-medium shadow-md hover:bg-[#936ed4] hover:text-black transition flex items-center justify-center w-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"

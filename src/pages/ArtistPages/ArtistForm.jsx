@@ -106,7 +106,7 @@ const ArtistForm = ({ artist, isEditing }) => {
     uploadData.append("tiktok", artistData.tiktok);
     uploadData.append("facebook", artistData.facebook);
     uploadData.append("twitter", artistData.twitter);
-    uploadData.append("youtubeUrl", artistData.youtubeUrl);
+    uploadData.append("youtubeUrl", artistData.youtubeUrl.split("v=").pop());
     uploadData.append("club", artistData.club / 100);
     uploadData.append("festival", artistData.festival / 100);
     uploadData.append("specialEvent", artistData.specialEvent / 100);
@@ -177,7 +177,7 @@ const ArtistForm = ({ artist, isEditing }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-[#101C29] pt-5 flex items-center justify-center bg-opacity-0">
+    <div className="bg-white dark:bg-[#101C29] flex h-screen items-center justify-center bg-opacity-0">
       <div className="mx-auto">
         <form
           onSubmit={handleSubmit}
@@ -190,7 +190,7 @@ const ArtistForm = ({ artist, isEditing }) => {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="col-span-1 row-start-1">
-              <h1 className="text-2xl font-semibold text-black text-center row-span-1 min-h-20">
+              <h1 className="text-2xl font-bold text-black text-center row-span-1 min-h-20">
                 Datos Básicos
               </h1>
               <FloatLabel>
@@ -261,8 +261,8 @@ const ArtistForm = ({ artist, isEditing }) => {
               </div>
             </div>
             <div>
-            <div className="min-h-20 flex flex-col items-center justify-center">
-              <h1 className="text-2xl font-semibold text-black text-center">
+            <div className="flex flex-col items-center justify-center row-span-1 min-h-20">
+              <h1 className="text-2xl font-bold text-black text-center ">
                 RRSS 
               </h1>
               <p className="text-sm text-center">(el link de Spotify es obligatorio)</p>
@@ -275,10 +275,11 @@ const ArtistForm = ({ artist, isEditing }) => {
             
             </div>
             <div>
-              <h1 className="text-2xl font-semibold text-black text-center row-span-1 min-h-20">
+              <h1 className="text-2xl font-bold text-black text-center row-span-1 min-h-20">
                 Bonus
               </h1>
-              <FloatLabel>
+              <FloatLabel
+              >
                 <label htmlFor="basePrice">Precio Base *</label>
                 <InputNumber
                   inputId="currency-germany"
@@ -288,13 +289,14 @@ const ArtistForm = ({ artist, isEditing }) => {
                   mode="currency"
                   currency="EUR"
                   locale="de-DE"
-                  className="w-full dark:bg-[#101C29] p-2 border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
+                  className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
                 />
               </FloatLabel>
-              <label>Bonus por tipo de evento</label>
+              <label className="font-bold">Bonus por tipo de evento</label>
               <InputSwitch
                 checked={promoterRoleChecked}
                 onChange={(e) => setPromoterRoleChecked(e.value)}
+                className="flex flex-row flex-end"
               />
               {promoterRoleChecked && (
                 <div>
@@ -306,7 +308,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     step={0.1}
                     value={artistData.club}
                     onValueChange={(e) => handleNumberChange("club", e.value)}
-                    className="w-full dark:bg-[#101C29] p-2 border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
 
@@ -320,7 +322,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     onValueChange={(e) =>
                       handleNumberChange("festival", e.value)
                     }
-                    className="w-full dark:bg-[#101C29] p-2 border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
 
@@ -334,15 +336,16 @@ const ArtistForm = ({ artist, isEditing }) => {
                     onValueChange={(e) =>
                       handleNumberChange("specialEvent", e.value)
                     }
-                    className="w-full dark:bg-[#101C29] p-2 border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
                 </div>
               )}
-              <label>Bonus por capacidad del evento</label>
+              <label className="font-bold">Bonus por capacidad del evento</label>
               <InputSwitch
                 checked={promoterCapacityChecked}
                 onChange={(e) => setPromoterCapacityChecked(e.value)}
+                className="flex flex-row flex-end"
               />
               {promoterCapacityChecked && (
                 <div>
@@ -354,7 +357,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     step={0.1}
                     value={artistData.small}
                     onValueChange={(e) => handleNumberChange("small", e.value)}
-                    className="w-full dark:bg-[#101C29] p-2 border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
 
@@ -366,15 +369,16 @@ const ArtistForm = ({ artist, isEditing }) => {
                     step={0.1}
                     value={artistData.large}
                     onValueChange={(e) => handleNumberChange("large", e.value)}
-                    className="w-full dark:bg-[#101C29] p-2 border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
                 </div>
               )}
-              <label>Bonus por fechas especiales</label>
+              <label className="font-bold">Bonus por fechas especiales</label>
               <InputSwitch
                 checked={promoterBoostChecked}
                 onChange={(e) => setPromoterBoostChecked(e.value)}
+                className="flex flex-row flex-end"  
               />
               {promoterBoostChecked && (
                 <div>
@@ -388,7 +392,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     onValueChange={(e) =>
                       handleNumberChange("weekendBoost", e.value)
                     }
-                    className="w-full dark:bg-[#101C29] p-2 border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
 
@@ -402,7 +406,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     onValueChange={(e) =>
                       handleNumberChange("monthBoost", e.value)
                     }
-                    className="w-full dark:bg-[#101C29] p-2 border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
                 </div>
