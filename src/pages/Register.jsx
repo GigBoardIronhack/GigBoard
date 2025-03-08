@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { InputText } from "primereact/inputtext";
 import { FloatLabel } from "primereact/floatlabel";
-import videoLanding from "../public/0307.webm";
+import videoLanding from "../assets/0307.webm";
 
 const Register = ({ isEditing }) => {
   const { isAuthLoaded, currentUser, setCurrentUser, getCurrentUser } = useContext(AuthContext);

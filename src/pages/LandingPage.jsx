@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
-import videoLanding from "../public/0307.webm";
+import videoLanding from "../assets/0307.webm";
 
 
 const LandingPage = () => {
