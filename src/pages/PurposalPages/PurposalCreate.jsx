@@ -35,7 +35,7 @@ import { useNavigate, useParams } from "react-router-dom";
         artistData = await getArtist(id);
         setIsLoading(false)
       }
-      console.log("**************************************", artistData);
+     
           if (!artistData?.purposals || !Array.isArray(artistData?.purposals)) {
             console.error("No hay purposals o no es un array.");
             return;
@@ -43,7 +43,7 @@ import { useNavigate, useParams } from "react-router-dom";
           const bookedDates = artistData?.purposals
             .filter((p) => p.eventDate)
             .map((p) => new Date(p.eventDate));
-          console.log("Fechas de purposals:", bookedDates);
+          
           setDisabledDates(bookedDates);
         } catch (error) {
           console.error("❌ Error al obtener las purposals:", error.response?.data || error.message || error);
@@ -83,12 +83,12 @@ import { useNavigate, useParams } from "react-router-dom";
         ( !isEditing ? (typeof purposalData.notes === 'string' ? purposalData.notes.trim() !== "" : purposalData.notes.join('').trim() !== "") :true );
       setIsFormValid(isValid);
     }, [purposalData, isEditing]);
-    console.log("Estado inicial purposalData:", purposalData);
+    
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
       e.preventDefault();
       if (!isFormValid) return;
-      console.log("Datos enviados al backend:", purposalData);
+      
       if (!purposalData.eventDate || !(purposalData.eventDate instanceof Date)) {
         console.error("Invalid or missing eventDate");
         return;
@@ -97,7 +97,7 @@ import { useNavigate, useParams } from "react-router-dom";
         let purposalChat;
         if (!isEditing) {
           purposalChat = await createChatService(artist.agency.id);
-          console.log("Chat creado con ID:", purposalChat.id);
+        
         } else {
           purposalChat = { id: purposalData.purposalChat };
         }
@@ -109,16 +109,16 @@ import { useNavigate, useParams } from "react-router-dom";
           status: purposalData.status,
           notes: purposalData.notes,
         };
-        console.log("Enviando datos a createPurposal:", uploadData);
+        
         if (isEditing) {
           const updatePurposal = await editPurposal(purposal.id, uploadData);
-          console.log("Purposal editada:", updatePurposal);
+          
           navigate(
             `/purposals/${updatePurposal.id}/${updatePurposal.purposalChat}`
           );
         } else {
           const newPurposal = await createPurposal(id, uploadData);
-          console.log("Purposal creada con éxito:", newPurposal);
+          
           navigate(`/purposals/${newPurposal.id}/${purposalChat.id}`);
           setPurposalData((prevState) => ({
             ...prevState,
@@ -139,7 +139,7 @@ import { useNavigate, useParams } from "react-router-dom";
         eventDate: new Date(date),
       }));
     };
-    console.log("eventDate en estado:", purposalData.eventDate);
+   
     const eventDate = purposalData.eventDate
       ? new Date(purposalData.eventDate)
       : null;
@@ -149,14 +149,14 @@ import { useNavigate, useParams } from "react-router-dom";
     let summerBoost = monthOfYear === 5 || monthOfYear === 6 || monthOfYear === 7;
     const handleChange = (e) => {
       const { name, value } = e.target;
-      console.log(`Cambiando ${name}:`, value);
+     
       setPurposalData((prevState) => ({
         ...prevState,
         [name]: value,
       }));
     };
     const handlePriceChange = (newPrice) => {
-      console.log("Nuevo negotiatedPrice recibido en PurposalCreate:", newPrice);
+     
       setPurposalData((prevState) => ({
         ...prevState,
         negotiatedPrice: newPrice,

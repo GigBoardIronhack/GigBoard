@@ -7,8 +7,6 @@ import WideArtistCard from "../Cards/WideArtistCard";
 import WidePurposalCard from "../Cards/WidePurposalCard";
 
 const CardGrid = ({ cards, type, setNeedRefresh }) => {
-  console.log("Cards recibidos en CardGrid:", cards);
-  console.log("setNeedRefresh en CardGrid:", setNeedRefresh);
 
   const getTitle = () => {
     switch (type) {

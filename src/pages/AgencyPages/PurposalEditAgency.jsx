@@ -35,7 +35,7 @@ const PurposalEditAgency = ({ id, setNeedRefresh }) => {
       const editedPurposal = await editPurposal(id, { status: purposalData.status });
   
       if (editedPurposal.status === "rejected") {
-        console.log("ENTRO AQUI", editedPurposal.purposalChat);
+       
   
         await deleteChat(editedPurposal.purposalChat);
         await deletePurposal(editedPurposal.id);

@@ -22,7 +22,7 @@ const AgencyDashboard = () => {
           Array.isArray(agencyPurposals) ? agencyPurposals : []
         );
         setIsLoading(false)
-        console.log("PURPOSALS AGENCY", agencyPurposals);
+        
       } catch (err) {
         console.log(err);
       }
