@@ -115,17 +115,17 @@ const ArtistForm = ({ artist, isEditing }) => {
     uploadData.append("weekendBoost", artistData.weekendBoost / 100);
     uploadData.append("monthBoost", artistData.monthBoost / 100);
     uploadData.append("agency", currentUser.id);
-    console.log("datos enviados a la api", Object.fromEntries(uploadData));
+   
 
     try {
       if (isEditing) {
         const updatedArtist = await editArtist(artist.id, uploadData);
         await getCurrentUser();
         navigate(`/artists/${updatedArtist.id}`);
-        console.log("Datos actualizados:", updatedArtist);
+        
         return;
       }
-      console.log("Datos enviados a la API:", artistData);
+      
 
       const newArtist = await createArtist(uploadData);
       await getCurrentUser();
@@ -357,7 +357,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     step={0.1}
                     value={artistData.small}
                     onValueChange={(e) => handleNumberChange("small", e.value)}
-                    className="w-full dark:bg-[#101C29] border-[#7c3aed] p2 border rounded mb-5 dark:text-zinc-300"
+                    className="w-full dark:bg-[#101C29] border-[#7c3aed] p-2 border rounded mb-5 dark:text-zinc-300"
                     suffix="%"
                   />
 

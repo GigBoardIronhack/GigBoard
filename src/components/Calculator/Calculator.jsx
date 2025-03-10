@@ -8,7 +8,7 @@
   const Calculator = ({ artist, weekendBoost, summerBoost, onPriceChange}) => {
     const { currentUser } = useContext(AuthContext);
 
-    console.log(currentUser);
+ 
 
     const isClub = currentUser.promoterRole === "club";
     const isFestival = currentUser.promoterRole === "festival";
@@ -33,7 +33,7 @@
       }
     }, [negotiatedPrice, countedPrice, onPriceChange]);
 
-    console.log(clubBonus, festivalBonus, specialEventBonus, smallBonus, largeBonus, weekendBonus, summerBonus, negotiatedPrice);
+   
 
     return (
       <div className="flex flex-column w-full">

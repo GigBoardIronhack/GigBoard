@@ -6,7 +6,7 @@ import PurposalCreate from "./PurposalCreate"
 const PurposalEdit = () => {
 
   const {id} = useParams()
-  console.log(id)
+
   
   const [purposal, setPurposal] = useState({})
   const [loading, setLoading] = useState(true)
@@ -18,7 +18,7 @@ const PurposalEdit = () => {
       
       try{
            const purposal = await getPurposal(id);
-           console.log("Purposal recibida en Edit:", purposal);
+         
            setPurposal(purposal)
       
            }catch(err){

@@ -10,7 +10,7 @@ const RecommendedArtists = () => {
     const fetchRecommendations = async () => {
       try {
         const data = await getRecommendedArtists();
-        console.log("🎯 Artistas recibidos en el frontend:", data);
+        
 
         const artistsWithId = data.map((artist) => ({
           ...artist,

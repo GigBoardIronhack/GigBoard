@@ -7,7 +7,7 @@ import videoLanding from "../assets/0307.webm";
 const LandingPage = () => {
    const { currentUser } = useContext(AuthContext);
    
-   console.log("CurrentUser", currentUser)
+  
   return (
     <div className="relative w-full h-screen flex items-center justify-center overflow-hidden">
 
