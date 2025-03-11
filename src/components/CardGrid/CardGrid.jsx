@@ -7,8 +7,6 @@ import WideArtistCard from "../Cards/WideArtistCard";
 import WidePurposalCard from "../Cards/WidePurposalCard";
 
 const CardGrid = ({ cards, type, setNeedRefresh }) => {
-  console.log("Cards recibidos en CardGrid:", cards);
-  console.log("setNeedRefresh en CardGrid:", setNeedRefresh);
 
   const getTitle = () => {
     switch (type) {
@@ -47,7 +45,6 @@ const CardGrid = ({ cards, type, setNeedRefresh }) => {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 justify-items-center max-h-screen p-4  mt-10 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
           {(type === "artists" || type === "favoriteArtists") &&
             cards
-              .slice(0, 9)
               .map((card, index) => <ArtistCard key={index} card={card} />)}
 
           {type === "purposals" &&

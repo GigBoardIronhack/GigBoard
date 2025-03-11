@@ -8,13 +8,13 @@ import MyArtistSkeleton from "../../components/Skeleton/MyArtistSkeleton";
 
 const PurposalList = () => {
   const {currentUser} = useContext(AuthContext)
-    console.log("CURRENTUSER",currentUser)
+    
   const [promoterPurposals, setPromoterPurposals] = useState([]);
   const [agencyPurposals, setAgencyPurposals]= useState([]);
   const [needRefresh, setNeedRefresh] = useState(true);
   const [isLoading, setIsLoading]=useState(true)
 
-  console.log("setNeedRefresh en PurposalList:", setNeedRefresh);
+  
 
       useEffect(() => {
         if (!currentUser) return;

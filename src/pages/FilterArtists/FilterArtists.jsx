@@ -17,7 +17,7 @@ const PromoterArtists = () => {
     const fetchArtists = async () => {
       try {
         const response = await listArtists();
-        console.log("artistasssss", response.artists);
+        
         const artistsArray = Array.isArray(response.artists)
           ? response.artists
           : [];
