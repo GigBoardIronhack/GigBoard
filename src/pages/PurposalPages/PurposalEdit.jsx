@@ -32,9 +32,9 @@ const PurposalEdit = () => {
           getPurposalId()
   },[id])
 
-  {loading && <p>Cargando purposal...</p> }
+  {loading && <p>Loading purposal...</p> }
 
-  {!purposal && <p>No hay purposal para mostrar</p> }
+  {!purposal && <p>No purposal to show you</p> }
   
   return (
     <div >

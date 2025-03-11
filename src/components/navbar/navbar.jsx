@@ -72,13 +72,13 @@ const Navbar = () => {
                           to="/artists"
                           className="block px-4 py-2 hover:bg-gray-100"
                         >
-                          Mis Artistas
+                          My Artists
                         </NavLink>
                         <NavLink
                           to="/artists/all"
                           className="block px-4 py-2 hover:bg-gray-100"
                         >
-                          Todos los Artistas
+                          All Artists
                         </NavLink>
                       </>
                     ) : (
@@ -87,13 +87,13 @@ const Navbar = () => {
                           to="/artists"
                           className="block px-4 py-2 hover:bg-gray-100"
                         >
-                          Todos los Artistas
+                          All Artists
                         </NavLink>
                         <NavLink
                           to="/artists/favorites"
                           className="block px-4 py-2 hover:bg-gray-100"
                         >
-                          Artistas Favoritos
+                          Favorite Artists
                         </NavLink>
                       </>
                     )}
@@ -164,13 +164,13 @@ const Navbar = () => {
                           to="/artists"
                           className="block px-4 py-2 hover:bg-gray-200"
                         >
-                          Mis Artistas
+                          My Artists
                         </NavLink>
                         <NavLink
                           to="/artists/all"
                           className="block px-4 py-2 hover:bg-gray-200"
                         >
-                          Todos los Artistas
+                          All Artists
                         </NavLink>
                       </>
                     ) : (
@@ -179,13 +179,13 @@ const Navbar = () => {
                           to="/artists"
                           className="block px-4 py-2 hover:bg-gray-200"
                         >
-                          Todos los Artistas
+                          All Artists
                         </NavLink>
                         <NavLink
                           to="/artists/favorites"
                           className="block px-4 py-2 hover:bg-gray-200"
                         >
-                          Artistas Favoritos
+                          Favorite Artists
                         </NavLink>
                       </>
                     )}

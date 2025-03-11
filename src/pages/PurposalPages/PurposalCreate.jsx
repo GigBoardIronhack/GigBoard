@@ -199,7 +199,9 @@ if (isLoading) {
                   isTileDisabled({ date, view })
                     ? "bg-red-500 text-white opacity-50 rounded-md"
                     : ""
+                    
                 }
+                locale="en-US"
               />
             </div>
           </div>
@@ -220,7 +222,7 @@ if (isLoading) {
             {!isEditing && (
               <label htmlFor="notes" className="w-full">
                 <textarea
-                  placeholder="Añadir notas..."
+                  placeholder="Add some extra info..."
                   name="notes"
                   id="notes"
                   onChange={handleChange}
