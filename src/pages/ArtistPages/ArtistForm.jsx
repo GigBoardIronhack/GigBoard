@@ -185,13 +185,13 @@ const ArtistForm = ({ artist, isEditing }) => {
         >
         
           <h1 className="text-5xl font-semibold text-black mb-10 text-center">
-          {isEditing ? "Editar Artista" : "Registrar Artista"}
+          {isEditing ? "Edit Artist" : "Register Artist"}
           </h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="col-span-1 row-start-1">
               <h1 className="text-2xl font-bold text-black text-center row-span-1 min-h-20">
-                Datos Básicos
+                Basic Info
               </h1>
               <FloatLabel>
                 <InputText
@@ -202,7 +202,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                   value={artistData.name}
                   className="w-full dark:bg-[#101C29] dark:text-zinc-300 p-2 border border-[#7c3aed] rounded mb-5"
                 />
-                <label htmlFor="name">Nombre *</label>
+                <label htmlFor="name">Name *</label>
               </FloatLabel>
               <FloatLabel>
                 <InputTextarea
@@ -214,12 +214,12 @@ const ArtistForm = ({ artist, isEditing }) => {
                   value={artistData.description}
                   className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#7c3aed] border rounded mb-5"
                 />
-                <label htmlFor="description">Descripción *</label>
+                <label htmlFor="description">Description *</label>
               </FloatLabel>
               <div className="dark:bg-[#101C29] dark:text-zinc-300 w-full p-2 border-[#7c3aed] border rounded mb-5">
                 <label htmlFor="imageUrl" className="block mb-2">
                   {" "}
-                  Imagen de perfil *
+                  Profile Picture *
                   {artistData.imageUrl && (
                     <div className="mb-2 flex justify-center">
                       <img
@@ -233,7 +233,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                       />
                       {errorImg?.message && (
                         <p className="text-red-500 text-sm mt-1">
-                          Formato de imagen no válido.
+                          Invalid Image Format
                         </p>
                       )}
                     </div>
@@ -254,7 +254,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                   options={GENRES_LIST}
                   optionLabel="style"
                   filter
-                  placeholder="Seleccionar estilos *"
+                  placeholder="Choose Styles *"
                   maxSelectedLabels={3}
                   className="dark:bg-[#101C29]"
                 />
@@ -263,9 +263,9 @@ const ArtistForm = ({ artist, isEditing }) => {
             <div>
             <div className="flex flex-col items-center justify-center row-span-1 min-h-20">
               <h1 className="text-2xl font-bold text-black text-center ">
-                RRSS 
+                Social Media 
               </h1>
-              <p className="text-sm text-center">(el link de Spotify es obligatorio)</p>
+              <p className="text-sm text-center">(Spotify link is required.)</p>
             </div>
               <ExpandableFields
                 handleChange={handleChange}
@@ -280,7 +280,7 @@ const ArtistForm = ({ artist, isEditing }) => {
               </h1>
               <FloatLabel
               >
-                <label htmlFor="basePrice">Precio Base *</label>
+                <label htmlFor="basePrice">Base Price *</label>
                 <InputNumber
                   inputId="currency-germany"
                   value={artistData.basePrice}
@@ -289,10 +289,10 @@ const ArtistForm = ({ artist, isEditing }) => {
                   mode="currency"
                   currency="EUR"
                   locale="de-DE"
-                  className="w-full dark:bg-[#101C29] border-[#7c3aed] p-2 border rounded mb-5 dark:text-zinc-300"
+                  className="w-full dark:bg-[#101C29] border-[#7c3aed] border rounded mb-5 dark:text-zinc-300  text-lg p-2"
                 />
               </FloatLabel>
-              <label className="font-bold">Bonus por tipo de evento</label>
+              <label className="font-bold">Event-Based Bonus</label>
               <InputSwitch
                 checked={promoterRoleChecked}
                 onChange={(e) => setPromoterRoleChecked(e.value)}
@@ -300,7 +300,7 @@ const ArtistForm = ({ artist, isEditing }) => {
               />
               {promoterRoleChecked && (
                 <div>
-                  <label>Porcentaje extra para clubes</label>
+                  <label>Extra percentage for clubs</label>
                   <InputNumber
                     name="club"
                     id="club"
@@ -312,7 +312,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     suffix="%"
                   />
 
-                  <label>Porcentaje extra para festivales</label>
+                  <label>Extra percentage for festivals</label>
                   <InputNumber
                     name="festival"
                     id="festival"
@@ -326,7 +326,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     suffix="%"
                   />
 
-                  <label>Porcentaje extra para eventos especiales</label>
+                  <label>Extra percentage for special events</label>
                   <InputNumber
                     name="specialEvent"
                     id="specialEvent"
@@ -341,7 +341,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                   />
                 </div>
               )}
-              <label className="font-bold">Bonus por capacidad del evento</label>
+              <label className="font-bold">Venue Capacity Bonus</label>
               <InputSwitch
                 checked={promoterCapacityChecked}
                 onChange={(e) => setPromoterCapacityChecked(e.value)}
@@ -349,7 +349,7 @@ const ArtistForm = ({ artist, isEditing }) => {
               />
               {promoterCapacityChecked && (
                 <div>
-                  <label>Capacidad pequeña</label>
+                  <label>Small Venue</label>
                   <InputNumber
                     name="small"
                     id="small"
@@ -361,7 +361,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     suffix="%"
                   />
 
-                  <label>Capacidad grande</label>
+                  <label>Big Venue</label>
                   <InputNumber
                     name="large"
                     id="large"
@@ -374,7 +374,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                   />
                 </div>
               )}
-              <label className="font-bold">Bonus por fechas especiales</label>
+              <label className="font-bold">Special Dates Bonus</label>
               <InputSwitch
                 checked={promoterBoostChecked}
                 onChange={(e) => setPromoterBoostChecked(e.value)}
@@ -382,7 +382,7 @@ const ArtistForm = ({ artist, isEditing }) => {
               />
               {promoterBoostChecked && (
                 <div>
-                  <label>Bonus por fin de semana</label>
+                  <label>Weekend Bonus (Friday and Saturday)</label>
                   <InputNumber
                     name="weekendBoost"
                     id="weekendBoost"
@@ -396,7 +396,7 @@ const ArtistForm = ({ artist, isEditing }) => {
                     suffix="%"
                   />
 
-                  <label>Bonus por mes</label>
+                  <label>Summer Bonus</label>
                   <InputNumber
                     name="monthBoost"
                     id="monthBoost"
@@ -424,10 +424,10 @@ const ArtistForm = ({ artist, isEditing }) => {
             }`}
             disabled={!isFormValid}
           >
-            {isEditing ? "Terminar Edición" : "Registrar Artista"}
+            {isEditing ? "Finish Editing" : "Register Artist"}
           </button>
           <p className="dark:text-zinc-300 text-black">
-            Los campos marcados con * son obligatorios
+          Fields marked with * are mandatory.
           </p>
         </form>
       </div>

@@ -16,7 +16,7 @@ function App() {
 
   useDarkMode()
  
-  if (!isAuthLoaded) return <div > <p>Cargando...</p></div>;
+  if (!isAuthLoaded) return <div > <p>Loading...</p></div>;
 
   return (
     <>

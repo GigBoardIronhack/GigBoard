@@ -50,7 +50,7 @@ const PurposalEditAgency = ({ id, setNeedRefresh }) => {
   };
   
 
-  if (!purposalData) return <p>Cargando...</p>;
+  if (!purposalData) return <p>Loading...</p>;
 
   return (
     
@@ -63,9 +63,9 @@ const PurposalEditAgency = ({ id, setNeedRefresh }) => {
           onChange={handleChange}
           className="block w-full px-4 py-3 text-sm font-medium text-black-700 bg-white border border-gray-300 rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         >
-          <option value="pending">Pendiente</option>
-          <option value="accepted">Aceptado</option>
-          <option value="rejected">Rechazado</option>
+          <option value="pending">Pending</option>
+          <option value="accepted">Accepted</option>
+          <option value="rejected">Rejected</option>
         </select>
 
 

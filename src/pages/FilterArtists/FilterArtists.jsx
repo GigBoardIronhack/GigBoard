@@ -82,7 +82,7 @@ const PromoterArtists = () => {
     <div className="max-w-7xl mx-auto px-4 py-6 ">
       <section className="mb-6">
         <label htmlFor="nameFilter" className="block text-lg font-semibold mb-2">
-          Buscar artistas por nombre
+        Search for artists by name
         </label>
         <input
           id="nameFilter"
@@ -96,7 +96,7 @@ const PromoterArtists = () => {
       </section>
 
       <section className="mb-6">
-        <h3 className="text-lg font-semibold mb-2">Filtrar por estilos</h3>
+        <h3 className="text-lg font-semibold mb-2">Filter by styles</h3>
         <Select
           isMulti
           name="styles"

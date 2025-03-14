@@ -26,9 +26,9 @@ const EditArtist = () => {
     getArtistId()
   },[id])
 
-  {loading && <p>Cargando artista...</p> }
+  {loading && <p>Loading Artist...</p> }
 
-  {!artist && <p>No hay artista para mostrar</p> }
+  {!artist && <p>No artist to show you</p> }
 
   return (
     <div className="">

@@ -44,7 +44,7 @@ const WidePurposalCard = ({ card, setNeedRefresh }) => {
           </svg>
 
           <p className="text-black-700 dark:text-black-300 font-semibold overflow-hidden text-ellipsis whitespace-nowrap max-w-[40%] text-center">
-            {card.artist?.name || "Artista Desconocido"}
+            {card.artist?.name || "Unknown Artist"}
           </p>
         </div>
 
