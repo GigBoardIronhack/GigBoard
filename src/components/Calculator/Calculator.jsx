@@ -58,7 +58,7 @@
           </p>
           </div>
           <div className="flex justify-end">
-          <p className="styled-number text-xl sm:text-1xl w-1/2 lg:text-xl ">+ <span className="ml-1"> {clubBonus} </span></p>
+          <p className="styled-number text-xl sm:text-1xl  lg:text-xl ">+ <span className="ml-1"> {clubBonus} </span></p>
           </div>
           </div>
           )}
@@ -161,4 +161,5 @@
     );
   };
 
+  
   export default Calculator;
