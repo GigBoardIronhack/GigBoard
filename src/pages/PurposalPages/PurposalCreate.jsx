@@ -75,12 +75,10 @@ import { useNavigate, useParams } from "react-router-dom";
       eventDate: purposal?.eventDate ? new Date(purposal?.eventDate) : null,
       status: purposal?.status ||  "pending",
       purposalChat: purposal?.purposalChat || null,
-      notes: purposal?.notes || [],
     });
     useEffect(() => {
       const isValid =
-        purposalData.eventDate &&
-        ( !isEditing ? (typeof purposalData.notes === 'string' ? purposalData.notes.trim() !== "" : purposalData.notes.join('').trim() !== "") :true );
+        purposalData.eventDate;
       setIsFormValid(isValid);
     }, [purposalData, isEditing]);
     
@@ -106,8 +104,7 @@ import { useNavigate, useParams } from "react-router-dom";
           negotiatedPrice: purposalData.negotiatedPrice,
           eventDate: purposalData.eventDate.toLocaleDateString("sv-SE"),
           purposalChat: purposalChat.id,
-          status: purposalData.status,
-          notes: purposalData.notes,
+          status: purposalData.status
         };
         
         if (isEditing) {
@@ -147,14 +144,7 @@ import { useNavigate, useParams } from "react-router-dom";
     const monthOfYear = eventDate ? eventDate.getMonth() : null;
     let weekendBoost = dayOfWeek === 5 || dayOfWeek === 6;
     let summerBoost = monthOfYear === 5 || monthOfYear === 6 || monthOfYear === 7;
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-     
-      setPurposalData((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    };
+    
     const handlePriceChange = (newPrice) => {
      
       setPurposalData((prevState) => ({
@@ -173,7 +163,7 @@ if (isLoading) {
       <div className="flex justify-center p-6">
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 lg:grid-cols-3 max-h-screen gap-6 bg-white shadow-lg rounded-lg w-full max-w-5xl p-6 bg-opacity-60"
+          className="grid grid-cols-1 lg:grid-cols-2 max-h-screen gap-6 bg-white shadow-lg rounded-lg w-full max-w-5xl p-6 bg-opacity-60"
         >
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-center bg-gray-100 shadow-md rounded-lg overflow-hidden">
@@ -203,6 +193,7 @@ if (isLoading) {
               />
             </div>
           </div>
+          <div className="flex flex-col justify-between">
           <div className="p-4 bg-gray-100 rounded-lg shadow-md flex">
             {artist && (
               <Calculator
@@ -217,19 +208,7 @@ if (isLoading) {
             )}
           </div>
           <div className="flex flex-col  gap-4">
-            {!isEditing && (
-              <label htmlFor="notes" className="w-full">
-                <textarea
-                  placeholder="Añadir notas..."
-                  name="notes"
-                  id="notes"
-                  onChange={handleChange}
-                  value={purposalData.notes || ""}
-                  rows={6}
-                  className={"w-full h-[100%] p-3 border rounded-lg shadow-md"}
-                />
-              </label>
-            )}
+           
             <button
               type="submit"
               className={`w-full p-2 rounded text-white ${isFormValid ? "bg-[#7c3aed] hover:bg-[#936ed4] hover:text-black" : "bg-gray-400 cursor-not-allowed"}`}
@@ -237,6 +216,7 @@ if (isLoading) {
             >
               {isEditing ? "Editar" : "Enviar"}
             </button>
+          </div>
           </div>
         </form>
       </div>
