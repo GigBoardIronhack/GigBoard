@@ -137,13 +137,8 @@ const ArtistDetail = () => {
                 </div>)}
 
 
-<<<<<<< HEAD
             <div className="mt-10 lg:p-6">
               <h2 className="text-2xl font-semibold text-black-800">Propuestas</h2>
-=======
-            <div className="mt-10">
-              <h2 className="text-2xl font-semibold text-black-800">Purposals</h2>
->>>>>>> 6b295871c87f93ab5d767a8191a3eab1625fc24a
               {purposals.length > 0 ? (
                 <div className="mt-4 space-y-3">
                   {purposals.map((purposal) =>
