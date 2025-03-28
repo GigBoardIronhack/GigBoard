@@ -177,11 +177,11 @@ const ArtistForm = ({ artist, isEditing }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-[#101C29] flex h-screen items-center justify-center bg-opacity-0">
+    <div className="bg-white  dark:bg-[#101C29] flex h-auto items-center justify-center bg-opacity-0 mt-4">
       <div className="mx-auto">
         <form
           onSubmit={handleSubmit}
-          className="dark:bg-[#004e64] p-6 container mx-auto rounded shadow-lg w-full bg-white bg-opacity-60"
+          className="dark:bg-[#004e64] border border-gray-300 p-6 container mx-auto rounded shadow-lg w-full bg-white bg-opacity-60"
         >
         
           <h1 className="text-5xl font-semibold text-black mb-10 text-center">
