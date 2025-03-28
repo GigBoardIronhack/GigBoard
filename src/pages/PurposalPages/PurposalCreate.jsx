@@ -163,7 +163,7 @@ if (isLoading) {
       <div className="flex justify-center p-6">
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 lg:grid-cols-2 max-h-screen gap-6 bg-white shadow-lg rounded-lg w-full max-w-5xl p-6 bg-opacity-60"
+          className="grid grid-cols-1 lg:grid-cols-2 h-auto gap-6 bg-white shadow-lg rounded-lg w-full max-w-5xl p-6 bg-opacity-60"
         >
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-center bg-gray-100 shadow-md rounded-lg overflow-hidden">

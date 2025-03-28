@@ -59,7 +59,7 @@
   
   /* Estilos para el contorno del calendario (el borde exterior) */
   .react-calendar__navigation {
-    background-color: #009da8; /* Fondo azul para el encabezado de navegación */
+    background-color: #7c3aed; /* Fondo azul para el encabezado de navegación */
     border-radius: 8px 8px 0 0; /* Bordes redondeados en la parte superior */
     color: #fff;
     height: 60px; /* Texto blanco */
