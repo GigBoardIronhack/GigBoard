@@ -44,14 +44,14 @@ const PurposalList = () => {
       if (isLoading) {
 
         return (
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 justify-items-center max-h-screen p-4  mt-10 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
+        <div className=" bg-white min-h-screen  grid grid-cols-1 lg:grid-cols-4 gap-4 justify-items-center max-h-screen p-4  mt-10 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
           <MyArtistSkeleton />
         </div>
         )
           
       }
   return (
-    <div >
+    <div className="min-h-screen" >
     {currentUser.role === "promoter" ? ( 
       promoterPurposals &&
       <CardGrid type="purposals" cards={promoterPurposals} setNeedRefresh={setNeedRefresh}/>
