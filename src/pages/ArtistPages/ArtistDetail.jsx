@@ -78,10 +78,10 @@ const ArtistDetail = () => {
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
           
-          <div className="relative bg-white rounded-lg shadow-lg w-4/5 p-6 z-10">
+          <div className="relative bg-white rounded-lg shadow-lg w-4/5 p-6 z-10 mt-4">
             <div className="grid grid-cols-1 gap-8 text-center lg:text-left">
               
-              <div className="flex flex-col lg:flex-row gap-6 justify-center items-center mb-6">
+              <div className="flex flex-col lg:flex-row gap-6 justify-start items-center mb-6 p-6">
                 <img
                   src={artist.imageUrl}
                   alt={artist.name}
@@ -89,7 +89,7 @@ const ArtistDetail = () => {
                 />
                 <div>
                   <h1 className="text-2xl lg:text-4xl  font-bold text-black-800">{artist.name}</h1>
-                  <p className="text-black-600 mt-3">{artist.description}</p>
+                  <p className="text-black-600 mt-3 p-4 w-16">{artist.description}</p>
 
                   <div className="flex justify-center lg:justify-start gap-4 mt-4">
                     {artist.rrss.instagram && (
@@ -137,8 +137,13 @@ const ArtistDetail = () => {
                 </div>)}
 
 
+<<<<<<< HEAD
+            <div className="mt-10 lg:p-6">
+              <h2 className="text-2xl font-semibold text-black-800">Propuestas</h2>
+=======
             <div className="mt-10">
               <h2 className="text-2xl font-semibold text-black-800">Purposals</h2>
+>>>>>>> 6b295871c87f93ab5d767a8191a3eab1625fc24a
               {purposals.length > 0 ? (
                 <div className="mt-4 space-y-3">
                   {purposals.map((purposal) =>
@@ -155,7 +160,7 @@ const ArtistDetail = () => {
               )}
             </div>
 
-            <div className="mt-8 flex gap-4">
+            <div className="mt-8 flex gap-4 lg:p-6">
               {currentUser.role === "promoter" && (
                 <>
                   <button onClick={submitLike} className="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600">
