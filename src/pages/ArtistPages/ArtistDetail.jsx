@@ -89,7 +89,7 @@ const ArtistDetail = () => {
                 />
                 <div>
                   <h1 className="text-2xl lg:text-4xl  font-bold text-black-800">{artist.name}</h1>
-                  <p className="text-black-600 mt-3 p-4 w-16">{artist.description}</p>
+                  <p className="text-black-600 mt-3 p-4">{artist.description}</p>
 
                   <div className="flex justify-center lg:justify-start gap-4 mt-4">
                     {artist.rrss.instagram && (
