@@ -34,7 +34,7 @@ const PromoterDashboard = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 grid-rows-[50px_1/2fr_1fr_1fr] lg:grid-rows-[auto_1fr_1fr_1fr] lg:grid-cols-5 gap-2 lg:gap-4 w-full h-screen mx-auto p-4 ">
+    <div className="grid grid-cols-1 grid-rows-[50px_1/2fr_1fr_1fr] lg:grid-rows-[auto_1fr_1fr_1fr] lg:grid-cols-5 gap-2 lg:gap-4 w-full h-auto mx-auto p-4 ">
 
       <div className="text-center border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-lg rounded-lg p-4 py-2 bg-white dark:bg-gray-800 lg:col-span-5 bg-opacity-60">
         <h1 className="text-2xl lg:text-4xl font-bold uppercase dark:text-white mb-1">
