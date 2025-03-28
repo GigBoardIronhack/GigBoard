@@ -189,7 +189,9 @@ if (isLoading) {
                   isTileDisabled({ date, view })
                     ? "bg-red-500 text-white opacity-50 rounded-md"
                     : ""
+                    
                 }
+                locale="en-US"
               />
             </div>
           </div>
@@ -208,7 +210,6 @@ if (isLoading) {
             )}
           </div>
           <div className="flex flex-col  gap-4">
-           
             <button
               type="submit"
               className={`w-full p-2 rounded text-white ${isFormValid ? "bg-[#7c3aed] hover:bg-[#936ed4] hover:text-black" : "bg-gray-400 cursor-not-allowed"}`}

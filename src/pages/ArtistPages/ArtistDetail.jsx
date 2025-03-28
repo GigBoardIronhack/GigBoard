@@ -137,8 +137,13 @@ const ArtistDetail = () => {
                 </div>)}
 
 
+<<<<<<< HEAD
             <div className="mt-10 lg:p-6">
               <h2 className="text-2xl font-semibold text-black-800">Propuestas</h2>
+=======
+            <div className="mt-10">
+              <h2 className="text-2xl font-semibold text-black-800">Purposals</h2>
+>>>>>>> 6b295871c87f93ab5d767a8191a3eab1625fc24a
               {purposals.length > 0 ? (
                 <div className="mt-4 space-y-3">
                   {purposals.map((purposal) =>
@@ -151,7 +156,7 @@ const ArtistDetail = () => {
                   )}
                 </div>
               ) : (
-                <p className="text-black-500 mt-3">No hay propuestas.</p>
+                <p className="text-black-500 mt-3">No Purposals yet 😢</p>
               )}
             </div>
 
@@ -189,7 +194,7 @@ const ArtistDetail = () => {
                                     d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
                                   />
                                 </svg>
-                                <p className="block lg:hidden w-full">Editar</p>
+                                <p className="block lg:hidden w-full">Edit</p>
                               </Button>
                             </Link>
                   
@@ -200,7 +205,7 @@ const ArtistDetail = () => {
           </div>
         </div>
       ) : (
-        <p className="text-black-500 text-center mt-10">Artista no encontrado</p>
+        <p className="text-black-500 text-center mt-10">Artist not found</p>
       )}
     </>
   );

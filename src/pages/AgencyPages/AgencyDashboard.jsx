@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext, useEffect, useState } from "react";
 import LinkCreateArtist from "../../components/LinkCreateArtist/LinkCreateArtist";
@@ -65,13 +66,13 @@ const AgencyDashboard = () => {
         </p>
         {currentUser.artists.length === 0 ? (
           <p className="text-xs lg:text-sm text-black-500 dark:">
-            Aún no has añadido artistas, añade tu primer Artista!!
+          You haven't added any artists yet. Add your first artist!
           </p>
         ) : (
           <p className="text-xs lg:text-sm font-medium text-black-700 dark:text-black-300">
-            Actualmente tienes{" "}
+            You currently have{" "}
             <span className="font-bold">{currentUser.artists.length}</span>{" "}
-            artistas
+            artists
           </p>
         )}
 
@@ -79,8 +80,8 @@ const AgencyDashboard = () => {
 
 
         <Link to="/edit">
-          <div className="bg-[#7c3aed] text-white text-center mb-2 mt-2 px-4 py-4 w-full max-w-xs lg:w-full rounded-full font-medium shadow-md hover:bg-[#936ed4] hover:text-black transition cursor-pointer">
-            Editar Perfil
+          <div className="bg-[#7c3aed] text-white text-center mb-2 mt-2 px-9 py-4 w-full max-w-xs lg:w-full rounded-full font-medium shadow-md hover:bg-[#936ed4] hover:text-black transition cursor-pointer">
+            Edit Profile
           </div>
         </Link>
 
