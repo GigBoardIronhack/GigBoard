@@ -106,7 +106,7 @@ const Register = ({ isEditing }) => {
   };
 
   return (
-    <div className=" bg-white dark:bg-[#101C29] min-h-screen flex items-center justify-center">
+    <div className=" bg-white  min-h-screen flex items-center justify-center">
     <video
         className="absolute top-0 left-0 w-full h-full object-cover"
         autoPlay
