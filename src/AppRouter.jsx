@@ -16,7 +16,55 @@ function App() {
 
   useDarkMode()
  
-  if (!isAuthLoaded) return <div > <p>Loading...</p></div>;
+  if (!isAuthLoaded)
+    return (
+      <div className="flex flex-col items-center justify-center h-screen text-center px-6">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#27a3a9] mb-6"></div>
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-10 max-w-4xl">
+          <div className="text-sm max-w-xs">
+            <p className="text-lg font-semibold mb-2">Cargando el render de la app...</p>
+            <p className="text-gray-600 dark:text-gray-300">
+              Esto puede tardar hasta un minuto. Gracias por esperar.
+            </p>
+            <p className="mt-4">
+              Si no quieres registrar tu propia agencia, puedes usar:
+            </p>
+            <p className="mt-1"><strong>Email:</strong> agency@agency.com</p>
+            <p><strong>Contraseña:</strong> aA1.</p>
+  
+            <p className="mt-4">
+              Siéntete libre de crear nuevos perfiles, pero si quieres algo rápido, aquí tienes dos perfiles de prueba:
+            </p>
+            <ul className="mt-1">
+              <li><strong>Agencia:</strong> agency@agency.com</li>
+              <li><strong>Promotor:</strong> promotor@promotor.com</li>
+              <li><strong>Contraseña común:</strong> aA1</li>
+            </ul>
+          </div>
+          <div className="text-sm max-w-xs">
+            <p className="text-lg font-semibold mb-2">Loading app render...</p>
+            <p className="text-gray-600 dark:text-gray-300">
+              This may take up to a minute. Thank you for your patience.
+            </p>
+            <p className="mt-4">
+              If you don’t want to register your own agency, you can use:
+            </p>
+            <p className="mt-1"><strong>Email:</strong> agency@agency.com</p>
+            <p><strong>Password:</strong> aA1.</p>
+  
+            <p className="mt-4">
+              Feel free to create new profiles, but if you want something quick, here are two test accounts:
+            </p>
+            <ul className="mt-1">
+              <li><strong>Agency:</strong> agency@agency.com</li>
+              <li><strong>Promoter:</strong> promotor@promotor.com</li>
+              <li><strong>Common password:</strong> aA1</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    );
+  
 
   return (
     <>

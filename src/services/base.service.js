@@ -3,11 +3,9 @@ import { getAccessToken, logout } from "../store/AccessTokenStore";
 
 export const createHttp = (useAccessToken = false) => {
   const http = axios.create({
-    baseURL: "https://gigboardapi.onrender.com", "http://localhost:3000"
- 
-
-
- });  if (useAccessToken) {
+    baseURL: "https://gigboardapi.onrender.com"
+ });
+   if (useAccessToken) {
     http.interceptors.request.use(
       (config) => {
         config.headers.Authorization = `Bearer ${getAccessToken()}`;
