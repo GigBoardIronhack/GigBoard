@@ -27,7 +27,7 @@ if (isLoading) {
   } 
 
   return (
-    <div >
+    <div className="min-h-screen">
         <CardGrid type="artists" cards={favoriteArtists} />
     </div>
   );

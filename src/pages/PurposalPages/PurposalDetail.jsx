@@ -50,7 +50,6 @@ const PurposalDetail = () => {
               <p><strong>🎤 Artist:</strong> {purposal.artist?.name || "Unknown"}</p>
               <p><strong>🏢 Promoter:</strong> {purposal.promoter?.name || "Unknown"}</p>
               <p><strong>📅 Event Date:</strong> {formatDate(purposal.eventDate)}</p>
-              <p><strong>💬 Notes:</strong> {purposal.notes || "No additional notes"}</p>
               <p><strong>💰 Offer:</strong> {purposal.negotiatedPrice ? `${purposal.negotiatedPrice} €` : "Not set"}</p>
             </div>
 
